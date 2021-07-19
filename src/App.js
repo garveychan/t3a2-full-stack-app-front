@@ -6,11 +6,11 @@ import {
   Redirect,
 } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
-import CheckIn from "./pages/CheckIn";
-import Login from "./pages/Login";
-import Recovery from "./pages/Recovery";
-import Reset from "./pages/Reset";
-import Signup from "./pages/Signup";
+import CheckIn from "./components/CheckIn";
+import Login from "./components/Login";
+import Recovery from "./components/Recovery";
+import Reset from "./components/Reset";
+import Signup from "./components/Signup";
 
 function App() {
 
