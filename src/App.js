@@ -9,6 +9,7 @@ import NavBar from "./components/NavBar/NavBar";
 import CheckIn from "./pages/CheckIn";
 import Login from "./pages/Login";
 import Recovery from "./pages/Recovery";
+import Reset from "./pages/Reset";
 import Signup from "./pages/Signup";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Switch>
             <Route path="/login" render={() => <Login />} />
             <Route path="/recovery" render={() => <Recovery />} />
+            <Route path="/reset" render={() => <Reset />} />
             <Route path="/signup" render={() => <Signup />} />
             <Route path="/onboarding"></Route>
             <Route path="/dashboard"></Route>
