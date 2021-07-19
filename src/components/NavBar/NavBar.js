@@ -1,5 +1,9 @@
-import { BrowserRouter as Router, Link } from "react-router-dom";
-import navbar_logo from "../images/navbar_logo.png";
+import { Route, Link } from "react-router-dom";
+import navbar_logo from "../../images/navbar_logo.png";
+import LinkSignup from "./LinkSignup";
+import LinkLogin from "./LinkLogin";
+import LinkCheckIn from "./LinkCheckIn";
+import LinkBack from "./LinkBack";
 
 export default function NavBar() {
   return (
@@ -27,22 +31,10 @@ export default function NavBar() {
           </div>
         </div>
         <div className="md:flex md:items-center md:space-x-6 space-x-2">
-          <button
-            className="text-base font-medium text-white hover:text-gray-300 rounded-md focus:outline-none focus:ring-2
-              focus:ring-offset-2 focus:ring-green-400
-              focus:ring-offset-gray-900"
-          >
-            <Link to="/login">Log in</Link>
-          </button>
-          <button
-            className="inline-flex items-center px-4 py-2 border
-              border-transparent text-base font-medium rounded-md text-white
-              bg-green-500 hover:bg-green-700 focus:outline-none focus:ring-2
-              focus:ring-offset-2 focus:ring-green-400
-              focus:ring-offset-gray-900"
-          >
-            <Link to="/signup">Sign Up</Link>
-          </button>
+          <Route path="/login" component={LinkCheckIn}/>
+          <Route path="/onboarding" component={LinkBack}/>
+          <Route path={/^(?!.*(login|onboarding)).*$/} component={LinkLogin}/>
+          <Route path={/^(?!.*(signup|onboarding)).*$/} component={LinkSignup}/>
         </div>
       </nav>
     </div>

@@ -5,14 +5,13 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import NavBar from "./components/NavBar";
+import NavBar from "./components/NavBar/NavBar";
 import CheckIn from "./pages/CheckIn";
 import Login from "./pages/Login";
 import Recovery from "./pages/Recovery";
 import Signup from "./pages/Signup";
 
 function App() {
-  // useEffect(() => {}, []);
 
   return (
     <>
