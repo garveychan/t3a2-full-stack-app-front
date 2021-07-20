@@ -36,7 +36,7 @@ export default function UserPhotoUpload() {
 
         {files[0] ? (
           <div key={files[0].name} className="h-1/2 w-1/2">
-            <img src={files[0].preview} />
+            <img src={files[0].preview} alt="Upload Preview"/>
           </div>
         ) : (
           <div className="space-y-1 text-center">

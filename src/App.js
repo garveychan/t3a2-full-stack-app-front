@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,30 +12,32 @@ import Recovery from "./components/Recovery";
 import Reset from "./components/Reset";
 import Signup from "./components/Signup";
 import Onboarding from "./components/Onboarding/Onboarding";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  const signed_in = false;
+  const [loggedIn, setLoggedIn] = useState(true);
+  const portalTheme = `h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden`;
 
   return (
-    <>
-      <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
-        <Router>
-          <NavBar />
-          <Switch>
-            <Route path="/login" render={() => <Login />} />
-            <Route path="/recovery" render={() => <Recovery />} />
-            <Route path="/reset" render={() => <Reset />} />
-            <Route path="/signup" render={() => <Signup />} />
-            <Route path="/onboarding" render={() => <Onboarding />} />
-            <Route path="/dashboard"></Route>
-            <Route path="/signout"></Route>
-            <Route path="/">
-              {signed_in ? <Redirect to="/dashboard" /> : <CheckIn />}
-            </Route>
-          </Switch>
-        </Router>
-      </div>
-    </>
+    <div className={loggedIn || portalTheme}>
+      <Router>
+        <NavBar loggedIn={loggedIn} />
+        <Switch>
+          <Route path="/login" render={() => <Login />} />
+          <Route path="/recovery" render={() => <Recovery />} />
+          <Route path="/reset" render={() => <Reset />} />
+          <Route path="/signup" render={() => <Signup />} />
+          <Route path="/onboarding" render={() => <Onboarding />} />
+          <Route path="/dashboard">
+            {loggedIn ? <Dashboard /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/signout"></Route>
+          <Route path="/">
+            {loggedIn ? <Redirect to="/dashboard" /> : <CheckIn />}
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
