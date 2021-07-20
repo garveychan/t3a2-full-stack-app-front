@@ -5,7 +5,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
-import CheckIn from "./components/CheckIn";
+import CheckIn from "./components/CheckIn/CheckIn";
 import Login from "./components/Login";
 import Recovery from "./components/Recovery";
 import Reset from "./components/Reset";
