@@ -1,5 +1,5 @@
 import { Route, Link } from "react-router-dom";
-import navbar_logo from "../../images/navbar_logo.png";
+import logo from "../../images/logo_1up.png";
 import LinkSignup from "./_LinkSignup";
 import LinkLogin from "./_LinkLogin";
 import LinkCheckIn from "./_LinkCheckIn";
@@ -25,7 +25,7 @@ export default function NavBar({ loggedIn }) {
                     <span className="sr-only">1UP Bouldering Gym</span>
                     <img
                       className="h-8 w-auto sm:h-10"
-                      src={navbar_logo}
+                      src={logo}
                       alt="1UP Logo"
                     />
                   </Link>

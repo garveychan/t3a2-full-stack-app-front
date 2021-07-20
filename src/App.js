@@ -15,7 +15,7 @@ import Onboarding from "./components/Onboarding/Onboarding";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const portalTheme = `h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden`;
 
   return (
@@ -31,7 +31,7 @@ function App() {
           <Route path="/dashboard">
             {loggedIn ? <Dashboard /> : <Redirect to="/" />}
           </Route>
-          <Route path="/signout"></Route>
+          <Route path="/logout"></Route>
           <Route path="/">
             {loggedIn ? <Redirect to="/dashboard" /> : <CheckIn />}
           </Route>
