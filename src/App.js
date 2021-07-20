@@ -10,7 +10,7 @@ import Onboarding from "./components/Onboarding/Onboarding";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const portalTheme = `h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden`;
 
   return (

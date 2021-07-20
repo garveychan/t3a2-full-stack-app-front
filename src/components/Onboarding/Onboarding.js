@@ -20,8 +20,8 @@ export default function Onboarding() {
     profilePhoto: null,
   };
 
-  const { formData, setFormData } = useState(initialFormData);
-  const { step, setStep } = useState(1);
+  const [ formData, setFormData ] = useState(initialFormData);
+  const [ step, setStep ] = useState(1);
 
   const prevStep = () => {
     setStep(step - 1);
@@ -31,15 +31,27 @@ export default function Onboarding() {
     setStep(step + 1);
   };
 
-  useEffect(() => {}, [step]);
+  const handleChange = (input) => (e) => {
+    setFormData({ [input]: e.target.value });
+  };
 
-  return (
-    <>
-      {/* <UserProfile /> */}
-      {/* <UserWaiver /> */}
-      {/* <UserPricing/> */}
-      <UserCheckout/>
-      {/* <UserSuccess/> */}
-    </>
-  );
+  const onboardingProps = {
+    prevStep,
+    nextStep,
+    handleChange,
+  };
+
+  switch (step) {
+    case 1:
+      return <UserProfile {...onboardingProps} />;
+    case 2:
+      return <UserWaiver {...onboardingProps} />;
+    case 3:
+      return <UserPricing {...onboardingProps} />;
+    case 4:
+      return <UserCheckout {...onboardingProps} />;
+    case 5:
+      return <UserSuccess {...onboardingProps} />;
+    default:
+  }
 }

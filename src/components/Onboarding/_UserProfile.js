@@ -1,6 +1,6 @@
 import UserPhotoUpload from "./__UserPhotoUpload";
 
-export default function UserProfile() {
+export default function UserProfile({ nextStep, handleChange }) {
   return (
     <div className="max-w-md max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
       <div className="lg:py-24">
@@ -9,14 +9,11 @@ export default function UserProfile() {
             Let's get your details
           </span>
         </h1>
-        <div className="max-h-screen-3/4 mt-4 p-10 overflow-y-scroll bg-gray-100 rounded-lg">
+        <div className="max-h-screen-2/3 mt-4 p-10 overflow-y-scroll bg-gray-100 rounded-lg">
           <form className="space-y-8">
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div className="sm:col-span-3">
-                <label
-                  htmlFor="first-name"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                   First name
                 </label>
                 <div className="mt-1">
@@ -31,10 +28,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-3">
-                <label
-                  htmlFor="last-name"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                   Last name
                 </label>
                 <div className="mt-1">
@@ -49,10 +43,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="first-name"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                   Date of Birth
                 </label>
                 <div className="mt-1">
@@ -66,10 +57,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="last-name"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                   Phone Number
                 </label>
                 <div className="mt-1">
@@ -84,10 +72,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="country"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                   Climbing Experience
                 </label>
                 <div className="mt-1">
@@ -105,10 +90,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-4">
-                <label
-                  htmlFor="street-address"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                   Street address
                 </label>
                 <div className="mt-1">
@@ -123,10 +105,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="city"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                   City
                 </label>
                 <div className="mt-1">
@@ -140,10 +119,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="state"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="state" className="block text-sm font-medium text-gray-700">
                   State / Province
                 </label>
                 <div className="mt-1">
@@ -157,10 +133,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="zip"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
                   ZIP / Postal
                 </label>
                 <div className="mt-1">
@@ -175,10 +148,7 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-2">
-                <label
-                  htmlFor="country"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                   Country / Region
                 </label>
                 <div className="mt-1">
@@ -195,24 +165,22 @@ export default function UserProfile() {
               </div>
 
               <div className="sm:col-span-6">
-                <label
-                  htmlFor="cover-photo"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700">
                   Profile Photo
                 </label>
                 <UserPhotoUpload />
               </div>
             </div>
 
-              <div className="flex justify-end">
-                <button
-                  type="submit"
-                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                >
-                  Next
-                </button>
-              </div>
+            <div className="flex justify-end">
+              <button
+                type="submit"
+                onClick={nextStep}
+                className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Next
+              </button>
+            </div>
           </form>
         </div>
       </div>

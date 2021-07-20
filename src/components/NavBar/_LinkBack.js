@@ -7,7 +7,7 @@ export default function LinkBack() {
   focus:ring-offset-2 focus:ring-green-400
   focus:ring-offset-gray-900"
     >
-      <Link to="/signup">Back</Link>
+      <Link to="/">Back</Link>
     </button>
   );
 }

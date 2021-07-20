@@ -1,5 +1,5 @@
-import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
-import { useState, useEffect, render } from "react";
+import { useRouteMatch, Switch, Route } from "react-router-dom";
+import { useState } from "react";
 import {
   IdentificationIcon,
   UsersIcon,
