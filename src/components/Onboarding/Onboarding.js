@@ -1,4 +1,5 @@
 import UserProfile from "./UserProfile";
+import UserWaiver from "./UserWaiver";
 import React, { useState, useEffect } from "react";
 
 export default function Onboarding() {
@@ -17,10 +18,21 @@ export default function Onboarding() {
   };
 
   const { formData, setFormData } = useState(initialFormData);
+  const { step, setStep } = useState(1);
+
+  const prevStep = () => {
+    setStep(step - 1)
+  }
+
+  const nextStep = () => {
+    setStep(step + 1)
+  }
+
+  useEffect(() => {}, [step])
 
   return (
     <>
-      <UserProfile />
+      <UserWaiver />
     </>
   );
 }
