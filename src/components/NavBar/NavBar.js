@@ -39,6 +39,8 @@ export default function NavBar({ loggedIn }) {
                   </>
                 )}
               />
+              <Route path="/signup" render={() => <LinkLogin />} />
+              <Route path="/onboarding" render={() => <></>} />
               <Route
                 path="/"
                 render={() => (

@@ -1,7 +1,7 @@
 import SignatureModal from "./__UserSignature";
 import { useState } from "react";
 
-export default function UserWaiver() {
+export default function UserWaiver({ prevStep, nextStep, handleChange }) {
   const ACKNOWLEDGEMENTS = `
   You acknowledge and accept that climbing/bouldering is a dangerous recreational activity with obvious risks. You are participating at your own risk.
   One Up Bouldering provides a safe environment to all participants and utilises state of the art equipment to ensure the safety of all its members. However, as bouldering is inherently a dangerous recreational activity, it is a requirement that all participants sign the waiver below.
@@ -29,7 +29,7 @@ export default function UserWaiver() {
   return (
     <>
       {modalOpen && (
-        <SignatureModal modalOpen={modalOpen} setModalOpen={setModalOpen} />
+        <SignatureModal modalOpen={modalOpen} setModalOpen={setModalOpen} nextStep={nextStep} />
       )}
       <div className="max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
         <div className="sm:py-12 lg:py-24">
@@ -38,34 +38,34 @@ export default function UserWaiver() {
               Acknowledgements
             </span>
           </h1>
-          <div className="max-h-screen-3/4 mt-2 p-10 overflow-y-scroll bg-gray-100 rounded-lg text-left">
-            <h6 className="text-md font-bold text-green-400">
-              PLEASE READ CAREFULLY
-            </h6>
+          <div className="max-h-screen-2/3 mt-2 p-10 overflow-y-scroll bg-gray-100 rounded-lg text-left">
+            <h6 className="text-md font-bold text-green-400">PLEASE READ CAREFULLY</h6>
             <div className="my-2">
-              <h3 className="block text-lg font-medium text-gray-700">
-                Acknowledgements
-              </h3>
-              <p className="block text-sm font-light text-gray-700">
-                {ACKNOWLEDGEMENTS}
-              </p>
+              <h3 className="block text-lg font-medium text-gray-700">Acknowledgements</h3>
+              <p className="block text-sm font-light text-gray-700">{ACKNOWLEDGEMENTS}</p>
             </div>
             <div className="my-4">
-              <h3 className="block text-lg font-medium text-gray-700">
-                Waiver
-              </h3>
+              <h3 className="block text-lg font-medium text-gray-700">Waiver</h3>
               <p className="block text-sm font-light text-gray-700">{WAIVER}</p>
             </div>
             <div className="mt-4 py-4 space-y-4 bg-gray-100 rounded-lg text-center">
               <p className="block text-sm text-gray-700">{DECLARATION}</p>
               <div className="flex justify-center">
                 {!modalOpen && (
-                  <button
-                    onClick={() => setModalOpen(true)}
-                    className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                  >
-                    Collect Signature
-                  </button>
+                  <>
+                    <button
+                      onClick={prevStep}
+                      className="mx-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                      Back
+                    </button>
+                    <button
+                      onClick={() => setModalOpen(true)}
+                      className="mx-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                      Signature
+                    </button>
+                  </>
                 )}
               </div>
             </div>
