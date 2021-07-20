@@ -1,4 +1,4 @@
-import SignatureModal from "./UserSignature";
+import SignatureModal from "./__UserSignature";
 import { useState } from "react";
 
 export default function UserWaiver() {
