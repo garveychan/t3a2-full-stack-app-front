@@ -13,6 +13,7 @@ import Signup from "./components/Signup";
 import Onboarding from "./components/Onboarding/Onboarding";
 
 function App() {
+  const signed_in = false;
 
   return (
     <>
@@ -28,8 +29,7 @@ function App() {
             <Route path="/dashboard"></Route>
             <Route path="/signout"></Route>
             <Route path="/">
-              {/* signed in ? dashboard : checkin */}
-              <CheckIn />
+              {signed_in ? <Redirect to="/dashboard" /> : <CheckIn />}
             </Route>
           </Switch>
         </Router>
