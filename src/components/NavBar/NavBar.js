@@ -1,9 +1,9 @@
 import { Route, Link } from "react-router-dom";
 import navbar_logo from "../../images/navbar_logo.png";
-import LinkSignup from "./LinkSignup";
-import LinkLogin from "./LinkLogin";
-import LinkCheckIn from "./LinkCheckIn";
-import LinkBack from "./LinkBack";
+import LinkSignup from "./_LinkSignup";
+import LinkLogin from "./_LinkLogin";
+import LinkCheckIn from "./_LinkCheckIn";
+import LinkBack from "./_LinkBack";
 
 export default function NavBar() {
   return (

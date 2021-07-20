@@ -1,8 +1,8 @@
-import UserProfile from "./UserProfile";
-import UserWaiver from "./UserWaiver";
-import UserPricing from "./UserPricing";
-import UserCheckout from "./UserCheckout";
-import UserSuccess from "./UserSuccess";
+import UserProfile from "./_UserProfile";
+import UserWaiver from "./_UserWaiver";
+import UserPricing from "./_UserPricing";
+import UserCheckout from "./_UserCheckout";
+import UserSuccess from "./_UserSuccess";
 import React, { useState, useEffect } from "react";
 
 export default function Onboarding() {
@@ -38,8 +38,8 @@ export default function Onboarding() {
       {/* <UserProfile /> */}
       {/* <UserWaiver /> */}
       {/* <UserPricing/> */}
-      {/* <UserCheckout/> */}
-      <UserSuccess/>
+      <UserCheckout/>
+      {/* <UserSuccess/> */}
     </>
   );
 }

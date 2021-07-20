@@ -1,4 +1,4 @@
-import UserPhotoUpload from "./UserPhotoUpload";
+import UserPhotoUpload from "./__UserPhotoUpload";
 
 export default function UserProfile() {
   return (

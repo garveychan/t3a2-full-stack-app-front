@@ -1,7 +1,6 @@
 import SignatureCanvas from "react-signature-canvas";
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { CheckIcon } from "@heroicons/react/outline";
 
 export default function SignatureModal({
   modalOpen: open,
