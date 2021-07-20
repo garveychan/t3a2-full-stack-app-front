@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,6 +10,7 @@ import Login from "./components/Login";
 import Recovery from "./components/Recovery";
 import Reset from "./components/Reset";
 import Signup from "./components/Signup";
+import Onboarding from "./components/Onboarding/Onboarding";
 
 function App() {
 
@@ -24,7 +24,7 @@ function App() {
             <Route path="/recovery" render={() => <Recovery />} />
             <Route path="/reset" render={() => <Reset />} />
             <Route path="/signup" render={() => <Signup />} />
-            <Route path="/onboarding"></Route>
+            <Route path="/onboarding" render={() => <Onboarding />} />
             <Route path="/dashboard"></Route>
             <Route path="/signout"></Route>
             <Route path="/">

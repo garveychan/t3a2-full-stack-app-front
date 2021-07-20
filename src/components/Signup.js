@@ -1,4 +1,5 @@
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
+import { Link } from "react-router-dom";
 
 export default function Signup() {
   return (
@@ -56,18 +57,20 @@ export default function Signup() {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
-              >
-                Sign Up
-                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  <ArrowCircleRightIcon
-                    className="h-5 w-5 text-green-500 group-hover:text-green-400"
-                    aria-hidden="true"
-                  />
-                </span>
-              </button>
+              <Link to="/onboarding">
+                <button
+                  type="submit"
+                  className="group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
+                >
+                  Sign Up
+                  <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                    <ArrowCircleRightIcon
+                      className="h-5 w-5 text-green-500 group-hover:text-green-400"
+                      aria-hidden="true"
+                    />
+                  </span>
+                </button>
+              </Link>
             </div>
           </form>
         </div>
