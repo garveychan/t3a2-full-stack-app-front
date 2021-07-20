@@ -7,7 +7,7 @@ import LinkBack from "./LinkBack";
 
 export default function NavBar() {
   return (
-    <div className="fixed top-0 w-screen">
+    <div className="fixed top-0 w-screen z-50 bg-gradient-to-t from-gray-900 to-gray-800">
       <nav
         className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4 sm:px-6"
         aria-label="Global"
