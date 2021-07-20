@@ -1,5 +1,5 @@
 import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, render } from "react";
 import {
   IdentificationIcon,
   UsersIcon,
@@ -23,49 +23,50 @@ export default function Dashboard() {
       href: "/checkins",
       icon: IdentificationIcon,
       adminRequired: true,
-      current: true,
     },
     members: {
       name: "Members",
       href: "/members",
       icon: UsersIcon,
       adminRequired: true,
-      current: false,
     },
     profile: {
       name: "Edit Profile",
       href: "/profile",
       icon: UserCircleIcon,
       adminRequired: false,
-      current: false,
     },
     billing: {
       name: "Billing Portal",
       href: "/billing",
       icon: CreditCardIcon,
       adminRequired: false,
-      current: false,
     },
   };
 
-  function classNames(...classes) {
+  const classNames = (...classes) => {
     return classes.filter(Boolean).join(" ");
-  }
+  };
 
-  // adminStatus to be pulled from API
-  const [adminStatus, setAdminStatus] = useState(true);
-  const [navLinks, setNavLinks] = useState([]);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [dashboardPage, setDashboardPage] = useState("");
-
-  useEffect(() => {
-    setNavLinks([]);
+  const initialState = () => {
+    let [initialPage, navLinks] = [null, []];
     for (const page in navigation) {
       if (navigation[page].adminRequired === adminStatus) {
-        setNavLinks((prevLinks) => [...prevLinks, navigation[page]]);
+        if (!initialPage) initialPage = navigation[page]
+        navLinks.push(navigation[page])
       }
     }
-  }, []);
+    return {
+      page: initialPage,
+      navLinks: navLinks
+    };
+  };
+
+  // adminStatus to be pulled from API
+  const [adminStatus, setAdminStatus] = useState(false);
+  const [navLinks, setNavLinks] = useState(initialState().navLinks);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [dashboardPage, setDashboardPage] = useState(initialState().page);
 
   const dashboardProps = {
     sidebarOpen,

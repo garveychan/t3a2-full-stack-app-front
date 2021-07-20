@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import CheckIn from "./components/CheckIn/CheckIn";
 import Login from "./components/Login";
@@ -15,11 +10,11 @@ import Onboarding from "./components/Onboarding/Onboarding";
 import Dashboard from "./components/Dashboard/Dashboard";
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
   const portalTheme = `h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden`;
 
   return (
-    <div className={loggedIn || portalTheme}>
+    <div className={loggedIn ? "" : portalTheme}>
       <Router>
         <NavBar loggedIn={loggedIn} />
         <Switch>
@@ -28,13 +23,9 @@ function App() {
           <Route path="/reset" render={() => <Reset />} />
           <Route path="/signup" render={() => <Signup />} />
           <Route path="/onboarding" render={() => <Onboarding />} />
-          <Route path="/dashboard">
-            {loggedIn ? <Dashboard /> : <Redirect to="/" />}
-          </Route>
+          <Route path="/dashboard">{loggedIn ? <Dashboard /> : <Redirect to="/" />}</Route>
           <Route path="/logout"></Route>
-          <Route path="/">
-            {loggedIn ? <Redirect to="/dashboard" /> : <CheckIn />}
-          </Route>
+          <Route path="/">{loggedIn ? <Redirect to="/dashboard" /> : <CheckIn />}</Route>
         </Switch>
       </Router>
     </div>
