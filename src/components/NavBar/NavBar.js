@@ -1,9 +1,6 @@
 import { Route, Link, Switch } from "react-router-dom";
+import { Signup, Login, CheckIn } from "./_Links.js";
 import logo from "../../images/logo_1up.png";
-import LinkSignup from "./_LinkSignup";
-import LinkLogin from "./_LinkLogin";
-import LinkCheckIn from "./_LinkCheckIn";
-import LinkBack from "./_LinkBack";
 
 export default function NavBar({ loggedIn }) {
   if (loggedIn) {
@@ -35,17 +32,17 @@ export default function NavBar({ loggedIn }) {
                 path="/login"
                 render={() => (
                   <>
-                    <LinkCheckIn /> <LinkSignup />
+                    <CheckIn /> <Signup />
                   </>
                 )}
               />
-              <Route path="/signup" render={() => <LinkLogin />} />
+              <Route path="/signup" render={() => <Login />} />
               <Route path="/onboarding" render={() => <></>} />
               <Route
                 path="/"
                 render={() => (
                   <>
-                    <LinkLogin /> <LinkSignup />
+                    <Login /> <Signup />
                   </>
                 )}
               />
