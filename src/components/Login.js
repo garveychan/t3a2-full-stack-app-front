@@ -60,13 +60,8 @@ export default function Login() {
 
           <div className="flex items-center justify-center">
             <div className="text-sm">
-              <Link to="/recovery">
-                <a
-                  href="#"
-                  className="font-medium text-green-600 hover:text-green-500"
-                >
-                  Forgot your password?
-                </a>
+              <Link to="/recovery" className="font-medium text-green-600 hover:text-green-500">
+                Forgot your password?
               </Link>
             </div>
           </div>
