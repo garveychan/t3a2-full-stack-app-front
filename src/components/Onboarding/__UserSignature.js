@@ -35,7 +35,7 @@ export default function SignatureModal({
 
   useEffect(() => {
     if (formData.waiverSignature) signatureCanvas.current.fromData(formData.waiverSignature);
-  }, []);
+  }, [formData.waiverSignature]);
 
   return (
     <Transition.Root show={open} as={Fragment}>

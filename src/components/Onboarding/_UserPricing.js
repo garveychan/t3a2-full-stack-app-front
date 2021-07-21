@@ -29,7 +29,7 @@ const tiers = [
 
 export default function UserPricing({ nextStep, prevStep, handleFormData }) {
   const handleClick = (e) => {
-    handleFormData({ target: { name: "subscriptionType", value: e.target.getAttribute('pricingId') } });
+    handleFormData({ target: { name: "subscriptionType", value: e.target.getAttribute('pricingid') } });
     nextStep(e)
   };
 
@@ -79,7 +79,7 @@ export default function UserPricing({ nextStep, prevStep, handleFormData }) {
                       ))}
                     </ul>
                     <button
-                      pricingId={tier.id}
+                      pricingid={tier.id}
                       onClick={(e) => handleClick(e)}
                       className="box-border items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow text-white bg-green-400 hover:bg-green-500"
                       aria-describedby="tier-standard"
