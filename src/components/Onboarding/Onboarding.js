@@ -18,6 +18,8 @@ export default function Onboarding() {
     postcode: "",
     country: "",
     profilePhoto: null,
+    waiverSignature: null,
+    subscriptionType: null,
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -31,14 +33,14 @@ export default function Onboarding() {
     setStep(step + 1);
   };
 
-  const handleChange = ({ target: { name, value } }) => {
+  const handleFormData = ({ target: { name, value } }) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const onboardingProps = {
     prevStep,
     nextStep,
-    handleChange,
+    handleFormData,
     formData,
   };
 

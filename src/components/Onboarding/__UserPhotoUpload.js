@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function UserPhotoUpload({ formData, handleChange }) {
+export default function UserPhotoUpload({ formData, handleFormData }) {
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -12,7 +12,7 @@ export default function UserPhotoUpload({ formData, handleChange }) {
         })
       );
       setFiles(fileArray);
-      handleChange({ target: { name: "profilePhoto", value: fileArray[0] } });
+      handleFormData({ target: { name: "profilePhoto", value: fileArray[0] } });
     },
     multiple: false,
   });

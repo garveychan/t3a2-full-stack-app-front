@@ -1,6 +1,6 @@
 import UserPhotoUpload from "./__UserPhotoUpload";
 
-export default function UserProfile({ nextStep, handleChange, formData }) {
+export default function UserProfile({ nextStep, handleFormData, formData }) {
   return (
     <div className="max-w-md max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
       <div className="lg:py-24">
@@ -23,7 +23,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     id="first-name"
                     autoComplete="given-name"
                     value={formData.firstName}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -40,7 +40,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     id="last-name"
                     autoComplete="family-name"
                     value={formData.lastName}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -56,7 +56,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     name="dateOfBirth"
                     id="date-of-birth"
                     value={formData.dateOfBirth}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -73,7 +73,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     id="phone-number"
                     autoComplete="tel"
                     value={formData.phoneNumber}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -89,7 +89,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     name="climbingExperience"
                     autoComplete="climbing-experience"
                     value={formData.climbingExperience}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Novice</option>
@@ -110,7 +110,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     id="street-address"
                     autoComplete="street-address"
                     value={formData.street}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -126,7 +126,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     name="city"
                     id="city"
                     value={formData.city}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -142,7 +142,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     name="state"
                     id="state"
                     value={formData.state}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -158,7 +158,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     name="postcode"
                     id="postcode"
                     value={formData.postcode}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     autoComplete="postal-code"
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
@@ -175,7 +175,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                     name="country"
                     autoComplete="country"
                     value={formData.country}
-                    onChange={handleChange}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Australia</option>
@@ -188,7 +188,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                 <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700">
                   Profile Photo
                 </label>
-                <UserPhotoUpload formData={formData} handleChange={handleChange}/>
+                <UserPhotoUpload formData={formData} handleFormData={handleFormData}/>
               </div>
             </div>
 

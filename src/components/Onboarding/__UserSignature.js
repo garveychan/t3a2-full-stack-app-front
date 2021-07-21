@@ -5,9 +5,21 @@ import { Dialog, Transition } from "@headlessui/react";
 export default function SignatureModal({
   modalOpen: open,
   setModalOpen: setOpen,
-  nextStep
+  handleFormData,
+  nextStep,
 }) {
-  const cancelButtonRef = useRef(null);
+  const signatureCanvas = useRef(null);
+
+  const handleReset = () => {
+    signatureCanvas.current.clear();
+  };
+
+  const handleSave = () => {
+    handleFormData({
+      target: { name: "waiverSignature", value: signatureCanvas.current.toDataURL() },
+    });
+    nextStep();
+  };
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -31,13 +43,11 @@ export default function SignatureModal({
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
-          {/* This element is to trick the browser into centering the modal contents. */}
-          <span
-            className="hidden sm:inline-block sm:align-middle sm:h-screen"
-            aria-hidden="true"
-          >
+          {/* center the modal */}
+          <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
             &#8203;
           </span>
+
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -58,6 +68,7 @@ export default function SignatureModal({
                       className:
                         "sigCanvas border-2 border-gray-300 hover:border-green-300 rounded-md",
                     }}
+                    ref={signatureCanvas}
                   />
                 </div>
               </div>
@@ -65,15 +76,14 @@ export default function SignatureModal({
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm"
-                  onClick={nextStep}
+                  onClick={handleSave}
                 >
                   Save
                 </button>
                 <button
                   type="button"
                   className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:mt-0 sm:col-start-1 sm:text-sm"
-                  onClick={() => setOpen(false)}
-                  ref={cancelButtonRef}
+                  onClick={handleReset}
                 >
                   Reset
                 </button>

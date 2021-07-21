@@ -1,7 +1,7 @@
 import SignatureModal from "./__UserSignature";
 import { useState } from "react";
 
-export default function UserWaiver({ prevStep, nextStep, handleChange }) {
+export default function UserWaiver({ prevStep, nextStep, handleFormData }) {
   const ACKNOWLEDGEMENTS = `
   You acknowledge and accept that climbing/bouldering is a dangerous recreational activity with obvious risks. You are participating at your own risk.
   One Up Bouldering provides a safe environment to all participants and utilises state of the art equipment to ensure the safety of all its members. However, as bouldering is inherently a dangerous recreational activity, it is a requirement that all participants sign the waiver below.
@@ -26,16 +26,23 @@ export default function UserWaiver({ prevStep, nextStep, handleChange }) {
 
   const [modalOpen, setModalOpen] = useState(false);
 
+  const signatureProps = {
+    modalOpen,
+    setModalOpen,
+    nextStep,
+    handleFormData,
+  }
+
   return (
     <>
       {modalOpen && (
-        <SignatureModal modalOpen={modalOpen} setModalOpen={setModalOpen} nextStep={nextStep} />
+        <SignatureModal {...signatureProps} />
       )}
       <div className="max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
         <div className="sm:py-12 lg:py-24">
           <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-6xl xl:text-6xl">
             <span className="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-green-200 to-green-400 sm:pb-5">
-              Acknowledgements
+              Digital Waiver
             </span>
           </h1>
           <div className="max-h-screen-2/3 mt-2 p-10 overflow-y-scroll bg-gray-100 rounded-lg text-left">
