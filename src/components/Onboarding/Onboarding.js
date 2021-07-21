@@ -11,12 +11,12 @@ export default function Onboarding() {
     lastName: "",
     dateOfBirth: "",
     phoneNumber: "",
-    climbingExperience: "",
+    climbingExperience: "Novice",
     street: "",
     city: "",
     state: "",
     postcode: "",
-    country: "",
+    country: "Australia",
     profilePhoto: null,
     waiverSignature: null,
     waiverSignatureURI: null,
@@ -26,11 +26,13 @@ export default function Onboarding() {
   const [formData, setFormData] = useState(initialFormData);
   const [step, setStep] = useState(1);
 
-  const prevStep = () => {
+  const prevStep = (e) => {
+    e.preventDefault();
     setStep(step - 1);
   };
-
-  const nextStep = () => {
+  
+  const nextStep = (e) => {
+    e.preventDefault();
     setStep(step + 1);
   };
 

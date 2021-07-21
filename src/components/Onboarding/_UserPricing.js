@@ -30,7 +30,7 @@ const tiers = [
 export default function UserPricing({ nextStep, prevStep, handleFormData }) {
   const handleClick = (e) => {
     handleFormData({ target: { name: "subscriptionType", value: e.target.getAttribute('pricingId') } });
-    nextStep()
+    nextStep(e)
   };
 
   return (
