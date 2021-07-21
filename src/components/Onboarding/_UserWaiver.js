@@ -1,7 +1,7 @@
 import SignatureModal from "./__UserSignature";
 import { useState } from "react";
 
-export default function UserWaiver({ prevStep, nextStep, handleFormData }) {
+export default function UserWaiver({ prevStep, nextStep, handleFormData, formData }) {
   const ACKNOWLEDGEMENTS = `
   You acknowledge and accept that climbing/bouldering is a dangerous recreational activity with obvious risks. You are participating at your own risk.
   One Up Bouldering provides a safe environment to all participants and utilises state of the art equipment to ensure the safety of all its members. However, as bouldering is inherently a dangerous recreational activity, it is a requirement that all participants sign the waiver below.
@@ -30,6 +30,7 @@ export default function UserWaiver({ prevStep, nextStep, handleFormData }) {
     modalOpen,
     setModalOpen,
     nextStep,
+    formData,
     handleFormData,
   }
 

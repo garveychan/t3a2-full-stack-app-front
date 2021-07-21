@@ -1,25 +1,41 @@
 import SignatureCanvas from "react-signature-canvas";
-import { Fragment, useRef } from "react";
+import { Fragment, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 
 export default function SignatureModal({
   modalOpen: open,
   setModalOpen: setOpen,
+  formData,
   handleFormData,
   nextStep,
 }) {
   const signatureCanvas = useRef(null);
+  const formProps = {
+    'waiverSignature': 'signatureCanvas.current.toData()',
+    'waiverSignatureURI': 'signatureCanvas.current.toDataURL()'
+  }
+
+  const sendSignatureToFormState = (send=true) => {
+    for (const prop in formProps) {
+      const signature = (send ? eval(formProps[prop]) : null)
+      handleFormData({
+        target: { name: prop, value: signature },
+      })
+    }
+  } 
 
   const handleReset = () => {
+    sendSignatureToFormState(false)
     signatureCanvas.current.clear();
   };
 
   const handleSave = () => {
-    handleFormData({
-      target: { name: "waiverSignature", value: signatureCanvas.current.toDataURL() },
-    });
-    nextStep();
+    sendSignatureToFormState()
   };
+
+  useEffect(() => {
+    if (formData.waiverSignature) signatureCanvas.current.fromData(formData.waiverSignature);
+  }, []);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -68,6 +84,7 @@ export default function SignatureModal({
                       className:
                         "sigCanvas border-2 border-gray-300 hover:border-green-300 rounded-md",
                     }}
+                    onEnd={handleSave}
                     ref={signatureCanvas}
                   />
                 </div>
@@ -76,7 +93,7 @@ export default function SignatureModal({
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm"
-                  onClick={handleSave}
+                  onClick={nextStep}
                 >
                   Save
                 </button>

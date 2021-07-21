@@ -17,6 +17,7 @@ export default function UserPhotoUpload({ formData, handleFormData }) {
     multiple: false,
   });
 
+  // revoke data uris to avoid memory leaks
   useEffect(
     () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
@@ -34,9 +35,9 @@ export default function UserPhotoUpload({ formData, handleFormData }) {
       >
         <input {...getInputProps()} />
 
-        {files[0] ? (
-          <div key={files[0].name} className="h-1/2 w-1/2">
-            <img src={files[0].preview} alt="Upload Preview" />
+        {formData.profilePhoto ? (
+          <div key={formData.profilePhoto.name} className="h-1/2 w-1/2">
+            <img src={formData.profilePhoto.preview} alt="Upload Preview" />
           </div>
         ) : (
           <div className="space-y-1 text-center">

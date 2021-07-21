@@ -2,8 +2,8 @@ import { CheckIcon } from "@heroicons/react/outline";
 
 const tiers = [
   {
+    id: 1,
     name: "Monthly",
-    href: "#",
     priceMonthly: 99,
     description: "Enjoy flexibility.",
     features: [
@@ -14,8 +14,8 @@ const tiers = [
     ],
   },
   {
+    id: 2,
     name: "Annually",
-    href: "#",
     priceMonthly: 999,
     description: "Embrace the lifestyle.",
     features: [
@@ -27,7 +27,12 @@ const tiers = [
   },
 ];
 
-export default function UserPricing({ nextStep }) {
+export default function UserPricing({ nextStep, prevStep, handleFormData }) {
+  const handleClick = (e) => {
+    handleFormData({ target: { name: "subscriptionType", value: e.target.getAttribute('pricingId') } });
+    nextStep()
+  };
+
   return (
     <div className="bg-gray-900 max-h-screen overflow-y-scroll">
       <div className="mt-4 pt-12 sm:pt-16 lg:pt-24">
@@ -73,19 +78,23 @@ export default function UserPricing({ nextStep }) {
                         </li>
                       ))}
                     </ul>
-                      <button
-                        onClick={nextStep}
-                        className="box-border items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow text-white bg-green-400 hover:bg-green-500"
-                        aria-describedby="tier-standard"
-                      >
-                        Get started
-                      </button>
+                    <button
+                      pricingId={tier.id}
+                      onClick={(e) => handleClick(e)}
+                      className="box-border items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow text-white bg-green-400 hover:bg-green-500"
+                      aria-describedby="tier-standard"
+                    >
+                      Get started
+                    </button>
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+        <button onClick={prevStep} className="text-white">
+          Back (temp button)
+        </button>
       </div>
     </div>
   );

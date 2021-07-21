@@ -19,6 +19,7 @@ export default function Onboarding() {
     country: "",
     profilePhoto: null,
     waiverSignature: null,
+    waiverSignatureURI: null,
     subscriptionType: null,
   };
 
