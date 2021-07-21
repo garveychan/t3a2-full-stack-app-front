@@ -1,11 +1,24 @@
 import App from './App';
-import Login from './components/Auth/Login';
+import { unmountComponentAtNode } from "react-dom";
 import { render, screen } from '@testing-library/react';
-import { StaticRouter as Router } from 'react-router-dom'; 
+
+let container = null;
+beforeEach(() => {
+  // setup a DOM element as a render target
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  // cleanup on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
 
 describe('App', () => {
-it('should show Login option', () => {
-    render(<Router><Login/></Router>);
-    const text = screen.getByText(/login/i);
+it('should show gym name', () => {
+    render(<App/>);
+    const text = screen.getByText(/1UP Bouldering Gym/i);
     expect(text).toBeInTheDocument();
 })});
