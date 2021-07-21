@@ -1,4 +1,4 @@
-import Login from './Login';
+import Signup from './Signup';
 import { render, screen } from '@testing-library/react';
 import { StaticRouter as Router } from 'react-router-dom'; 
 import { unmountComponentAtNode } from "react-dom";
@@ -18,30 +18,30 @@ afterEach(() => {
   container = null;
 });
 
-describe('Login', () => {
+describe('Signup', () => {
     // Text display 
-    it('should show "Member Login" text', () => {
-        render(<Router><Login/></Router>);
-        const text = screen.getByText(/member login/i);
+    it('should render "Create your new account" text', () => {
+        render(<Router><Signup/></Router>);
+        const text = screen.getByText(/Create your new account/i);
         expect(text).toBeInTheDocument();
     });
 
     // Email 
     it('should show an email field with default placeholder text of "Email address"', () => {
-        render(<Router><Login/></Router>);
+        render(<Router><Signup/></Router>);
         const inputNode = screen.getByPlaceholderText('Email address')
         expect(inputNode).toBeInTheDocument();
     });
 
     it('should render an email input field', () => {
-        render(<Router><Login/></Router>);
+        render(<Router><Signup/></Router>);
         const inputEl = screen.getByTestId("email-input");
         expect(inputEl).toBeInTheDocument();
         expect(inputEl).toHaveAttribute("type", "email");
     });
 
     it('should not return an error if passed a valid email to test email input field', () => {
-        render(<Router><Login/></Router>);
+        render(<Router><Signup/></Router>);
         const inputEl = screen.getByTestId("email-input");
         userEvent.type(inputEl, "test@mail.com");
         expect(screen.getByTestId("email-input")).toHaveValue("test@mail.com");
@@ -49,7 +49,7 @@ describe('Login', () => {
     });
 
     it('should return an error message if passed an invalid email to test input value', () => {
-        render(<Router><Login/></Router>);
+        render(<Router><Signup/></Router>);
         const inputEl = screen.getByTestId("email-input");
         userEvent.type(inputEl, "test");
         expect(screen.getByTestId("email-input")).toHaveValue("test");
@@ -58,40 +58,56 @@ describe('Login', () => {
         // expect(screen.queryByTestId("error-msg").textContent).toEqual("Please enter a valid email.");
     });
 
-    // Password 
-    it('should show a password field with a default placeholder of "Password"', () => {
-        render(<Router><Login/></Router>);
-        const inputNode = screen.getByPlaceholderText('Password')
+    // Password  
+    it('should show a password field with a default placeholder of "Enter a password"', () => {
+        render(<Router><Signup/></Router>);
+        const inputNode = screen.getByPlaceholderText('Enter a password')
         expect(inputNode).toBeInTheDocument();
     });
 
     it('should render a password input field', () => {
-        render(<Router><Login/></Router>);
+        render(<Router><Signup/></Router>);
         const inputEl = screen.getByTestId("password-input");
+        expect(inputEl).toBeInTheDocument();
+        expect(inputEl).toHaveAttribute("type", "password");
+      });
+
+    //   KR, 21Jul2021: Value used to test password will need to change if we specify password validation in model later 
+    it('should pass a valid password to test the password input field', () => {
+        render(<Router><Signup/></Router>);
+        const inputEl = screen.getByTestId("password-input");
+        userEvent.type(inputEl, "TestPassword");
+        expect(screen.getByTestId("password-input")).toHaveValue("TestPassword");
+        expect(screen.queryByTestId("error-msg")).not.toBeInTheDocument();
+        });
+
+    // Password confirmation
+    it('should show a password confirmation field with a default placeholder of "Confirm your password"', () => {
+        render(<Router><Signup/></Router>);
+        const inputNode = screen.getByPlaceholderText('Confirm your password')
+        expect(inputNode).toBeInTheDocument();
+    });
+
+    it('should render a password confirmation input field', () => {
+        render(<Router><Signup/></Router>);
+        const inputEl = screen.getByTestId("password-confirmation-input");
         expect(inputEl).toBeInTheDocument();
         expect(inputEl).toHaveAttribute("type", "password");
     });
 
     //   KR, 21Jul2021: Value used to test password will need to change if we specify password validation in model later 
-    it('should pass a valid password to test the password input field', () => {
-        render(<Router><Login/></Router>);
-        const inputEl = screen.getByTestId("password-input");
+    it('should pass a valid password to test the password confirmation input field', () => {
+        render(<Router><Signup/></Router>);
+        const inputEl = screen.getByTestId("password-confirmation-input");
         userEvent.type(inputEl, "TestPassword");
-        expect(screen.getByTestId("password-input")).toHaveValue("TestPassword");
+        expect(screen.getByTestId("password-confirmation-input")).toHaveValue("TestPassword");
         expect(screen.queryByTestId("error-msg")).not.toBeInTheDocument();
     });
 
-        // Sign in button
-    it('should show "Sign in" button', () => {
-        render(<Router><Login/></Router>);
-        const text = screen.getByText(/sign in/i);
-        expect(text).toBeInTheDocument();
-    });
-
-    // Forgot password link 
-    it('should render "Forgot Password" link', () => {
-        render(<Router><Login/></Router>);
-        const linkElement = screen.getByText(/Forgot your password?/i);
+    // Sign Up button 
+    it('should render "Sign up" button within a link', () => {
+        render(<Router><Signup/></Router>);
+        const linkElement = screen.getByText(/Sign Up/);
         expect(linkElement).toBeInTheDocument();
     });
 });
