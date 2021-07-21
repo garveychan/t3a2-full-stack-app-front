@@ -188,7 +188,7 @@ export default function UserProfile({ nextStep, handleChange, formData }) {
                 <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700">
                   Profile Photo
                 </label>
-                <UserPhotoUpload handleChange={handleChange}/>
+                <UserPhotoUpload formData={formData} handleChange={handleChange}/>
               </div>
             </div>
 
