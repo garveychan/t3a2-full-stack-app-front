@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
-export default function UserPhotoUpload() {
+export default function UserPhotoUpload({ handleChange }) {
   const [files, setFiles] = useState([]);
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
@@ -20,6 +20,7 @@ export default function UserPhotoUpload() {
   useEffect(
     () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
+      handleChange({ target: { name: "profilePhoto", value: files[0] } });
     },
     [files]
   );
@@ -36,7 +37,7 @@ export default function UserPhotoUpload() {
 
         {files[0] ? (
           <div key={files[0].name} className="h-1/2 w-1/2">
-            <img src={files[0].preview} alt="Upload Preview"/>
+            <img src={files[0].preview} alt="Upload Preview" />
           </div>
         ) : (
           <div className="space-y-1 text-center">

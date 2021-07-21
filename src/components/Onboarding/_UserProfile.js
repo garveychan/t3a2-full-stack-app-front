@@ -1,6 +1,6 @@
 import UserPhotoUpload from "./__UserPhotoUpload";
 
-export default function UserProfile({ nextStep, handleChange }) {
+export default function UserProfile({ nextStep, handleChange, formData }) {
   return (
     <div className="max-w-md max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
       <div className="lg:py-24">
@@ -19,9 +19,11 @@ export default function UserProfile({ nextStep, handleChange }) {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="first-name"
+                    name="firstName"
                     id="first-name"
                     autoComplete="given-name"
+                    value={formData.firstName}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -34,9 +36,11 @@ export default function UserProfile({ nextStep, handleChange }) {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="last-name"
+                    name="lastName"
                     id="last-name"
                     autoComplete="family-name"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -49,8 +53,10 @@ export default function UserProfile({ nextStep, handleChange }) {
                 <div className="mt-1">
                   <input
                     type="date"
-                    name="date-of-birth"
+                    name="dateOfBirth"
                     id="date-of-birth"
+                    value={formData.dateOfBirth}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -63,23 +69,27 @@ export default function UserProfile({ nextStep, handleChange }) {
                 <div className="mt-1">
                   <input
                     type="tel"
-                    name="phone-number"
+                    name="phoneNumber"
                     id="phone-number"
                     autoComplete="tel"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
               </div>
 
               <div className="sm:col-span-2">
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="climbing-experience" className="block text-sm font-medium text-gray-700">
                   Climbing Experience
                 </label>
                 <div className="mt-1">
                   <select
-                    id="country"
-                    name="country"
-                    autoComplete="country"
+                    id="climbing-experience"
+                    name="climbingExperience"
+                    autoComplete="climbing-experience"
+                    value={formData.climbingExperience}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Novice</option>
@@ -96,9 +106,11 @@ export default function UserProfile({ nextStep, handleChange }) {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="street-address"
+                    name="street"
                     id="street-address"
                     autoComplete="street-address"
+                    value={formData.street}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -113,6 +125,8 @@ export default function UserProfile({ nextStep, handleChange }) {
                     type="text"
                     name="city"
                     id="city"
+                    value={formData.city}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -120,13 +134,15 @@ export default function UserProfile({ nextStep, handleChange }) {
 
               <div className="sm:col-span-2">
                 <label htmlFor="state" className="block text-sm font-medium text-gray-700">
-                  State / Province
+                  State
                 </label>
                 <div className="mt-1">
                   <input
                     type="text"
                     name="state"
                     id="state"
+                    value={formData.state}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -134,13 +150,15 @@ export default function UserProfile({ nextStep, handleChange }) {
 
               <div className="sm:col-span-2">
                 <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
-                  ZIP / Postal
+                  Post Code
                 </label>
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="zip"
-                    id="zip"
+                    name="postcode"
+                    id="postcode"
+                    value={formData.postcode}
+                    onChange={handleChange}
                     autoComplete="postal-code"
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
@@ -149,13 +167,15 @@ export default function UserProfile({ nextStep, handleChange }) {
 
               <div className="sm:col-span-2">
                 <label htmlFor="country" className="block text-sm font-medium text-gray-700">
-                  Country / Region
+                  Country
                 </label>
                 <div className="mt-1">
                   <select
                     id="country"
                     name="country"
                     autoComplete="country"
+                    value={formData.country}
+                    onChange={handleChange}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   >
                     <option>Australia</option>
@@ -168,7 +188,7 @@ export default function UserProfile({ nextStep, handleChange }) {
                 <label htmlFor="cover-photo" className="block text-sm font-medium text-gray-700">
                   Profile Photo
                 </label>
-                <UserPhotoUpload />
+                <UserPhotoUpload handleChange={handleChange}/>
               </div>
             </div>
 

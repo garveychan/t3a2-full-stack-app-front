@@ -20,8 +20,8 @@ export default function Onboarding() {
     profilePhoto: null,
   };
 
-  const [ formData, setFormData ] = useState(initialFormData);
-  const [ step, setStep ] = useState(1);
+  const [formData, setFormData] = useState(initialFormData);
+  const [step, setStep] = useState(1);
 
   const prevStep = () => {
     setStep(step - 1);
@@ -31,14 +31,15 @@ export default function Onboarding() {
     setStep(step + 1);
   };
 
-  const handleChange = (input) => (e) => {
-    setFormData({ [input]: e.target.value });
+  const handleChange = ({ target: { name, value } }) => {
+    setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
   };
 
   const onboardingProps = {
     prevStep,
     nextStep,
     handleChange,
+    formData,
   };
 
   switch (step) {

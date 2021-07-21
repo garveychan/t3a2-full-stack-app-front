@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import CheckIn from "./components/CheckIn/CheckIn";
-import Login from "./components/Login";
-import Recovery from "./components/Recovery";
-import Reset from "./components/Reset";
-import Signup from "./components/Signup";
+import Login from "./components/Auth/Login";
+import Recovery from "./components/Auth/Recovery";
+import Reset from "./components/Auth/Reset";
+import Signup from "./components/Auth/Signup";
 import Onboarding from "./components/Onboarding/Onboarding";
 import Dashboard from "./components/Dashboard/Dashboard";
 
