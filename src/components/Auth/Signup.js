@@ -52,6 +52,7 @@ export default function Signup() {
                 id="email-address"
                 name="email"
                 type="email"
+                data-testid="email-input"
                 autoComplete="email"
                 required
                 onChange={handleSignupData}
@@ -69,6 +70,7 @@ export default function Signup() {
                   name="password"
                   type="password"
                   autoComplete="new-password"
+                  data-testid="password-input"
                   required
                   onChange={handleSignupData}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
@@ -84,6 +86,7 @@ export default function Signup() {
                   name="confirmPassword"
                   type="password"
                   autoComplete="new-password"
+                  data-testid="password-confirmation-input"
                   required
                   onChange={handleSignupData}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
