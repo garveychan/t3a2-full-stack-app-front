@@ -61,5 +61,6 @@ const Back = () => {
 export {
   Signup,
   Login,
-  CheckIn
+  CheckIn,
+  Back
 }

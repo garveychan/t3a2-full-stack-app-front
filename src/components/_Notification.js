@@ -4,14 +4,14 @@ import { Transition } from "@headlessui/react";
 import { CheckCircleIcon, ExclamationCircleIcon, ExclamationIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 
-export function displayNotification(dispatch, timer, type, title, message) {
+export function displayNotification(dispatch, timer, type, title, ...messages) {
   dispatch({
     type: "setNotificationProps",
     data: {
       status: true,
       timer: timer,
       title: title,
-      message: message,
+      messages: messages.flat(),
       type: type,
     },
   });
@@ -23,7 +23,7 @@ export function displayNotification(dispatch, timer, type, title, message) {
         status: false,
         timer: null,
         title: "",
-        message: "",
+        messages: [],
         type: null,
       },
     });
@@ -33,7 +33,7 @@ export function displayNotification(dispatch, timer, type, title, message) {
 export function Notification() {
   const {
     store: {
-      notificationProps: { status, timer, title, message, type },
+      notificationProps: { status, timer, title, messages, type },
     },
   } = useGlobalState();
 
@@ -65,7 +65,7 @@ export function Notification() {
       {/* Global notification live region, render this permanently at the end of the document */}
       <div
         aria-live="assertive"
-        className="fixed inset-y-14 inset-x-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
+        className="z-50 fixed inset-y-14 inset-x-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
       >
         <div className="w-full flex flex-col items-center text-left space-y-4 sm:items-end">
           {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
@@ -79,13 +79,17 @@ export function Notification() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">{iconType()}</div>
                   <div className="ml-3 w-0 flex-1 pt-0.5">
                     <p className="text-sm font-medium text-gray-900">{title}</p>
-                    <p className="mt-1 text-sm text-gray-500">{message}</p>
+                    {messages.map((message, index) => (
+                      <p key={index} className="mt-1 text-sm text-gray-500">
+                        {message}
+                      </p>
+                    ))}
                   </div>
                   <div className="ml-4 flex-shrink-0 flex">
                     <button

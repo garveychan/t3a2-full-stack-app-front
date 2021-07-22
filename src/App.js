@@ -10,7 +10,7 @@ export default function App() {
       status: false,
       timer: 0,
       title: "",
-      message: "",
+      messages: [],
       type: null,
     },
     authToken: getToken(),

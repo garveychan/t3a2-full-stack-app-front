@@ -2,6 +2,7 @@ import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { displayNotification } from "../_Notification";
 import { useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
+import { signUp } from "../../api/Services";
 
 export default function Signup() {
   const { dispatch } = useGlobalState();
@@ -20,9 +21,11 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (signupData.password === signupData.confirmPassword) {
-      // handleSignup
-      console.log(signupData);
+
+    const { email, password, confirmPassword } = signupData;
+
+    if (password === confirmPassword) {
+      signUp(dispatch, email, password);
     } else {
       displayNotification(
         dispatch,
