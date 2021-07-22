@@ -2,6 +2,14 @@ import { LockClosedIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 
 export default function Login() {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const elements = e.target.elements
+    const [ email, password ] = [elements.email.value, elements.password.value]
+    console.log(email, password)
+    // onSignIn({ email, password })
+  }
+
   return (
     <div className="m-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
       <div className="lg:py-24">
@@ -11,14 +19,14 @@ export default function Login() {
           </span>
         </h1>
 
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
               </label>
               <input
-                id="email-address"
+                id="email"
                 name="email"
                 type="email"
                 autoComplete="email"
