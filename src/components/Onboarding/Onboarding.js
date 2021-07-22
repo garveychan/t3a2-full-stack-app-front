@@ -3,7 +3,7 @@ import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";
 import UserCheckout from "./_UserCheckout";
 import UserSuccess from "./_UserSuccess";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 export default function Onboarding() {
   const initialFormData = {
