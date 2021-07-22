@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Gym Membership Management System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Client - 1UP Bouldering Gym
 
-## Available Scripts
+<hr>
 
-In the project directory, you can run:
+#### Term 3 Assignment 2 - Full Stack Application
 
-### `yarn start`
+#### Coder Academy - Fast Track Bootcamp
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Developers - Katherine Rock & Garvey Chan
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<hr>
 
-### `yarn test`
+#### Deployed Website
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**[1UP Bouldering Gym Portal](https://1upbouldering.app)**
 
-### `yarn build`
+### Purpose
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The purpose of this application is to provide an all-in-one solution for managing the membership-related operations of a local bouldering gym, **1 Up Bouldering**, via an intuitive web portal interface.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Documentation
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+For further details on this app, please visit the comprehensive documentation available at:
 
-### `yarn eject`
+<https://github.com/garveycodes/t3a2-full-stack-app-docs/blob/main/README.md>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Tech Stack
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This repository is for the front-end of the application only. The repository for the back-end of the application is available at:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<https://github.com/garveycodes/t3a2-full-stack-app-back>
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+#### Front-End
 
-## Learn More
+- **ReactJS** - JavaScript library for building interactive User Interfaces.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **TailwindCSS** - Utility-first CSS framework for styling.
+  
+- **Jest** - JavaScript testing framework.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- **Netlify** - Powerful git-based serverless platform for deployment.
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
