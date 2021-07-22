@@ -1,11 +1,52 @@
-/* This example requires Tailwind CSS v2.0+ */
 import { Fragment, useState, useEffect } from "react";
+import { useGlobalState } from "../utils/globalContext";
 import { Transition } from "@headlessui/react";
 import { CheckCircleIcon, ExclamationCircleIcon, ExclamationIcon } from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 
-export default function Notification({ status=false, timer, title, message, type }) {
-  const [show, setShow] = useState(status)
+export function displayNotification(dispatch, timer, type, title, message) {
+  dispatch({
+    type: "setNotificationProps",
+    data: {
+      status: true,
+      timer: timer,
+      title: title,
+      message: message,
+      type: type,
+    },
+  });
+
+  setTimeout(() => {
+    dispatch({
+      type: "setNotificationProps",
+      data: {
+        status: false,
+        timer: null,
+        title: "",
+        message: "",
+        type: null,
+      },
+    });
+  }, timer);
+}
+
+export function Notification() {
+  const {
+    store: {
+      notificationProps: { status, timer, title, message, type },
+    },
+  } = useGlobalState();
+
+  const [show, setShow] = useState(status);
+
+  useEffect(() => {
+    setShow(status);
+
+    setTimeout(() => {
+      setShow(false);
+    }, timer);
+  }, [status, timer]);
+
   const iconType = () => {
     switch (type) {
       case "error":
@@ -18,13 +59,6 @@ export default function Notification({ status=false, timer, title, message, type
         return;
     }
   };
-
-  useEffect(() => {
-    setShow(status)
-    setTimeout(() => {
-      setShow(false)
-    }, timer)
-  }, [status, timer])
 
   return (
     <>

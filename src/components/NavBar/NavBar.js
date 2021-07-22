@@ -1,15 +1,20 @@
 import { Route, Link, Switch } from "react-router-dom";
 import { Signup, Login, CheckIn } from "./_Links.js";
 import logo from "../../images/logo_1up.png";
+import { useGlobalState } from "../../utils/globalContext.js";
 
-export default function NavBar({ loggedIn }) {
+export default function NavBar() {
+  const {
+    store: { loggedIn },
+  } = useGlobalState();
+
   if (loggedIn) {
     return <></>;
   } else {
     return (
       <div className="fixed top-0 w-screen z-50 bg-gradient-to-t from-gray-900 to-gray-800">
         <nav
-          className="max-w-7xl mx-auto flex items-center justify-between px-4 py-4 sm:px-6"
+          className="mx-auto flex items-center justify-between px-4 py-4 sm:px-6"
           aria-label="Global"
         >
           <div className="flex items-center flex-1">
