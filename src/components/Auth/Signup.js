@@ -1,7 +1,29 @@
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 export default function Signup() {
+  const initialSignupData = {
+    email: "",
+    password: "",
+    confirmPassword: "",
+  };
+
+  const [signupData, setSignupData] = useState(initialSignupData);
+
+  const handleSignupData = ({ target: { name, value } }) => {
+    setSignupData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = () => {
+    if (signupData.password === signupData.confirmPassword) {
+      // handleSignup
+      console.log(signupData)
+    } else {
+      // error notification
+    }
+  }
+
   return (
     <div className="m-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
       <div className="lg:py-24 max-w-sm">
@@ -11,7 +33,7 @@ export default function Signup() {
           </span>
         </h1>
         <div className="mt-10 sm:mt-12">
-          <form className="mt-8 space-y-6" action="#" method="POST">
+          <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email-address" className="sr-only">
                 Email address
@@ -22,6 +44,7 @@ export default function Signup() {
                 type="email"
                 autoComplete="email"
                 required
+                onChange={handleSignupData}
                 className="appearance-none relative block w-full mb-3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
               />
@@ -35,8 +58,9 @@ export default function Signup() {
                   id="password"
                   name="password"
                   type="password"
-                  autoComplete="current-password"
+                  autoComplete="new-password"
                   required
+                  onChange={handleSignupData}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Enter a password"
                 />
@@ -47,9 +71,11 @@ export default function Signup() {
                 </label>
                 <input
                   id="confirm-password"
-                  name="confirm-password"
+                  name="confirmPassword"
                   type="password"
+                  autoComplete="new-password"
                   required
+                  onChange={handleSignupData}
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Confirm your password"
                 />
@@ -57,7 +83,6 @@ export default function Signup() {
             </div>
 
             <div>
-              <Link to="/onboarding">
                 <button
                   type="submit"
                   className="group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
@@ -70,7 +95,6 @@ export default function Signup() {
                     />
                   </span>
                 </button>
-              </Link>
             </div>
           </form>
         </div>

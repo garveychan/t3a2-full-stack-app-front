@@ -24,7 +24,7 @@ export default function Notification({ status=false, timer, title, message, type
     setTimeout(() => {
       setShow(false)
     }, timer)
-  }, [status])
+  }, [status, timer])
 
   return (
     <>
