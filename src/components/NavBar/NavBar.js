@@ -5,10 +5,10 @@ import { useGlobalState } from "../../utils/globalContext.js";
 
 export default function NavBar() {
   const {
-    store: { loggedIn },
+    store: { authToken },
   } = useGlobalState();
 
-  if (loggedIn) {
+  if (authToken) {
     return <></>;
   } else {
     return (

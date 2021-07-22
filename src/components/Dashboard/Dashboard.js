@@ -1,6 +1,8 @@
-import { useRouteMatch, Switch, Route } from "react-router-dom";
-import { useState } from "react";
+import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
+import { getToken } from "../../api/Services";
 import Header from "./_Header";
 import CheckIns from "./_CheckIns";
 import Members from "./_Members";
@@ -50,8 +52,14 @@ export default function Dashboard() {
   };
 
   const {
-    store: { adminAccess },
+    store: { authToken, adminAccess }, dispatch
   } = useGlobalState();
+  const loggedIn = !!authToken;
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch({ type: 'setToken', data: getToken()})
+  },[dispatch, location])
 
   const initialState = () => {
     let [initialPage, navLinks] = [null, []];
@@ -67,7 +75,7 @@ export default function Dashboard() {
     };
   };
 
-  const [navLinks, setNavLinks] = useState(initialState().navLinks);
+  const [navLinks] = useState(initialState().navLinks);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [dashboardPage, setDashboardPage] = useState(initialState().page);
 
@@ -90,12 +98,16 @@ export default function Dashboard() {
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
           <div className="py-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              <Switch>
-                <Route path={`${path}/checkins`} render={() => <CheckIns />} />
-                <Route path={`${path}/members`} render={() => <Members />} />
-                <Route path={`${path}/profile`} render={() => <Profile />} />
-                <Route path={`${path}/billing`} render={() => <Billing />} />
-              </Switch>
+              {loggedIn ? (
+                <Switch>
+                  <Route path={`${path}/checkins`} render={() => <CheckIns />} />
+                  <Route path={`${path}/members`} render={() => <Members />} />
+                  <Route path={`${path}/profile`} render={() => <Profile />} />
+                  <Route path={`${path}/billing`} render={() => <Billing />} />
+                </Switch>
+              ) : (
+                <Redirect to="/" />
+              )}
             </div>
           </div>
         </main>

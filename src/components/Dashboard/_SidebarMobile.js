@@ -68,10 +68,8 @@ export default function SidebarMobile({
               </div>
             </Transition.Child>
             <div className="flex-shrink-0 flex items-center px-4">
-              <Link to="/">
-                <span className="sr-only">1UP Bouldering Gym</span>
-                <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Bouldering Gym" />
-              </Link>
+              <span className="sr-only">1UP Bouldering Gym</span>
+              <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Bouldering Gym" />
             </div>
             <div className="mt-5 flex-1 h-0 overflow-y-auto">
               <nav className="px-2 space-y-1">

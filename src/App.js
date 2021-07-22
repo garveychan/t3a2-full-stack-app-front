@@ -1,3 +1,4 @@
+import {getToken} from "./api/Services";
 import React, { useReducer } from "react";
 import { GlobalContext } from "./utils/globalContext";
 import globalReducer from "./utils/globalReducer";
@@ -12,7 +13,8 @@ export default function App() {
       message: "",
       type: null,
     },
-    loggedIn: false,
+    authToken: getToken(),
+    profileComplete: false,
     adminAccess: false,
   };
 

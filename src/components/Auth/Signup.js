@@ -1,8 +1,11 @@
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
+import { displayNotification } from "../_Notification";
 import { useState } from "react";
+import { useGlobalState } from "../../utils/globalContext";
 
 export default function Signup() {
+  const { dispatch } = useGlobalState();
+
   const initialSignupData = {
     email: "",
     password: "",
@@ -15,14 +18,21 @@ export default function Signup() {
     setSignupData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     if (signupData.password === signupData.confirmPassword) {
       // handleSignup
-      console.log(signupData)
+      console.log(signupData);
     } else {
-      // error notification
+      displayNotification(
+        dispatch,
+        3000,
+        "error",
+        "Oops!",
+        "Please make sure your passwords match."
+      );
     }
-  }
+  };
 
   return (
     <div className="m-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
@@ -83,18 +93,18 @@ export default function Signup() {
             </div>
 
             <div>
-                <button
-                  type="submit"
-                  className="group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
-                >
-                  Sign Up
-                  <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                    <ArrowCircleRightIcon
-                      className="h-5 w-5 text-green-500 group-hover:text-green-400"
-                      aria-hidden="true"
-                    />
-                  </span>
-                </button>
+              <button
+                type="submit"
+                className="group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
+              >
+                Sign Up
+                <span className="absolute left-0 inset-y-0 flex items-center pl-3">
+                  <ArrowCircleRightIcon
+                    className="h-5 w-5 text-green-500 group-hover:text-green-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </button>
             </div>
           </form>
         </div>
