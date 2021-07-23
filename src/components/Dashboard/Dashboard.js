@@ -2,7 +2,7 @@ import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
-import { getToken } from "../../api/Services";
+import { retrieveTokenFromStorage } from "../../api/_Storage";
 import Header from "./_Header";
 import CheckIns from "./_CheckIns";
 import Members from "./_Members";
@@ -52,32 +52,38 @@ export default function Dashboard() {
   };
 
   const {
-    store: { authToken, adminAccess }, dispatch
+    store: { authToken, role },
+    dispatch,
   } = useGlobalState();
   const loggedIn = !!authToken;
-  const location = useLocation();
-
-  useEffect(() => {
-    dispatch({ type: 'setToken', data: getToken()})
-  },[dispatch, location])
+  const adminAccess = role === "admin";
 
   const initialState = () => {
-    let [initialPage, navLinks] = [null, []];
+    let [landingPage, navLinks] = [null, []];
     for (const page in navigation) {
       if (navigation[page].adminRequired === adminAccess) {
-        if (!initialPage) initialPage = navigation[page];
+        if (!landingPage) landingPage = navigation[page];
         navLinks.push(navigation[page]);
       }
     }
     return {
-      page: initialPage,
-      navLinks: navLinks,
+      initialPage: landingPage,
+      initialLinks: navLinks,
     };
   };
 
-  const [navLinks] = useState(initialState().navLinks);
+  const { initialPage, initialLinks } = initialState();
+  const [dashboardPage, setDashboardPage] = useState(initialPage);
+  const [navLinks, setNavLinks] = useState(initialLinks);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [dashboardPage, setDashboardPage] = useState(initialState().page);
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch({ type: "setToken", data: retrieveTokenFromStorage() });
+    setDashboardPage(initialPage)
+    setNavLinks(initialLinks)
+    // validate token with api service
+  }, [dispatch, location, role]);
 
   const dashboardProps = {
     sidebarOpen,

@@ -1,4 +1,4 @@
-import {getToken} from "./api/Services";
+import {retrieveTokenFromStorage} from "./api/_Storage";
 import React, { useReducer } from "react";
 import { GlobalContext } from "./utils/globalContext";
 import globalReducer from "./utils/globalReducer";
@@ -13,9 +13,9 @@ export default function App() {
       messages: [],
       type: null,
     },
-    authToken: getToken(),
+    authToken: retrieveTokenFromStorage(),
     profileComplete: false,
-    adminAccess: false,
+    role: null,
   };
 
   const [store, dispatch] = useReducer(globalReducer, initialState);
