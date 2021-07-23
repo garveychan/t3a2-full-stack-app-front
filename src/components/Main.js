@@ -1,4 +1,10 @@
-import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useLocation,
+} from "react-router-dom";
 import NavBar from "./NavBar/NavBar";
 import CheckIn from "./CheckIn/CheckIn";
 import Login from "./Auth/Login";
@@ -22,7 +28,6 @@ export default function Main() {
   } = useGlobalState();
 
   const location = useLocation();
-
   useEffect(() => {
     const token = retrieveTokenFromStorage();
     token ? setUserProps(dispatch, token) : clearUserProps(dispatch);
@@ -41,12 +46,11 @@ export default function Main() {
         ) : (
           <Redirect to="/onboarding" />
         )
-      ) : (
-        <Redirect to="/" />
-      )}
+      ) : null}
       <Switch>
         <Route path="/login" render={() => <Login />} />
         <Route path="/recovery" render={() => <Recovery />} />
+        <Route path="/users/password/edit" render={() => <Reset redirect={true} />} />
         <Route path="/reset" render={() => <Reset />} />
         <Route path="/signup" render={() => <Signup />} />
         <Route path="/onboarding" render={() => <Onboarding />} />

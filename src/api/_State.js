@@ -11,3 +11,17 @@ export function clearUserProps(dispatch) {
     data: { id: null, email: null, profileComplete: null, role: null, token: null },
   });
 }
+
+export function setResetToken(dispatch, resetToken) {
+  dispatch({
+    type: "setResetToken",
+    data: resetToken
+  })
+}
+
+export function clearResetToken(dispatch) {
+  dispatch({
+    type: "setResetToken",
+    data: null
+  })
+}

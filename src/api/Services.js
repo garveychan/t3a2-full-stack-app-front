@@ -96,3 +96,42 @@ export function signOut(dispatch) {
       );
     });
 }
+
+export function getRecoveryEmail(dispatch, email) {
+  const recoveryURL = `${API_URL}/users/password`;
+
+  axios.post(recoveryURL, { user: { email } }).catch((_) => {});
+
+  displayNotification(
+    dispatch,
+    3000,
+    "success",
+    "Success!",
+    `Your password reset link has been sent to ${email}. Please check your inbox.`
+  );
+}
+
+export function resetPassword(dispatch, resetToken, password) {
+  const resetURL = `${API_URL}/users/password`;
+
+  axios
+    .patch(resetURL, { user: { reset_password_token: resetToken, password: password } })
+    .then((_) => {
+      displayNotification(
+        dispatch,
+        3000,
+        "success",
+        "Success!",
+        "Your password was successfully changed."
+      );
+    })
+    .catch((error) => {
+      displayNotification(
+        dispatch,
+        3000,
+        "error",
+        "Sorry, the following error(s) occurred.",
+        error.response.data.error
+      );
+    });
+}

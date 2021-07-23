@@ -4,7 +4,7 @@ import { GlobalContext } from "./utils/globalContext";
 import globalReducer from "./utils/globalReducer";
 import Main from "./components/Main";
 import jwt_decode from "jwt-decode";
-import {BrowserRouter as Router} from "react-router-dom"
+import { BrowserRouter as Router } from "react-router-dom";
 
 export default function App() {
   let token = retrieveTokenFromStorage();
@@ -19,6 +19,7 @@ export default function App() {
       messages: [],
       type: null,
     },
+    resetToken: null,
     userProps: {
       id: id,
       email: email,

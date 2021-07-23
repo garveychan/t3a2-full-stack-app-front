@@ -14,6 +14,12 @@ export default function globalReducer(state, action) {
         userProps: data
       }
     }
+    case "setResetToken": {
+      return {
+        ...state,
+        resetToken: data
+      }
+    }
     default:
       return state;
   }

@@ -1,20 +1,14 @@
+import { getRecoveryEmail } from "../../api/Services";
 import { useGlobalState } from "../../utils/globalContext";
-import { displayNotification } from "../_Notification";
 
 export default function Recovery() {
   const { dispatch } = useGlobalState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const email = e.target.elements.email.value;
-    // onRecovery(email)
-    displayNotification(
-      dispatch,
-      3000,
-      "success",
-      "Success!",
-      `Your password reset link has been sent to ${email}. Please check your inbox.`
-    );
+    getRecoveryEmail(dispatch, email);
     e.target.elements.email.value = "";
   };
 
