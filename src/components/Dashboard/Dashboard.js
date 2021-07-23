@@ -80,10 +80,13 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch({ type: "setToken", data: retrieveTokenFromStorage() });
+    // validate token with api service
+  }, [dispatch, location]);
+  
+  useEffect(() => {
     setDashboardPage(initialPage)
     setNavLinks(initialLinks)
-    // validate token with api service
-  }, [dispatch, location, role]);
+  },[role])
 
   const dashboardProps = {
     sidebarOpen,
