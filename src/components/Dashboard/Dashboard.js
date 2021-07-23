@@ -52,7 +52,7 @@ export default function Dashboard() {
   };
 
   const {
-    store: { authToken, role },
+    store: { authToken, profileComplete, role },
     dispatch,
   } = useGlobalState();
   const loggedIn = !!authToken;
@@ -80,13 +80,12 @@ export default function Dashboard() {
 
   useEffect(() => {
     dispatch({ type: "setToken", data: retrieveTokenFromStorage() });
-    // validate token with api service
   }, [dispatch, location]);
   
   useEffect(() => {
     setDashboardPage(initialPage)
     setNavLinks(initialLinks)
-  },[role])
+  },[loggedIn, initialLinks, initialPage])
 
   const dashboardProps = {
     sidebarOpen,
@@ -107,7 +106,7 @@ export default function Dashboard() {
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
           <div className="py-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              {loggedIn ? (
+              {loggedIn ? (profileComplete && !adminAccess) ? (
                 <Switch>
                   <Route path={`${path}/checkins`} render={() => <CheckIns />} />
                   <Route path={`${path}/members`} render={() => <Members />} />
@@ -115,6 +114,8 @@ export default function Dashboard() {
                   <Route path={`${path}/billing`} render={() => <Billing />} />
                 </Switch>
               ) : (
+                <Redirect to="/onboarding" />
+                ) : (
                 <Redirect to="/" />
               )}
             </div>

@@ -1,14 +1,10 @@
 import { Route, Link, Switch } from "react-router-dom";
 import { Signup, Login, CheckIn } from "./_Links.js";
+import Logout from "../Dashboard/__Logout";
 import logo from "../../images/logo_1up.png";
-import { useGlobalState } from "../../utils/globalContext.js";
 
-export default function NavBar() {
-  const {
-    store: { authToken },
-  } = useGlobalState();
-
-  if (authToken) {
+export default function NavBar({ loggedIn, profileComplete }) {
+  if (loggedIn && profileComplete) {
     return <></>;
   } else {
     return (
@@ -42,7 +38,7 @@ export default function NavBar() {
                 )}
               />
               <Route path="/signup" render={() => <Login />} />
-              <Route path="/onboarding" render={() => <></>} />
+              <Route path="/onboarding" render={() => <Logout />} />
               <Route
                 path="/"
                 render={() => (

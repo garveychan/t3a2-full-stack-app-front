@@ -13,7 +13,7 @@ export default function Recovery() {
       3000,
       "success",
       "Success!",
-      `Your password reset link has been sent to ${email}.`
+      `Your password reset link has been sent to ${email}. Please check your inbox.`
     );
     e.target.elements.email.value = "";
   };
