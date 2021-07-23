@@ -21,3 +21,11 @@ export function setProfileComplete(dispatch, bool) {
 export function clearProfileComplete(dispatch) {
   dispatch({ type: "setProfileComplete", data: null})
 }
+
+export function setUserProps(dispatch, id, email, profileComplete, role, authToken) {
+  dispatch({ type: "setUserProps", data: {id, email, profileComplete, role, authToken}})
+}
+
+export function clearUserProps(dispatch) {
+  dispatch({ type: "setUserProps", data: null})
+}
