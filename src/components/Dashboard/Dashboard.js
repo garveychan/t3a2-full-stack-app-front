@@ -1,8 +1,5 @@
-import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { useGlobalState } from "../../utils/globalContext";
-import { retrieveTokenFromStorage } from "../../api/_Storage";
+import { useRouteMatch, Switch, Route } from "react-router-dom";
+import { useState } from "react";
 import Header from "./_Header";
 import CheckIns from "./_CheckIns";
 import Members from "./_Members";
@@ -17,7 +14,7 @@ import {
   CreditCardIcon,
 } from "@heroicons/react/outline";
 
-export default function Dashboard() {
+export default function Dashboard({ role }) {
   const { path, url } = useRouteMatch();
 
   const navigation = {
@@ -51,11 +48,6 @@ export default function Dashboard() {
     return classes.filter(Boolean).join(" ");
   };
 
-  const {
-    store: { authToken, profileComplete, role },
-    dispatch,
-  } = useGlobalState();
-  const loggedIn = !!authToken;
   const adminAccess = role === "admin";
 
   const initialState = () => {
@@ -74,18 +66,8 @@ export default function Dashboard() {
 
   const { initialPage, initialLinks } = initialState();
   const [dashboardPage, setDashboardPage] = useState(initialPage);
-  const [navLinks, setNavLinks] = useState(initialLinks);
+  const [navLinks] = useState(initialLinks);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    dispatch({ type: "setToken", data: retrieveTokenFromStorage() });
-  }, [dispatch, location]);
-  
-  useEffect(() => {
-    setDashboardPage(initialPage)
-    setNavLinks(initialLinks)
-  },[loggedIn, initialLinks, initialPage])
 
   const dashboardProps = {
     sidebarOpen,
@@ -106,18 +88,12 @@ export default function Dashboard() {
         <main className="flex-1 relative overflow-y-auto focus:outline-none">
           <div className="py-6">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
-              {loggedIn ? (profileComplete && !adminAccess) ? (
-                <Switch>
-                  <Route path={`${path}/checkins`} render={() => <CheckIns />} />
-                  <Route path={`${path}/members`} render={() => <Members />} />
-                  <Route path={`${path}/profile`} render={() => <Profile />} />
-                  <Route path={`${path}/billing`} render={() => <Billing />} />
-                </Switch>
-              ) : (
-                <Redirect to="/onboarding" />
-                ) : (
-                <Redirect to="/" />
-              )}
+              <Switch>
+                <Route path={`${path}/checkins`} render={() => <CheckIns />} />
+                <Route path={`${path}/members`} render={() => <Members />} />
+                <Route path={`${path}/profile`} render={() => <Profile />} />
+                <Route path={`${path}/billing`} render={() => <Billing />} />
+              </Switch>
             </div>
           </div>
         </main>

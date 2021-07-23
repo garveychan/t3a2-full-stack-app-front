@@ -3,8 +3,8 @@ import { Signup, Login, CheckIn } from "./_Links.js";
 import Logout from "../Dashboard/__Logout";
 import logo from "../../images/logo_1up.png";
 
-export default function NavBar({ loggedIn, profileComplete }) {
-  if (loggedIn && profileComplete) {
+export default function NavBar({ token, profileComplete }) {
+  if (token && profileComplete) {
     return <></>;
   } else {
     return (

@@ -30,7 +30,7 @@ export default function Onboarding() {
     e.preventDefault();
     setStep(step - 1);
   };
-  
+
   const nextStep = (e) => {
     e.preventDefault();
     setStep(step + 1);

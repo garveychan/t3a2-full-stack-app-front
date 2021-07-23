@@ -1,14 +1,7 @@
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
 import { retrieveTokenFromStorage, saveTokenToStorage, deleteTokenFromStorage } from "./_Storage";
-import {
-  clearProfileComplete,
-  clearRole,
-  clearToken,
-  setProfileComplete,
-  setRole,
-  setToken,
-} from "./_State";
+import { clearUserProps, setUserProps } from "./_State";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -19,10 +12,9 @@ export function signUp(dispatch, email, password) {
     .post(signUpURL, { user: { email, password } })
     .then((resp) => {
       const token = resp.headers.authorization;
-      return saveTokenToStorage(token);
-    })
-    .then((token) => {
-      dispatch({ type: "setToken", data: token });
+      saveTokenToStorage(token);
+      setUserProps(dispatch, token);
+      return resp;
     })
     .then((_) => {
       displayNotification(
@@ -34,7 +26,6 @@ export function signUp(dispatch, email, password) {
       );
     })
     .catch((error) => {
-      // clear state, clear token
       displayNotification(
         dispatch,
         3000,
@@ -53,24 +44,19 @@ export function signIn(dispatch, email, password) {
     .then((resp) => {
       const token = resp.headers.authorization;
       saveTokenToStorage(token);
-      setToken(dispatch, token);
-      return resp;
-    })
-    .then((resp) => {
-      const role = resp.data.user.role;
-      setRole(dispatch, role);
-      return resp;
-    })
-    .then((resp) => {
-      const profileComplete = resp.data.user.profileComplete;
-      setProfileComplete(dispatch, profileComplete);
+      setUserProps(dispatch, token);
       return resp;
     })
     .then((_) => {
-      displayNotification(dispatch, 3000, "success", "Welcome!", "It's nice to see you today.");
+      displayNotification(
+        dispatch,
+        3000,
+        "success",
+        "Welcome!",
+        "It's nice to see you here today."
+      );
     })
     .catch((error) => {
-      // clear state, clear token
       displayNotification(
         dispatch,
         3000,
@@ -89,9 +75,7 @@ export function signOut(dispatch) {
     .delete(url, { headers: { Authorization: token } })
     .then((_) => {
       deleteTokenFromStorage(token);
-      clearToken(dispatch);
-      clearRole(dispatch);
-      clearProfileComplete(dispatch);
+      clearUserProps(dispatch);
     })
     .then((_) => {
       displayNotification(

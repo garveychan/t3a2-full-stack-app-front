@@ -8,22 +8,10 @@ export default function globalReducer(state, action) {
         notificationProps: data
       };
     }
-    case "setToken" : {
+    case "setUserProps": {
       return {
         ...state,
-        authToken: data
-      }
-    }
-    case "setRole" : {
-      return {
-        ...state,
-        role: data
-      }
-    }
-    case "setProfileComplete" : {
-      return {
-        ...state,
-        profileComplete: data
+        userProps: data
       }
     }
     default:
