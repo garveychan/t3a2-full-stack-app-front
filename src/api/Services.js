@@ -1,7 +1,7 @@
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
 import { retrieveTokenFromStorage, saveTokenToStorage, deleteTokenFromStorage } from "./_Storage";
-import { clearUserProps, setUserProps } from "./_State";
+import { clearResetToken, clearUserProps, setUserProps } from "./_State";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -123,7 +123,8 @@ export function resetPassword(dispatch, resetToken, password) {
         "success",
         "Success!",
         "Your password was successfully changed."
-      );
+        );
+      clearResetToken(dispatch)
     })
     .catch((error) => {
       displayNotification(

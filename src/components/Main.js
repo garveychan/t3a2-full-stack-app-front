@@ -40,13 +40,13 @@ export default function Main() {
     <Router>
       <NavBar {...navBarProps} />
       <Notification />
-      {token ? (
+      { token ? (
         profileComplete ? (
           <Redirect to="/dashboard" />
         ) : (
           <Redirect to="/onboarding" />
         )
-      ) : null}
+      ) : <Redirect to="/"/> }
       <Switch>
         <Route path="/login" render={() => <Login />} />
         <Route path="/recovery" render={() => <Recovery />} />
