@@ -87,6 +87,8 @@ export function signOut(dispatch) {
       );
     })
     .catch((error) => {
+      deleteTokenFromStorage(token);
+      clearUserProps(dispatch)
       displayNotification(
         dispatch,
         3000,
@@ -107,7 +109,7 @@ export function getRecoveryEmail(dispatch, email) {
     3000,
     "success",
     "Success!",
-    `Your password reset link has been sent to ${email}. Please check your inbox.`
+    `Your password reset link has been sent to ${email}. Please check your inbox, including your spam folder.`
   );
 }
 
