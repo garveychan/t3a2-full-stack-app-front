@@ -1,7 +1,8 @@
+import { PencilIcon } from "@heroicons/react/solid";
 import SignatureModal from "./__UserSignature";
 import { useState } from "react";
 
-export default function UserWaiver({ prevStep, nextStep, handleFormData, formData }) {
+export default function UserWaiver({ nextStep, handleFormData, formData }) {
   const ACKNOWLEDGEMENTS = `
   You acknowledge and accept that climbing/bouldering is a dangerous recreational activity with obvious risks. You are participating at your own risk.
   One Up Bouldering provides a safe environment to all participants and utilises state of the art equipment to ensure the safety of all its members. However, as bouldering is inherently a dangerous recreational activity, it is a requirement that all participants sign the waiver below.
@@ -61,16 +62,14 @@ export default function UserWaiver({ prevStep, nextStep, handleFormData, formDat
                   {!modalOpen && (
                     <>
                       <button
-                        onClick={prevStep}
-                        className="mx-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                      >
-                        Back
-                      </button>
-                      <button
                         onClick={() => setModalOpen(true)}
-                        className="mx-2 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                        className="mx-2 inline-flex justify-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       >
-                        Signature
+                        <PencilIcon
+                          className="h-5 w-4 mr-1 text-green-200 group-hover:text-green-400"
+                          aria-hidden="true"
+                        />
+                        Signature Canvas
                       </button>
                     </>
                   )}

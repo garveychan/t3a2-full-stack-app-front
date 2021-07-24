@@ -55,7 +55,7 @@ export default function SignatureModal({
     setSignerName(formData.waiverName);
     setSignature(formData.waiverSignature);
     setSignatureURI(formData.waiverSignatureURI)
-    signatureCanvas.current.fromData(formData.waiverSignature);
+    if (formData.waiverSignature) signatureCanvas.current.fromData(formData.waiverSignature);
   }, [formData.waiverSignature, formData.waiverSignatureURI, formData.signerName]);
 
   return (
@@ -96,7 +96,10 @@ export default function SignatureModal({
           >
             <div className="inline-block align-center bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
-                <div className="flex flex-col items-center justify-center mt-3 text-center sm:mt-5">
+                <div className="flex flex-col space-y-4 items-center justify-center text-center">
+                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                    Please sign here and enter your name below.
+                  </label>
                   <SignatureCanvas
                     penColor="black"
                     canvasProps={{
@@ -108,19 +111,20 @@ export default function SignatureModal({
                     onEnd={handleChange}
                     ref={signatureCanvas}
                   />
-                  <div className="mt-2 w-1/2">
+                  <div className="w-3/4">
                     <input
+                      type="text"
                       name="signerName"
                       id="signer-name"
                       ref={signerNameRef}
                       value={signerName}
                       onChange={handleChange}
-                      className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                      className="shadow-sm focus:ring-green-300 focus:border-green-300 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>
                 </div>
               </div>
-              <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+              <div className="mt-4 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm"
