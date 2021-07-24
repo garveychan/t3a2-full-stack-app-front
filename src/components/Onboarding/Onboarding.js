@@ -18,6 +18,7 @@ export default function Onboarding() {
     postcode: "",
     country: "Australia",
     profilePhoto: null,
+    waiverName: "",
     waiverSignature: null,
     waiverSignatureURI: null,
     subscriptionType: null,

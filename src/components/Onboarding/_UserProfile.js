@@ -48,7 +48,7 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="date-of-birth" className="block text-sm font-medium text-gray-700">
                     Date of Birth
                   </label>
                   <div className="mt-1">
@@ -64,7 +64,7 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
                     Phone Number
                   </label>
                   <div className="mt-1">
@@ -156,7 +156,7 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="postcode" className="block text-sm font-medium text-gray-700">
                     Post Code
                   </label>
                   <div className="mt-1">

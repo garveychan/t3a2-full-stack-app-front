@@ -10,17 +10,25 @@ export default function SignatureModal({
   nextStep,
 }) {
   const signatureCanvas = useRef(null);
+  const signerNameRef = useRef();
+
   const [signature, setSignature] = useState(null);
   const [signatureURI, setSignatureURI] = useState(null);
+  const [signerName, setSignerName] = useState("");
 
   const handleChange = () => {
+    setSignerName(signerNameRef.current.value);
     setSignature(signatureCanvas.current.toData());
     setSignatureURI(signatureCanvas.current.toDataURL());
   };
 
   const handleReset = () => {
+    setSignerName("");
     setSignature(null);
     setSignatureURI(null);
+    handleFormData({
+      target: { name: "waiverName", value: null },
+    });
     handleFormData({
       target: { name: "waiverSignature", value: null },
     });
@@ -32,6 +40,9 @@ export default function SignatureModal({
 
   const handleSave = (e) => {
     handleFormData({
+      target: { name: "waiverName", value: signerName },
+    });
+    handleFormData({
       target: { name: "waiverSignature", value: signature },
     });
     handleFormData({
@@ -41,8 +52,11 @@ export default function SignatureModal({
   };
 
   useEffect(() => {
-    if (formData.waiverSignature) signatureCanvas.current.fromData(formData.waiverSignature);
-  }, [formData.waiverSignature]);
+    setSignerName(formData.waiverName);
+    setSignature(formData.waiverSignature);
+    setSignatureURI(formData.waiverSignatureURI)
+    signatureCanvas.current.fromData(formData.waiverSignature);
+  }, [formData.waiverSignature, formData.waiverSignatureURI, formData.signerName]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -82,7 +96,7 @@ export default function SignatureModal({
           >
             <div className="inline-block align-center bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
-                <div className="flex justify-center mt-3 text-center sm:mt-5">
+                <div className="flex flex-col items-center justify-center mt-3 text-center sm:mt-5">
                   <SignatureCanvas
                     penColor="black"
                     canvasProps={{
@@ -94,6 +108,16 @@ export default function SignatureModal({
                     onEnd={handleChange}
                     ref={signatureCanvas}
                   />
+                  <div className="mt-2 w-1/2">
+                    <input
+                      name="signerName"
+                      id="signer-name"
+                      ref={signerNameRef}
+                      value={signerName}
+                      onChange={handleChange}
+                      className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
