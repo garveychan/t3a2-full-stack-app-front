@@ -1,28 +1,8 @@
-import { Route, Link, Switch } from "react-router-dom";
-import { Signup, Login, CheckIn } from "./_Links.js";
+import { Route, Switch } from "react-router-dom";
+import { HomeIcon, Signup, Login, CheckIn, OnboardingBackLink } from "./_Links.js";
 import Logout from "../Dashboard/__Logout";
-import logo from "../../images/logo_1up.png";
 
 export default function NavBar({ token, profileComplete }) {
-  const Logo = () => {
-    return (
-      <>
-        <span className="sr-only">1UP Bouldering Gym</span>
-        <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Logo" />
-      </>
-    );
-  };
-
-  const dynamicLink = () => {
-    return token ? (
-      <Logo />
-    ) : (
-      <Link to="/">
-        <Logo />
-      </Link>
-    );
-  };
-
   return (
     <>
       {(!token || !profileComplete) && (
@@ -39,7 +19,7 @@ export default function NavBar({ token, profileComplete }) {
                 focus:ring-offset-gray-900"
                 ></button>
               </div>
-              {dynamicLink()}
+              <HomeIcon token={token} />
             </div>
             <div className="md:flex md:items-center md:space-x-6 space-x-2">
               <Switch>
@@ -52,7 +32,14 @@ export default function NavBar({ token, profileComplete }) {
                   )}
                 />
                 <Route path="/signup" render={() => <Login />} />
-                <Route path="/onboarding" render={() => <Logout />} />
+                <Route
+                  path="/onboarding"
+                  render={() => (
+                    <>
+                      <OnboardingBackLink /> <Logout />
+                    </>
+                  )}
+                />
                 <Route
                   path="/"
                   render={() => (
