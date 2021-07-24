@@ -6,7 +6,10 @@ import { useGlobalState } from "../../utils/globalContext";
 import { resetPassword } from "../../api/Services";
 
 export default function Reset(redirect = false) {
-  const { store: {resetToken}, dispatch } = useGlobalState();
+  const {
+    store: { resetToken },
+    dispatch,
+  } = useGlobalState();
 
   const tokenQuery = new URLSearchParams(useLocation().search);
   const newToken = tokenQuery.get("reset_password_token");

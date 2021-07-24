@@ -4,6 +4,7 @@ import UserPricing from "./_UserPricing";
 import UserCheckout from "./_UserCheckout";
 import UserSuccess from "./_UserSuccess";
 import React, { useState } from "react";
+import { useGlobalState } from "../../utils/globalContext";
 
 export default function Onboarding() {
   const initialFormData = {
@@ -25,16 +26,20 @@ export default function Onboarding() {
   };
 
   const [formData, setFormData] = useState(initialFormData);
-  const [step, setStep] = useState(1);
+
+  const {
+    store: { onboardingStep },
+    dispatch,
+  } = useGlobalState();
 
   const prevStep = (e) => {
     e.preventDefault();
-    setStep(step - 1);
+    dispatch({type:"prevOnboardingStep"})
   };
 
   const nextStep = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+    dispatch({type:"nextOnboardingStep"})
   };
 
   const handleFormData = ({ target: { name, value } }) => {
@@ -48,7 +53,7 @@ export default function Onboarding() {
     formData,
   };
 
-  switch (step) {
+  switch (onboardingStep) {
     case 1:
       return <UserProfile {...onboardingProps} />;
     case 2:

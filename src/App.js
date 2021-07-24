@@ -13,7 +13,6 @@ export default function App() {
       messages: [],
       type: null,
     },
-    resetToken: null,
     userProps: {
       id: null,
       email: null,
@@ -22,6 +21,8 @@ export default function App() {
       role: null,
       token: null,
     },
+    onboardingStep: 1,
+    resetToken: null,
   };
 
   const [store, dispatch] = useReducer(globalReducer, initialState);

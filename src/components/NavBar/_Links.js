@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo_1up.png";
+import { useGlobalState } from "../../utils/globalContext";
 
-export const HomeIcon = ({ token }) => {
+export const HomeIcon = ({ loggedIn }) => {
   const Logo = () => {
     return (
       <>
@@ -11,7 +12,7 @@ export const HomeIcon = ({ token }) => {
     );
   };
 
-  return token ? (
+  return loggedIn ? (
     <Logo />
   ) : (
     <Link to="/">
@@ -62,18 +63,28 @@ export const CheckIn = () => {
 };
 
 export const OnboardingBackLink = () => {
-  const handleClick = () => {
-    console.log("go back bro");
+  const {
+    store: { onboardingStep },
+    dispatch,
+  } = useGlobalState();
+  const firstOnboardingPage = onboardingStep === 1;
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch({ type: "prevOnboardingStep" });
   };
 
   return (
-    <button
-      onClick={handleClick}
-      className=" text-base font-medium text-white hover:text-gray-300 rounded-md focus:outline-none focus:ring-2
-  focus:ring-offset-2 focus:ring-green-400
-  focus:ring-offset-gray-900"
-    >
-      Back
-    </button>
+    <>
+      {firstOnboardingPage ? null : (
+        <button
+          onClick={handleClick}
+          className="text-base font-medium text-white hover:text-gray-300 rounded-md focus:outline-none focus:ring-2
+            focus:ring-offset-2 focus:ring-green-400
+          focus:ring-offset-gray-900"
+        >
+          Back
+        </button>
+      )}
+    </>
   );
 };

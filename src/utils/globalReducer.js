@@ -20,6 +20,22 @@ export default function globalReducer(state, action) {
         resetToken: data
       }
     }
+    case "prevOnboardingStep": {
+      const {onboardingStep} = state
+      const newStep = onboardingStep - 1
+      return {
+        ...state,
+        onboardingStep: newStep
+      }
+    }
+    case "nextOnboardingStep": {
+      const {onboardingStep} = state
+      const newStep = onboardingStep + 1
+      return {
+        ...state,
+        onboardingStep: newStep
+      }
+    }
     default:
       return state;
   }

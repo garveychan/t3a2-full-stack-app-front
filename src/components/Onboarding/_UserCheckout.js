@@ -1,6 +1,6 @@
 export default function UserCheckout({ nextStep }) {
   return (
-    <>
+    <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
       {/* Stripe Portal Checkout Integration */}
       <button
         type="submit"
@@ -9,6 +9,6 @@ export default function UserCheckout({ nextStep }) {
       >
         Next
       </button>
-    </>
+    </div>
   );
 }

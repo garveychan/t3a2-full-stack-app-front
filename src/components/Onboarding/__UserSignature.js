@@ -56,7 +56,7 @@ export default function SignatureModal({
     setSignature(formData.waiverSignature);
     setSignatureURI(formData.waiverSignatureURI)
     if (formData.waiverSignature) signatureCanvas.current.fromData(formData.waiverSignature);
-  }, [formData.waiverSignature, formData.waiverSignatureURI, formData.signerName]);
+  }, [formData.waiverSignature, formData.waiverSignatureURI, formData.waiverName]);
 
   return (
     <Transition.Root show={open} as={Fragment}>

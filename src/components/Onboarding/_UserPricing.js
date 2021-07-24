@@ -27,7 +27,7 @@ const tiers = [
   },
 ];
 
-export default function UserPricing({ nextStep, prevStep, handleFormData }) {
+export default function UserPricing({ nextStep, handleFormData }) {
   const handleClick = (e) => {
     handleFormData({
       target: { name: "subscriptionType", value: e.target.getAttribute("pricingid") },
@@ -86,7 +86,7 @@ export default function UserPricing({ nextStep, prevStep, handleFormData }) {
                       </ul>
                       <button
                         pricingid={tier.id}
-                        onClick={(e) => handleClick(e)}
+                        onClick={handleClick}
                         className="box-border items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow text-white bg-green-400 hover:bg-green-500"
                         aria-describedby="tier-standard"
                       >
@@ -98,9 +98,6 @@ export default function UserPricing({ nextStep, prevStep, handleFormData }) {
               </div>
             </div>
           </div>
-          <button onClick={prevStep} className="text-white">
-            Back (temp button)
-          </button>
         </div>
       </div>
     </div>
