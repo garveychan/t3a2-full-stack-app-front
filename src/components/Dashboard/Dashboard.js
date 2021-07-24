@@ -1,11 +1,5 @@
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { useState } from "react";
-import {
-  IdentificationIcon,
-  UsersIcon,
-  UserCircleIcon,
-  CreditCardIcon,
-} from "@heroicons/react/outline";
 import Header from "./_Header";
 import CheckIns from "./_CheckIns";
 import Members from "./_Members";
@@ -13,8 +7,14 @@ import Profile from "./_Profile";
 import Billing from "./_Billing";
 import Sidebar from "./_Sidebar";
 import SidebarMobile from "./_SidebarMobile";
+import {
+  IdentificationIcon,
+  UsersIcon,
+  UserCircleIcon,
+  CreditCardIcon,
+} from "@heroicons/react/outline";
 
-export default function Dashboard() {
+export default function Dashboard({ role }) {
   const { path, url } = useRouteMatch();
 
   const navigation = {
@@ -48,25 +48,26 @@ export default function Dashboard() {
     return classes.filter(Boolean).join(" ");
   };
 
+  const adminAccess = role === "admin";
+
   const initialState = () => {
-    let [initialPage, navLinks] = [null, []];
+    let [landingPage, navLinks] = [null, []];
     for (const page in navigation) {
-      if (navigation[page].adminRequired === adminStatus) {
-        if (!initialPage) initialPage = navigation[page]
-        navLinks.push(navigation[page])
+      if (navigation[page].adminRequired === adminAccess) {
+        if (!landingPage) landingPage = navigation[page];
+        navLinks.push(navigation[page]);
       }
     }
     return {
-      page: initialPage,
-      navLinks: navLinks
+      initialPage: landingPage,
+      initialLinks: navLinks,
     };
   };
 
-  // adminStatus to be pulled from API
-  const [adminStatus, setAdminStatus] = useState(false);
-  const [navLinks, setNavLinks] = useState(initialState().navLinks);
+  const { initialPage, initialLinks } = initialState();
+  const [dashboardPage, setDashboardPage] = useState(initialPage);
+  const [navLinks] = useState(initialLinks);
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const [dashboardPage, setDashboardPage] = useState(initialState().page);
 
   const dashboardProps = {
     sidebarOpen,
