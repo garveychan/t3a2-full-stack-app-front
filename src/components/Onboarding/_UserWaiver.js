@@ -12,7 +12,6 @@ export default function UserWaiver({
   formQueries: { waiverContent, waiverDeclaration },
 }) {
   const { dispatch } = useGlobalState();
-
   const WAIVER = waiverContent;
   const DECLARATION = waiverDeclaration;
 
@@ -79,7 +78,7 @@ export default function UserWaiver({
                           className="h-5 w-4 mr-1 text-indigo-200 group-hover:text-indigo-400"
                           aria-hidden="true"
                         />
-                        Signature Canvas
+                        {!formData.waiverSignature ? "Show Signature Canvas" : "Edit Signature"}
                       </button>
                     </>
                   )}

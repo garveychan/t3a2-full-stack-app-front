@@ -13,7 +13,7 @@ const tiers = [
       "Vel ipsa esse repudiandae excepturi",
       "Itaque cupiditate adipisci quibusdam",
     ],
-    stripePriceId: 'price_1JGmU5DyKcbUGYk7nfGpvqxP'
+    pricingId: 'price_1JGmU5DyKcbUGYk7nfGpvqxP'
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const tiers = [
       "Vel ipsa esse repudiandae excepturi",
       "Itaque cupiditate adipisci quibusdam",
     ],
-    stripePriceId: 'price_1JGmU5DyKcbUGYk7oWAOpODr'
+    pricingId: 'price_1JGmU5DyKcbUGYk7oWAOpODr'
   },
 ];
 
@@ -37,7 +37,7 @@ export default function UserPricing({ nextStep, handleFormData }) {
       target: { name: "subscriptionType", value: e.target.getAttribute("pricingType") },
     });
     handleFormData({
-      target: { name: "subscriptionId", value: e.target.getAttribute("pricingid") },
+      target: { name: "pricingId", value: e.target.getAttribute("pricingid") },
     });
     nextStep(e);
   };
@@ -93,12 +93,12 @@ export default function UserPricing({ nextStep, handleFormData }) {
                       </ul>
                       <button
                         pricingtype={`$${tier.price} ${tier.name}`}
-                        pricingid={tier.stripePriceId}
+                        pricingid={tier.pricingId}
                         onClick={handleClick}
                         className="box-border items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow text-white bg-green-400 hover:bg-green-500"
                         aria-describedby="tier-standard"
                       >
-                        Get started
+                        Select
                       </button>
                     </div>
                   </div>

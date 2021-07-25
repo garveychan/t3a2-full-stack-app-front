@@ -32,6 +32,10 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
     subscriptionType,
   } = formData;
 
+  const urlFromObject = (object) => {
+    return object ? URL.createObjectURL(object) : "";
+  };
+
   const imageWrapper = (name, string) => {
     return <img src={string} alt={name} />;
   };
@@ -47,7 +51,7 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
     { name: "Full Address", value: `${street}, ${city}, ${state}, ${postcode}, ${country}` },
     {
       name: "Profile Photo",
-      value: imageWrapper("Profile Photo", URL.createObjectURL(profilePhoto)),
+      value: imageWrapper("Profile Photo", urlFromObject(profilePhoto)),
     },
     { name: "Signature Name", value: waiverName },
     { name: "Signature", value: imageWrapper("Signature", waiverSignatureURI) },

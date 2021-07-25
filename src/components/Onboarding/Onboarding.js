@@ -2,29 +2,31 @@ import UserProfile from "./_UserProfile";
 import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";
 import UserReview from "./_UserReview";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 import { getOnboardingForm } from "../../api/ServicesOnboarding";
 
 export default function Onboarding() {
-  const initialFormData = {
-    firstName: "",
-    lastName: "",
-    dateOfBirth: "",
-    phoneNumber: "",
-    climbingExperience: 1,
-    street: "",
-    city: "",
-    state: "",
-    postcode: "",
-    country: "Australia",
-    profilePhoto: null,
-    waiverName: "",
-    waiverSignature: null,
-    waiverSignatureURI: null,
-    subscriptionType: null,
-    subscriptionId: null,
-  };
+  const memoizedInitialFormData = useMemo(() => {
+    return {
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      climbingExperience: 1,
+      street: "",
+      city: "",
+      state: "",
+      postcode: "",
+      country: "Australia",
+      profilePhoto: null,
+      waiverName: "",
+      waiverSignature: null,
+      waiverSignatureURI: null,
+      subscriptionType: null,
+      pricingId: null,
+    };
+  }, []);
 
   const initialFormQueries = {
     experienceLevels: null,
@@ -32,7 +34,7 @@ export default function Onboarding() {
     waiverDeclaration: null,
   };
 
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState(memoizedInitialFormData);
   const [formQueries, setFormQueries] = useState(initialFormQueries);
 
   const {
@@ -43,19 +45,21 @@ export default function Onboarding() {
   useEffect(() => {
     let mounted = true;
 
-    getOnboardingForm(dispatch).then((data) => {
-      const {
-        currentWaiver: { content: waiverContent, declaration: waiverDeclaration },
-        experienceLevels,
-      } = data;
-      mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
-    });
+    getOnboardingForm(dispatch)
+      .then((data) => {
+        const {
+          currentWaiver: { content: waiverContent, declaration: waiverDeclaration },
+          experienceLevels,
+        } = data;
+        mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
+      })
+      .catch((error) => console.error(error));
 
     return () => {
       mounted = false;
-      setFormData(null)
+      setFormData(memoizedInitialFormData);
     };
-  }, [dispatch]);
+  }, [dispatch, memoizedInitialFormData]);
 
   const prevStep = (e) => {
     e.preventDefault();

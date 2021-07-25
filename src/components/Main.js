@@ -6,9 +6,9 @@ import Recovery from "./Auth/Recovery";
 import Reset from "./Auth/Reset";
 import Signup from "./Auth/Signup";
 import Onboarding from "./Onboarding/Onboarding";
-import Success from "./Onboarding/Success";
-import Dashboard from "./Dashboard/Dashboard";
 import Checkout from "./Onboarding/Checkout";
+import Failure from "./Onboarding/Failure";
+import Dashboard from "./Dashboard/Dashboard";
 import { Notification } from "./_Notification";
 import { useGlobalState } from "../utils/globalContext";
 import { useEffect } from "react";
@@ -53,7 +53,7 @@ export default function Main() {
         <Route path="/signup" render={() => <Signup />} />
         <Route path="/onboarding" render={() => <Onboarding />} />
         <Route path="/checkout" render={() => <Checkout />} />
-        <Route path="/success" render={() => <Success />} />
+        <Route path="/failure" render={() => <Failure />} />
         <Route path="/dashboard" render={() => <Dashboard {...dashboardProps} />} />
         <Route path="/" render={() => <CheckIn />} />
       </Switch>

@@ -17,12 +17,13 @@ export default function App() {
       id: null,
       email: null,
       profileComplete: null,
-      subscribed: null,
+      stripeCustomer: null,
       role: null,
       token: null,
     },
     onboardingStep: 1,
     resetToken: null,
+    redirectURL: "",
   };
 
   const [store, dispatch] = useReducer(globalReducer, initialState);

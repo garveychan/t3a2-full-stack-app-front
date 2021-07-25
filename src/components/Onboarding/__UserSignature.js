@@ -7,7 +7,6 @@ export default function SignatureModal({
   setModalOpen: setOpen,
   formData,
   handleFormData,
-  nextStep,
 }) {
   const signatureCanvas = useRef(null);
   const signerNameRef = useRef();
@@ -80,7 +79,6 @@ export default function SignatureModal({
             <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </Transition.Child>
 
-          {/* center the modal */}
           <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
             &#8203;
           </span>

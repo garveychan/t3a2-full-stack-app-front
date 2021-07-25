@@ -1,5 +1,7 @@
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
+import { saveTokenToStorage } from "./_Storage";
+import { resetOnboardingStep, setRedirectURL } from "./_State";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
@@ -25,24 +27,51 @@ export function getOnboardingForm(dispatch) {
 }
 
 export function postOnboardingForm(dispatch, history, formData, userProps) {
-  const url = `${API_URL}/members`;
+  const memberURL = `${API_URL}/members`;
+  const paymentURL = `${API_URL}/payments/checkout`;
   const profileData = { ...formData };
   const profilePhoto = profileData.profilePhoto;
 
   delete profileData.profilePhoto;
   delete profileData.waiverSignature;
+  delete profileData.subscriptionType;
 
   const payload = new FormData();
   payload.append("id", userProps.id);
-  payload.append("profileData", JSON.stringify(profileData))
+  payload.append("profileData", JSON.stringify(profileData));
   payload.append("profilePhoto", profilePhoto);
 
   axios
-    .post(url, payload, { headers: { Authorization: userProps.token } })
-    .then((resp) => {
-      console.log(resp);
+    .post(memberURL, payload, { headers: { Authorization: userProps.token } })
+    .then((_) => {
 
-      history.push("/checkout")
+      axios
+        .post(
+          paymentURL,
+          { id: userProps.id, pricingId: profileData.pricingId },
+          { headers: { Authorization: userProps.token } }
+        )
+        .then((resp) => {
+          const token = resp.headers.authorization;
+          saveTokenToStorage(token);
+          setRedirectURL(dispatch, resp.data.StripeSessionURL)
+          resetOnboardingStep(dispatch);
+        })
+        .then((_) => {
+          history.push("/checkout");
+        })
+        .catch((error) => {
+          console.error(error);
+          displayNotification(
+            dispatch,
+            3000,
+            "error",
+            "Something went wrong.",
+            "We were unable to redirect you.",
+            "Please refresh the page and try again."
+          );
+        });
+
     })
     .catch((error) => {
       console.error(error);
@@ -55,8 +84,4 @@ export function postOnboardingForm(dispatch, history, formData, userProps) {
         "Please refresh the page and try again."
       );
     });
-}
-
-export function createStripeSession(dispatch, formData) {
-  const url = `${API_URL}/payments`; 
 }

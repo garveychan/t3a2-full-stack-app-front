@@ -5,36 +5,48 @@ export default function globalReducer(state, action) {
     case "setNotificationProps": {
       return {
         ...state,
-        notificationProps: data
+        notificationProps: data,
       };
     }
     case "setUserProps": {
       return {
         ...state,
-        userProps: data
-      }
+        userProps: data,
+      };
     }
     case "setResetToken": {
       return {
         ...state,
-        resetToken: data
-      }
+        resetToken: data,
+      };
     }
     case "prevOnboardingStep": {
-      const {onboardingStep} = state
-      const newStep = onboardingStep - 1
+      const { onboardingStep } = state;
+      const newStep = onboardingStep - 1;
       return {
         ...state,
-        onboardingStep: newStep
-      }
+        onboardingStep: newStep,
+      };
     }
     case "nextOnboardingStep": {
-      const {onboardingStep} = state
-      const newStep = onboardingStep + 1
+      const { onboardingStep } = state;
+      const newStep = onboardingStep + 1;
       return {
         ...state,
-        onboardingStep: newStep
-      }
+        onboardingStep: newStep,
+      };
+    }
+    case "resetOnboardingStep": {
+      return {
+        ...state,
+        onboardingStep: 1,
+      };
+    }
+    case "setRedirectURL": {
+      return {
+        ...state,
+        redirectURL: data,
+      };
     }
     default:
       return state;
