@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { postOnboardingForm } from "../../api/ServicesOnboarding";
 import { useGlobalState } from "../../utils/globalContext";
 import { mapCategories } from "./___Helpers";
@@ -8,8 +9,10 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
     dispatch,
   } = useGlobalState();
 
+  const history = useHistory();
+
   const handleSubmit = () => {
-    postOnboardingForm(dispatch, formData, userProps);
+    postOnboardingForm(dispatch, history, formData, userProps);
   };
 
   const {
@@ -73,6 +76,7 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
               <dl>
                 {profileInfo.map((info, index) => (
                   <div
+                    key={index}
                     className={`${
                       index % 2 === 0 ? "bg-gray-50" : "bg-white"
                     } px-4 py-5 flex flex-col items-center`}

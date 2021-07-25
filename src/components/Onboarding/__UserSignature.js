@@ -27,7 +27,7 @@ export default function SignatureModal({
     setSignature(null);
     setSignatureURI(null);
     handleFormData({
-      target: { name: "waiverName", value: null },
+      target: { name: "waiverName", value: "" },
     });
     handleFormData({
       target: { name: "waiverSignature", value: null },

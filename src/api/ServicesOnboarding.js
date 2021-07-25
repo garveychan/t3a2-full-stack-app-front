@@ -24,7 +24,7 @@ export function getOnboardingForm(dispatch) {
     });
 }
 
-export function postOnboardingForm(dispatch, formData, userProps) {
+export function postOnboardingForm(dispatch, history, formData, userProps) {
   const url = `${API_URL}/members`;
   const profileData = { ...formData };
   const profilePhoto = profileData.profilePhoto;
@@ -41,6 +41,8 @@ export function postOnboardingForm(dispatch, formData, userProps) {
     .post(url, payload, { headers: { Authorization: userProps.token } })
     .then((resp) => {
       console.log(resp);
+
+      history.push("/checkout")
     })
     .catch((error) => {
       console.error(error);
@@ -49,7 +51,8 @@ export function postOnboardingForm(dispatch, formData, userProps) {
         3000,
         "error",
         "Something went wrong.",
-        "Please check that you have completed all the fields."
+        "The server was unable to process your details",
+        "Please refresh the page and try again."
       );
     });
 }
