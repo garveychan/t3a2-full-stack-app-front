@@ -49,8 +49,7 @@ export function postOnboardingForm(dispatch, formData, userProps) {
         3000,
         "error",
         "Something went wrong.",
-        "The server could not process the onboarding form.",
-        "Please refresh the page and try again."
+        "Please check that you have completed all the fields."
       );
     });
 }

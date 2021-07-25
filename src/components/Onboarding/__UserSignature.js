@@ -1,6 +1,8 @@
 import SignatureCanvas from "react-signature-canvas";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
+import { useGlobalState } from "../../utils/globalContext";
+import { displayNotification } from "../_Notification";
 
 export default function SignatureModal({
   modalOpen: open,
@@ -9,6 +11,8 @@ export default function SignatureModal({
   handleFormData,
   nextStep,
 }) {
+  const { dispatch } = useGlobalState();
+
   const signatureCanvas = useRef(null);
   const signerNameRef = useRef();
 
@@ -38,6 +42,32 @@ export default function SignatureModal({
     signatureCanvas.current.clear();
   };
 
+  const validateSignature = (e) => {
+    e.preventDefault();
+
+    const checkProps = () => {
+      const props = ["waiverName", "waiverSignature", "waiverSignatureURI"];
+
+      for (const prop of props) {
+        if (!formData[prop]) return false;
+      }
+
+      return true;
+    };
+
+    if (checkProps()) {
+      nextStep(e);
+    } else {
+      displayNotification(
+        dispatch,
+        3000,
+        "warning",
+        "Oops!",
+        "Please check that you have completed all the fields."
+      );
+    }
+  };
+
   const handleSave = (e) => {
     handleFormData({
       target: { name: "waiverName", value: signerName },
@@ -48,13 +78,13 @@ export default function SignatureModal({
     handleFormData({
       target: { name: "waiverSignatureURI", value: signatureURI },
     });
-    nextStep(e);
+    validateSignature(e);
   };
 
   useEffect(() => {
     setSignerName(formData.waiverName);
     setSignature(formData.waiverSignature);
-    setSignatureURI(formData.waiverSignatureURI)
+    setSignatureURI(formData.waiverSignatureURI);
     if (formData.waiverSignature) signatureCanvas.current.fromData(formData.waiverSignature);
   }, [formData.waiverSignature, formData.waiverSignatureURI, formData.waiverName]);
 
@@ -97,7 +127,7 @@ export default function SignatureModal({
             <div className="inline-block align-center bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
                 <div className="flex flex-col space-y-4 items-center justify-center text-center">
-                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                     Please sign here and enter your name below.
                   </label>
                   <SignatureCanvas

@@ -52,6 +52,7 @@ export default function Onboarding() {
 
     return () => {
       mounted = false;
+      setFormData(null)
     };
   }, [dispatch]);
 

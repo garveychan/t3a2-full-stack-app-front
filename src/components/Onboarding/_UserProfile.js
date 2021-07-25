@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import { useGlobalState } from "../../utils/globalContext";
+import { displayNotification } from "../_Notification";
 import UserPhotoUpload from "./__UserPhotoUpload";
 
 export default function UserProfile({
@@ -23,6 +26,62 @@ export default function UserProfile({
     };
     handleFormData(mappedExperience);
   };
+
+  const { dispatch } = useGlobalState();
+
+  const validateForm = (e) => {
+    const checkProps = () => {
+      const props = [
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "phoneNumber",
+        "climbingExperience",
+        "street",
+        "city",
+        "state",
+        "postcode",
+        "country",
+        "profilePhoto",
+      ];
+
+      for (const prop of props) {
+        if (!formData[prop]) return false;
+      }
+
+      return true;
+    };
+
+    if (checkProps()) {
+      nextStep(e);
+    } else {
+      displayNotification(
+        dispatch,
+        3000,
+        "warning",
+        "Oops!",
+        "Please ensure that you have completed all the fields according to the requirements."
+      );
+    }
+  };
+
+  useEffect(() => {
+    (function setMaxDateOfBirth() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      document.getElementById("date-of-birth").setAttribute("max", today);
+    })();
+  }, []);
 
   return (
     <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
@@ -193,7 +252,7 @@ export default function UserProfile({
                   </label>
                   <div className="mt-1">
                     <input
-                      type="text"
+                      type="number"
                       name="postcode"
                       id="postcode"
                       value={formData.postcode}
@@ -234,7 +293,7 @@ export default function UserProfile({
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  onClick={nextStep}
+                  onClick={validateForm}
                   className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
                   Next
