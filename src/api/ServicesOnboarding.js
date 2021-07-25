@@ -53,3 +53,7 @@ export function postOnboardingForm(dispatch, formData, userProps) {
       );
     });
 }
+
+export function createStripeSession(dispatch, formData) {
+  const url = `${API_URL}/payments`; 
+}

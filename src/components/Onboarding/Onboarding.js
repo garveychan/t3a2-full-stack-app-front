@@ -23,6 +23,7 @@ export default function Onboarding() {
     waiverSignature: null,
     waiverSignatureURI: null,
     subscriptionType: null,
+    subscriptionId: null,
   };
 
   const initialFormQueries = {

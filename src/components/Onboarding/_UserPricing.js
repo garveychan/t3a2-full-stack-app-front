@@ -3,8 +3,9 @@ import { CheckIcon } from "@heroicons/react/outline";
 const tiers = [
   {
     id: 1,
-    name: "Monthly",
-    priceMonthly: 99,
+    name: "monthly",
+    cycle: "/mo",
+    price: 99,
     description: "Enjoy flexibility.",
     features: [
       "Pariatur quod similique",
@@ -12,11 +13,13 @@ const tiers = [
       "Vel ipsa esse repudiandae excepturi",
       "Itaque cupiditate adipisci quibusdam",
     ],
+    stripePriceId: 'price_1JGmU5DyKcbUGYk7nfGpvqxP'
   },
   {
     id: 2,
-    name: "Annually",
-    priceMonthly: 999,
+    name: "annually",
+    cycle: "/yr",
+    price: 999,
     description: "Embrace the lifestyle.",
     features: [
       "Pariatur quod similique",
@@ -24,13 +27,17 @@ const tiers = [
       "Vel ipsa esse repudiandae excepturi",
       "Itaque cupiditate adipisci quibusdam",
     ],
+    stripePriceId: 'price_1JGmU5DyKcbUGYk7oWAOpODr'
   },
 ];
 
 export default function UserPricing({ nextStep, handleFormData }) {
   const handleClick = (e) => {
     handleFormData({
-      target: { name: "subscriptionType", value: e.target.getAttribute("pricingid") },
+      target: { name: "subscriptionType", value: e.target.getAttribute("pricingType") },
+    });
+    handleFormData({
+      target: { name: "subscriptionId", value: e.target.getAttribute("pricingid") },
     });
     nextStep(e);
   };
@@ -68,8 +75,8 @@ export default function UserPricing({ nextStep, handleFormData }) {
                         </h3>
                       </div>
                       <div className="mt-4 flex items-baseline text-6xl font-extrabold">
-                        ${tier.priceMonthly}
-                        <span className="ml-1 text-2xl font-medium text-gray-500">/mo</span>
+                        ${tier.price}
+                        <span className="ml-1 text-2xl font-medium text-gray-500">{tier.cycle}</span>
                       </div>
                       <p className="mt-5 text-lg text-gray-500">{tier.description}</p>
                     </div>
@@ -85,7 +92,8 @@ export default function UserPricing({ nextStep, handleFormData }) {
                         ))}
                       </ul>
                       <button
-                        pricingid={tier.id}
+                        pricingtype={`$${tier.price} ${tier.name}`}
+                        pricingid={tier.stripePriceId}
                         onClick={handleClick}
                         className="box-border items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md shadow text-white bg-green-400 hover:bg-green-500"
                         aria-describedby="tier-standard"

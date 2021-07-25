@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";
 import UserPhotoUpload from "./__UserPhotoUpload";
-import {mapCategories} from "./___Helpers"
+import { mapCategories } from "./___Helpers";
 
 export default function UserProfile({
   nextStep,
@@ -23,7 +23,7 @@ export default function UserProfile({
   const { dispatch } = useGlobalState();
 
   const validateForm = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     const checkProps = () => {
       const props = [
         "firstName",
@@ -283,7 +283,7 @@ export default function UserProfile({
                   <UserPhotoUpload formData={formData} handleFormData={handleFormData} />
                 </div>
               </div>
-
+              <div className="w-full border-t border-gray-300" />
               <div className="flex justify-end">
                 <button
                   type="submit"

@@ -63,7 +63,7 @@ export default function UserWaiver({
                 Digital Waiver
               </span>
             </h1>
-            <div className="max-h-screen-2/3 mt-2 p-10 overflow-y-scroll bg-gray-100 rounded-lg text-left">
+            <div className="max-h-screen-2/3 mt-2 p-10 space-y-8 overflow-y-scroll bg-gray-100 rounded-lg text-left">
               <h6 className="mb-4 text-md font-bold text-green-400">PLEASE READ CAREFULLY</h6>
               <ReactMarkdown className="whitespace-pre-wrap">{WAIVER}</ReactMarkdown>
               <div className="mt-4 py-4 space-y-4 bg-gray-100 rounded-lg text-center">
@@ -85,10 +85,12 @@ export default function UserWaiver({
                   )}
                 </div>
               </div>
+              <div className="w-full border-t border-gray-300" />
               <div className="flex justify-end">
                 <button
+                  type="submit"
                   onClick={validateSignature}
-                  className="mx-2 inline-flex justify-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
                   Next
                 </button>
