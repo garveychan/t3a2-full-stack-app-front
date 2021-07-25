@@ -7,10 +7,10 @@ export default function NavBar() {
   const {
     store: {
       onboardingStep,
-      userProps: { authToken, profileComplete },
+      userProps: { token, profileComplete },
     },
   } = useGlobalState();
-  const loggedIn = !!authToken;
+  const loggedIn = !!token;
   const onboardingEnd = onboardingStep > 4;
   const onboardingStart = onboardingStep < 1;
 

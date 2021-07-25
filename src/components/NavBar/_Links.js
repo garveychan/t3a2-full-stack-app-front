@@ -11,7 +11,6 @@ export const HomeIcon = ({ loggedIn }) => {
       </>
     );
   };
-
   return loggedIn ? (
     <Logo />
   ) : (

@@ -2,7 +2,6 @@ import UserProfile from "./_UserProfile";
 import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";
 import UserReview from "./_UserReview";
-import UserSuccess from "./_UserSuccess";
 import React, { useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 
