@@ -2,8 +2,9 @@ import UserProfile from "./_UserProfile";
 import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";
 import UserReview from "./_UserReview";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
+import { getOnboardingForm } from "../../api/ServicesOnboarding";
 
 export default function Onboarding() {
   const initialFormData = {
@@ -11,7 +12,7 @@ export default function Onboarding() {
     lastName: "",
     dateOfBirth: "",
     phoneNumber: "",
-    climbingExperience: "Novice",
+    climbingExperience: 1,
     street: "",
     city: "",
     state: "",
@@ -24,21 +25,45 @@ export default function Onboarding() {
     subscriptionType: null,
   };
 
+  const initialFormQueries = {
+    experienceLevels: null,
+    waiverContent: null,
+    waiverDeclaration: null,
+  };
+
   const [formData, setFormData] = useState(initialFormData);
+  const [formQueries, setFormQueries] = useState(initialFormQueries);
 
   const {
     store: { onboardingStep },
     dispatch,
   } = useGlobalState();
 
+  useEffect(() => {
+    let mounted = true;
+
+    getOnboardingForm(dispatch).then((data) => {
+      const {
+        currentWaiver: { content: waiverContent, declaration: waiverDeclaration },
+        experienceLevels,
+      } = data;
+      mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [dispatch]);
+  console.dir(formQueries);
+
   const prevStep = (e) => {
     e.preventDefault();
-    dispatch({type:"prevOnboardingStep"})
+    dispatch({ type: "prevOnboardingStep" });
   };
 
   const nextStep = (e) => {
     e.preventDefault();
-    dispatch({type:"nextOnboardingStep"})
+    dispatch({ type: "nextOnboardingStep" });
   };
 
   const handleFormData = ({ target: { name, value } }) => {
@@ -50,6 +75,7 @@ export default function Onboarding() {
     nextStep,
     handleFormData,
     formData,
+    formQueries,
   };
 
   switch (onboardingStep) {
@@ -62,6 +88,6 @@ export default function Onboarding() {
     case 4:
       return <UserReview {...onboardingProps} />;
     default:
-      return <></>
+      return <></>;
   }
 }

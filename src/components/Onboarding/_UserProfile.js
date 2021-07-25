@@ -1,6 +1,29 @@
 import UserPhotoUpload from "./__UserPhotoUpload";
 
-export default function UserProfile({ nextStep, handleFormData, formData }) {
+export default function UserProfile({
+  nextStep,
+  handleFormData,
+  formData,
+  formQueries: { experienceLevels },
+}) {
+  const mapCategories = (array, item, fromType, toType) => {
+    if (!array) return;
+
+    for (const el of array) {
+      if (el[fromType] === item) return el[toType];
+    }
+  };
+
+  const handleExperience = (e) => {
+    const mappedExperience = {
+      target: {
+        name: "climbingExperience",
+        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id"),
+      },
+    };
+    handleFormData(mappedExperience);
+  };
+
   return (
     <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
       <div className="max-w-md max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
@@ -48,7 +71,10 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="date-of-birth" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="date-of-birth"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Date of Birth
                   </label>
                   <div className="mt-1">
@@ -92,13 +118,19 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                       id="climbing-experience"
                       name="climbingExperience"
                       autoComplete="climbing-experience"
-                      value={formData.climbingExperience}
-                      onChange={handleFormData}
+                      value={mapCategories(
+                        experienceLevels,
+                        formData.climbingExperience,
+                        "id",
+                        "experience_level"
+                      )}
+                      onChange={handleExperience}
                       className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     >
-                      <option>Novice</option>
-                      <option>Intermediate</option>
-                      <option>Pro</option>
+                      {experienceLevels &&
+                        experienceLevels.map((level) => (
+                          <option key={level.id}>{level.experience_level}</option>
+                        ))}
                     </select>
                   </div>
                 </div>
@@ -108,7 +140,7 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                     htmlFor="street-address"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Street address
+                    Street Address
                   </label>
                   <div className="mt-1">
                     <input

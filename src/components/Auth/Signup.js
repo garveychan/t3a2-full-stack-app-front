@@ -2,7 +2,7 @@ import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { displayNotification } from "../_Notification";
 import { useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
-import { signUp } from "../../api/Services";
+import { signUp } from "../../api/ServicesAuth";
 
 export default function Signup() {
   const { dispatch } = useGlobalState();

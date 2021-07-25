@@ -3,7 +3,7 @@ import { displayNotification } from "../_Notification";
 import { useState } from "react";
 import { Route, Redirect, useLocation } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
-import { resetPassword } from "../../api/Services";
+import { resetPassword } from "../../api/ServicesAuth";
 
 export default function Reset(redirect = false) {
   const {

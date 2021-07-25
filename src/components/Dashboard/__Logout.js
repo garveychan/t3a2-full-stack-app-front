@@ -1,4 +1,4 @@
-import { signOut } from "../../api/Services";
+import { signOut } from "../../api/ServicesAuth";
 import { useGlobalState } from "../../utils/globalContext";
 
 export default function Logout() {

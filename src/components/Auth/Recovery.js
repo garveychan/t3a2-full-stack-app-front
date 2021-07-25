@@ -1,4 +1,4 @@
-import { getRecoveryEmail } from "../../api/Services";
+import { getRecoveryEmail } from "../../api/ServicesAuth";
 import { useGlobalState } from "../../utils/globalContext";
 
 export default function Recovery() {

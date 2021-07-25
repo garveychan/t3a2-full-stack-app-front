@@ -6,10 +6,10 @@ import { clearResetToken, clearUserProps, setUserProps } from "./_State";
 const API_URL = process.env.REACT_APP_API_URL;
 
 export function signUp(dispatch, email, password) {
-  const signUpURL = `${API_URL}/users`;
+  const url = `${API_URL}/users`;
 
   axios
-    .post(signUpURL, { user: { email, password } })
+    .post(url, { user: { email, password } })
     .then((resp) => {
       const token = resp.headers.authorization;
       saveTokenToStorage(token);
@@ -100,9 +100,9 @@ export function signOut(dispatch) {
 }
 
 export function getRecoveryEmail(dispatch, email) {
-  const recoveryURL = `${API_URL}/users/password`;
+  const url = `${API_URL}/users/password`;
 
-  axios.post(recoveryURL, { user: { email } }).catch((_) => {});
+  axios.post(url, { user: { email } }).catch((_) => {});
 
   displayNotification(
     dispatch,
@@ -114,10 +114,10 @@ export function getRecoveryEmail(dispatch, email) {
 }
 
 export function resetPassword(dispatch, resetToken, password) {
-  const resetURL = `${API_URL}/users/password`;
+  const url = `${API_URL}/users/password`;
 
   axios
-    .patch(resetURL, { user: { reset_password_token: resetToken, password: password } })
+    .patch(url, { user: { reset_password_token: resetToken, password: password } })
     .then((_) => {
       displayNotification(
         dispatch,

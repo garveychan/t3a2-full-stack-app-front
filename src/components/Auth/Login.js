@@ -1,7 +1,7 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { Link } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
-import { signIn } from "../../api/Services";
+import { signIn } from "../../api/ServicesAuth";
 
 export default function Login() {
   const { dispatch } = useGlobalState();
