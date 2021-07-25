@@ -12,6 +12,7 @@ import Recovery from "./Auth/Recovery";
 import Reset from "./Auth/Reset";
 import Signup from "./Auth/Signup";
 import Onboarding from "./Onboarding/Onboarding";
+import Success from "./Onboarding/Success";
 import Dashboard from "./Dashboard/Dashboard";
 import { Notification } from "./_Notification";
 import { useGlobalState } from "../utils/globalContext";
@@ -54,6 +55,7 @@ export default function Main() {
         <Route path="/reset" render={() => <Reset />} />
         <Route path="/signup" render={() => <Signup />} />
         <Route path="/onboarding" render={() => <Onboarding />} />
+        <Route path="/success" render={() => <Success />} />
         <Route path="/dashboard" render={() => <Dashboard {...dashboardProps} />} />
         <Route path="/" render={() => <CheckIn />} />
       </Switch>

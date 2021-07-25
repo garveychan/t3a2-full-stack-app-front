@@ -1,7 +1,7 @@
 import { useHistory } from "react-router";
 import { useEffect } from "react";
 
-export default function UserSuccess() {
+export default function Success() {
   const history = useHistory();
 
   useEffect(() => {

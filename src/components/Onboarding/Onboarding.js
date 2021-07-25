@@ -1,7 +1,7 @@
 import UserProfile from "./_UserProfile";
 import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";
-import UserCheckout from "./_UserCheckout";
+import UserReview from "./_UserReview";
 import UserSuccess from "./_UserSuccess";
 import React, { useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
@@ -61,9 +61,8 @@ export default function Onboarding() {
     case 3:
       return <UserPricing {...onboardingProps} />;
     case 4:
-      return <UserCheckout {...onboardingProps} />;
-    case 5:
-      return <UserSuccess {...onboardingProps} />;
+      return <UserReview {...onboardingProps} />;
     default:
+      return <></>
   }
 }
