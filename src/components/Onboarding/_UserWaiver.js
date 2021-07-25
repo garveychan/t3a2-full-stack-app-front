@@ -2,6 +2,8 @@ import { PencilIcon } from "@heroicons/react/solid";
 import SignatureModal from "./__UserSignature";
 import { useState } from "react";
 import ReactMarkdown from "react-markdown";
+import { useGlobalState } from "../../utils/globalContext";
+import { displayNotification } from "../_Notification";
 
 export default function UserWaiver({
   nextStep,
@@ -9,6 +11,8 @@ export default function UserWaiver({
   formData,
   formQueries: { waiverContent, waiverDeclaration },
 }) {
+  const { dispatch } = useGlobalState();
+
   const WAIVER = waiverContent;
   const DECLARATION = waiverDeclaration;
 
@@ -20,6 +24,32 @@ export default function UserWaiver({
     nextStep,
     formData,
     handleFormData,
+  };
+
+  const validateSignature = (e) => {
+    e.preventDefault();
+
+    const checkProps = () => {
+      const props = ["waiverName", "waiverSignature", "waiverSignatureURI"];
+
+      for (const prop of props) {
+        if (!formData[prop]) return false;
+      }
+
+      return true;
+    };
+
+    if (checkProps()) {
+      nextStep(e);
+    } else {
+      displayNotification(
+        dispatch,
+        3000,
+        "warning",
+        "Oops!",
+        "Please check that you have completed all the fields."
+      );
+    }
   };
 
   return (
@@ -43,10 +73,10 @@ export default function UserWaiver({
                     <>
                       <button
                         onClick={() => setModalOpen(true)}
-                        className="mx-2 inline-flex justify-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                        className="mx-2 inline-flex justify-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-500 hover:bg-indigo-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                       >
                         <PencilIcon
-                          className="h-5 w-4 mr-1 text-green-200 group-hover:text-green-400"
+                          className="h-5 w-4 mr-1 text-indigo-200 group-hover:text-indigo-400"
                           aria-hidden="true"
                         />
                         Signature Canvas
@@ -54,6 +84,14 @@ export default function UserWaiver({
                     </>
                   )}
                 </div>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={validateSignature}
+                  className="mx-2 inline-flex justify-center py-2 px-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>

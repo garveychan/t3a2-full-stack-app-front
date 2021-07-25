@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";
 import UserPhotoUpload from "./__UserPhotoUpload";
+import {mapCategories} from "./___Helpers"
 
 export default function UserProfile({
   nextStep,
@@ -9,14 +10,6 @@ export default function UserProfile({
   formData,
   formQueries: { experienceLevels },
 }) {
-  const mapCategories = (array, item, fromType, toType) => {
-    if (!array) return;
-
-    for (const el of array) {
-      if (el[fromType] === item) return el[toType];
-    }
-  };
-
   const handleExperience = (e) => {
     const mappedExperience = {
       target: {
@@ -30,6 +23,7 @@ export default function UserProfile({
   const { dispatch } = useGlobalState();
 
   const validateForm = (e) => {
+    e.preventDefault()
     const checkProps = () => {
       const props = [
         "firstName",
@@ -60,7 +54,7 @@ export default function UserProfile({
         3000,
         "warning",
         "Oops!",
-        "Please ensure that you have completed all the fields according to the requirements."
+        "Please ensure that you have completed all the fields and check that the responses are valid."
       );
     }
   };

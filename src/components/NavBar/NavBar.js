@@ -28,9 +28,10 @@ export default function NavBar() {
                   className="rounded-md focus:outline-none focus:ring-2
                 focus:ring-offset-2 focus:ring-green-400
                 focus:ring-offset-gray-900"
-                ></button>
+                >
+                  <HomeIcon loggedIn={loggedIn} />
+                </button>
               </div>
-              <HomeIcon loggedIn={loggedIn} />
             </div>
             <div className="md:flex md:items-center md:space-x-6 space-x-2">
               <Switch>

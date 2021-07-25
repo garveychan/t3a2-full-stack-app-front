@@ -1,8 +1,6 @@
 import SignatureCanvas from "react-signature-canvas";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { useGlobalState } from "../../utils/globalContext";
-import { displayNotification } from "../_Notification";
 
 export default function SignatureModal({
   modalOpen: open,
@@ -11,8 +9,6 @@ export default function SignatureModal({
   handleFormData,
   nextStep,
 }) {
-  const { dispatch } = useGlobalState();
-
   const signatureCanvas = useRef(null);
   const signerNameRef = useRef();
 
@@ -42,33 +38,7 @@ export default function SignatureModal({
     signatureCanvas.current.clear();
   };
 
-  const validateSignature = (e) => {
-    e.preventDefault();
-
-    const checkProps = () => {
-      const props = ["waiverName", "waiverSignature", "waiverSignatureURI"];
-
-      for (const prop of props) {
-        if (!formData[prop]) return false;
-      }
-
-      return true;
-    };
-
-    if (checkProps()) {
-      nextStep(e);
-    } else {
-      displayNotification(
-        dispatch,
-        3000,
-        "warning",
-        "Oops!",
-        "Please check that you have completed all the fields."
-      );
-    }
-  };
-
-  const handleSave = (e) => {
+  const handleSave = () => {
     handleFormData({
       target: { name: "waiverName", value: signerName },
     });
@@ -78,7 +48,7 @@ export default function SignatureModal({
     handleFormData({
       target: { name: "waiverSignatureURI", value: signatureURI },
     });
-    validateSignature(e);
+    setOpen(false)
   };
 
   useEffect(() => {
