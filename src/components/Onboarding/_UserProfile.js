@@ -18,7 +18,7 @@ export default function UserProfile({
     const mappedExperience = {
       target: {
         name: "climbingExperience",
-        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id"),
+        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id").toString(),
       },
     };
     handleFormData(mappedExperience);

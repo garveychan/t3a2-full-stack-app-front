@@ -54,7 +54,6 @@ export default function Onboarding() {
       mounted = false;
     };
   }, [dispatch]);
-  console.dir(formQueries);
 
   const prevStep = (e) => {
     e.preventDefault();
