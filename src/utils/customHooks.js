@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-export function useInterval(callback, delay) {
+export function useInterval(delay, callback) {
   const savedCallback = useRef();
 
   useEffect(() => {

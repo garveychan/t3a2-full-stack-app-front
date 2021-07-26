@@ -77,8 +77,6 @@ export default function Dashboard({ loggedIn, profileComplete, adminAccess }) {
     url,
   };
 
-  console.log(initialPage.href)
-
   if (profileComplete || adminAccess) {
     return (
       <div className="h-screen flex overflow-hidden bg-gray-100">

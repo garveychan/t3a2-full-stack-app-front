@@ -1,143 +1,108 @@
-const checkInLog = [
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-  {
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-    name: "Jane Cooper",
-    email: "jane.cooper@example.com",
-    streetAddress: "Regional Paradigm Technician",
-    townAddress: "Regional Paradigm Technician",
-    dateOfBirth: "Optimization",
-    waiverStatus: "Admin",
-    checkInTime: "Admin",
-  },
-];
-
-const currentCheckIn = {
-  image:
-    "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60",
-  name: "Jane Cooper",
-  email: "jane.cooper@example.com",
-  streetAddress: "Regional Paradigm Technician",
-  townAddress: "Regional Paradigm Technician",
-  dateOfBirth: "Optimization",
-  waiverStatus: "Admin",
-  checkInTime: "Admin",
-};
+import { useCallback, useEffect, useState } from "react";
+import { getCheckIns } from "../../api/ServicesCheckins";
+import { useInterval } from "../../utils/customHooks";
+import { useGlobalState } from "../../utils/globalContext";
+import { displayNotification } from "../_Notification";
+import { parseISO } from "date-fns";
 
 const columns = ["Name", "Address", "Date of Birth", "Waiver Status", "Check-in Time"];
 
 export default function CheckIns() {
+  const {
+    store: { userProps },
+    dispatch,
+  } = useGlobalState();
+
+  const initialCheckIn = {
+    id: "",
+    image: "",
+    name: "",
+    email: "",
+    streetAddress: "",
+    townAddress: "",
+    dateOfBirth: "",
+    waiverStatus: null,
+    checkInTime: "",
+  };
+
+  const [checkIns, setCheckIns] = useState([]);
+  const [currentCheckIn, setCurrentCheckIn] = useState(initialCheckIn);
+  const [members, setMembers] = useState([]);
+
+  const pollCheckIns = useCallback(() => {
+    const findMember = (id) => {
+      for (const el of members) {
+        if (id === el.member.user.id) {
+          return el.member;
+        }
+      }
+    };
+
+    const updateCheckIns = (newCheckIns, newMembers) => {
+      setMembers(newMembers);
+
+      const checkInLog = [];
+      for (const checkIn of newCheckIns) {
+        try {
+          const {
+            photo,
+            waiver,
+            user: { email, id },
+            profile: { first_name, last_name, date_of_birth },
+            address: { street_address, city, state, postcode, country },
+          } = findMember(checkIn.user_id);
+
+          const timestamp = parseISO(checkIn.created_at);
+
+          checkInLog.push({
+            id: id,
+            image: photo,
+            name: `${first_name} ${last_name}`,
+            email: email,
+            streetAddress: `${street_address}, ${city}`,
+            townAddress: `${state} ${postcode} ${country}`,
+            dateOfBirth: date_of_birth,
+            waiverStatus: !!waiver,
+            checkInTime: `${timestamp.toLocaleTimeString()}, ${timestamp.toDateString()}`,
+          });
+        } catch (e) {}
+      }
+
+      if (checkInLog[0]) setCurrentCheckIn(checkInLog.shift());
+      setCheckIns(checkInLog);
+    };
+
+    getCheckIns(userProps)
+      .then(({ newCheckIns, newMembers }) => {
+        if (currentCheckIn && currentCheckIn.id !== newCheckIns[0].user_id) {
+          updateCheckIns(newCheckIns, newMembers);
+        }
+      })
+      .catch((_) => {
+        displayNotification(
+          dispatch,
+          3000,
+          "error",
+          "Sorry, something went wrong.",
+          "Please contact your system administrator."
+        );
+      });
+  }, [currentCheckIn, dispatch, userProps, members]);
+
+  useEffect(() => {
+    pollCheckIns();
+  }, [pollCheckIns]);
+
+  useInterval(5000, pollCheckIns);
+
   return (
     <div className="space-y-8">
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 rounded-lg">
         <div className="justify-between items-center flex flex-col lg:flex-row">
-          <div className="w-3/4 mx-auto flex justify-center">
-            <img
-              className="mt-2 rounded-full"
-              src={currentCheckIn.image}
-              alt="Current Check-in"
-            />
+          <div className="max-w-sm mx-auto flex justify-center">
+            <img className="mt-2 rounded-full" src={currentCheckIn.image} alt="Current Check-in" />
           </div>
-          <dl className="mt-4 lg:mt-0 w-full grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
+          <dl className="mt-4 lg:mt-0 w-1/2 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Name</dt>
               <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
@@ -152,7 +117,15 @@ export default function CheckIns() {
             </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Waiver Status</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.waiverStatus}</dd>
+              <span
+                className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                  currentCheckIn.waiverStatus
+                    ? "bg-green-100 text-green-800"
+                    : "bg-red-100 text-red-800"
+                }`}
+              >
+                {currentCheckIn.waiverStatus ? "Signed" : "Not Signed"}
+              </span>
             </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Address</dt>
@@ -162,7 +135,9 @@ export default function CheckIns() {
             </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Check-in Time</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.checkInTime}</dd>
+              <dd className="mt-1 text-sm text-gray-900">
+                {currentCheckIn.checkInTime.toString()}
+              </dd>
             </div>
           </dl>
         </div>
@@ -176,7 +151,8 @@ export default function CheckIns() {
                 <thead className="bg-gray-50">
                   <tr>
                     {columns.map((name, index) => (
-                      <th key={index}
+                      <th
+                        key={index}
                         scope="col"
                         className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                       >
@@ -186,7 +162,7 @@ export default function CheckIns() {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {checkInLog.map((person, index) => (
+                  {checkIns.map((person, index) => (
                     <tr key={index}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
@@ -207,12 +183,18 @@ export default function CheckIns() {
                         {person.dateOfBirth}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                          {person.waiverStatus}
+                        <span
+                          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                            person.waiverStatus
+                              ? "bg-green-100 text-green-800"
+                              : "bg-red-100 text-red-800"
+                          }`}
+                        >
+                          {person.waiverStatus ? "Signed" : "Not Signed"}
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {person.checkInTime}
+                        {person.checkInTime.toString()}
                       </td>
                     </tr>
                   ))}
