@@ -1,39 +1,74 @@
 import UserProfile from "./_UserProfile";
 import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";
-import UserCheckout from "./_UserCheckout";
-import UserSuccess from "./_UserSuccess";
-import React, { useState } from "react";
+import UserReview from "./_UserReview";
+import React, { useEffect, useState, useMemo } from "react";
+import { useGlobalState } from "../../utils/globalContext";
+import { getOnboardingForm } from "../../api/ServicesOnboarding";
 
 export default function Onboarding() {
-  const initialFormData = {
-    firstName: "",
-    lastName: "",
-    dateOfBirth: "",
-    phoneNumber: "",
-    climbingExperience: "Novice",
-    street: "",
-    city: "",
-    state: "",
-    postcode: "",
-    country: "Australia",
-    profilePhoto: null,
-    waiverSignature: null,
-    waiverSignatureURI: null,
-    subscriptionType: null,
+  const memoizedInitialFormData = useMemo(() => {
+    return {
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      climbingExperience: 1,
+      street: "",
+      city: "",
+      state: "",
+      postcode: "",
+      country: "Australia",
+      profilePhoto: null,
+      waiverName: "",
+      waiverSignature: null,
+      waiverSignatureURI: null,
+      subscriptionType: null,
+      pricingId: null,
+    };
+  }, []);
+
+  const initialFormQueries = {
+    experienceLevels: null,
+    waiverContent: null,
+    waiverDeclaration: null,
   };
 
-  const [formData, setFormData] = useState(initialFormData);
-  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState(memoizedInitialFormData);
+  const [formQueries, setFormQueries] = useState(initialFormQueries);
+
+  const {
+    store: { onboardingStep },
+    dispatch,
+  } = useGlobalState();
+
+  useEffect(() => {
+    let mounted = true;
+
+    getOnboardingForm(dispatch)
+      .then((data) => {
+        const {
+          currentWaiver: { content: waiverContent, declaration: waiverDeclaration },
+          experienceLevels,
+        } = data;
+        mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
+      })
+      .catch((error) => console.error(error));
+
+    return () => {
+      mounted = false;
+      setFormData(memoizedInitialFormData);
+    };
+  }, [dispatch, memoizedInitialFormData]);
 
   const prevStep = (e) => {
     e.preventDefault();
-    setStep(step - 1);
+    dispatch({ type: "prevOnboardingStep" });
   };
 
   const nextStep = (e) => {
     e.preventDefault();
-    setStep(step + 1);
+    dispatch({ type: "nextOnboardingStep" });
   };
 
   const handleFormData = ({ target: { name, value } }) => {
@@ -45,9 +80,10 @@ export default function Onboarding() {
     nextStep,
     handleFormData,
     formData,
+    formQueries,
   };
 
-  switch (step) {
+  switch (onboardingStep) {
     case 1:
       return <UserProfile {...onboardingProps} />;
     case 2:
@@ -55,9 +91,8 @@ export default function Onboarding() {
     case 3:
       return <UserPricing {...onboardingProps} />;
     case 4:
-      return <UserCheckout {...onboardingProps} />;
-    case 5:
-      return <UserSuccess {...onboardingProps} />;
+      return <UserReview {...onboardingProps} />;
     default:
+      return <></>;
   }
 }

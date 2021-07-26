@@ -1,16 +1,10 @@
-import { retrieveTokenFromStorage } from "./api/_Storage";
 import React, { useReducer } from "react";
 import { GlobalContext } from "./utils/globalContext";
 import globalReducer from "./utils/globalReducer";
 import Main from "./components/Main";
-import jwt_decode from "jwt-decode";
 import { BrowserRouter as Router } from "react-router-dom";
 
 export default function App() {
-  let token = retrieveTokenFromStorage();
-  let [id, email, profileComplete, role] = [null, null, null, null];
-  if (token) ({ id, email, profileComplete, role } = jwt_decode(token));
-
   const initialState = {
     notificationProps: {
       status: false,
@@ -19,14 +13,17 @@ export default function App() {
       messages: [],
       type: null,
     },
-    resetToken: null,
     userProps: {
-      id: id,
-      email: email,
-      profileComplete: profileComplete,
-      role: role,
-      token: token,
+      id: null,
+      email: null,
+      profileComplete: null,
+      stripeCustomer: null,
+      role: null,
+      token: null,
     },
+    onboardingStep: 1,
+    resetToken: null,
+    redirectURL: "",
   };
 
   const [store, dispatch] = useReducer(globalReducer, initialState);

@@ -1,11 +1,13 @@
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
-import { displayNotification } from "../_Notification";
+import { passwordsMatch } from "./___Helpers";
 import { useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
-import { signUp } from "../../api/Services";
+import { signUp } from "../../api/ServicesAuth";
+import { useHistory } from "react-router-dom";
 
 export default function Signup() {
   const { dispatch } = useGlobalState();
+  const history = useHistory();
 
   const initialSignupData = {
     email: "",
@@ -24,16 +26,12 @@ export default function Signup() {
 
     const { email, password, confirmPassword } = signupData;
 
-    if (password === confirmPassword) {
-      signUp(dispatch, email, password);
-    } else {
-      displayNotification(
-        dispatch,
-        3000,
-        "error",
-        "Oops!",
-        "Please make sure your passwords match."
-      );
+    if (passwordsMatch(dispatch, password, confirmPassword)) {
+      signUp(dispatch, email, password)
+        .then((_) => {
+          history.push("/onboarding");
+        })
+        .catch((error) => console.error(error));
     }
   };
 

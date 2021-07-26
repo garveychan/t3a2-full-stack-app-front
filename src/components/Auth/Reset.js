@@ -1,12 +1,16 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { displayNotification } from "../_Notification";
 import { useState } from "react";
-import { Route, Redirect, useLocation } from "react-router-dom";
+import { Route, Redirect, useLocation, useHistory } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
-import { resetPassword } from "../../api/Services";
+import { resetPassword } from "../../api/ServicesAuth";
+import { passwordsMatch } from "./___Helpers";
 
 export default function Reset(redirect = false) {
-  const { store: {resetToken}, dispatch } = useGlobalState();
+  const {
+    store: { resetToken },
+    dispatch,
+  } = useGlobalState();
+  const history = useHistory();
 
   const tokenQuery = new URLSearchParams(useLocation().search);
   const newToken = tokenQuery.get("reset_password_token");
@@ -28,16 +32,12 @@ export default function Reset(redirect = false) {
 
     const { password, confirmPassword } = resetData;
 
-    if (password === confirmPassword) {
-      resetPassword(dispatch, resetToken, password);
-    } else {
-      displayNotification(
-        dispatch,
-        3000,
-        "error",
-        "Oops!",
-        "Please make sure your passwords match."
-      );
+    if (passwordsMatch(dispatch, password, confirmPassword)) {
+      resetPassword(dispatch, resetToken, password)
+        .then((_) => {
+          history.push("/");
+        })
+        .catch((error) => console.error(error));
     }
   };
 

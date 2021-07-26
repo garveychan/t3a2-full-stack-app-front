@@ -1,16 +1,24 @@
 import { LockClosedIcon } from "@heroicons/react/solid";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
-import { signIn } from "../../api/Services";
+import { signIn } from "../../api/ServicesAuth";
 
 export default function Login() {
   const { dispatch } = useGlobalState();
+  const history = useHistory();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const elements = e.target.elements;
     const [email, password] = [elements.email.value, elements.password.value];
-    signIn(dispatch, email, password);
+
+    signIn(dispatch, email, password)
+      .then((_) => {
+        history.push("/dashboard");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

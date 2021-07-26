@@ -1,4 +1,4 @@
-import Logout from "./__Logout";
+import { Logout } from "../NavBar/_Links";
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 
 export default function Header({ dashboardPage, setSidebarOpen }) {

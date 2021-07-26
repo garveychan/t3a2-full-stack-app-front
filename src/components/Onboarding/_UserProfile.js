@@ -1,6 +1,82 @@
+import { useEffect } from "react";
+import { useGlobalState } from "../../utils/globalContext";
+import { displayNotification } from "../_Notification";
 import UserPhotoUpload from "./__UserPhotoUpload";
+import { mapCategories } from "./___Helpers";
 
-export default function UserProfile({ nextStep, handleFormData, formData }) {
+export default function UserProfile({
+  nextStep,
+  handleFormData,
+  formData,
+  formQueries: { experienceLevels },
+}) {
+  const handleExperience = (e) => {
+    const mappedExperience = {
+      target: {
+        name: "climbingExperience",
+        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id").toString(),
+      },
+    };
+    handleFormData(mappedExperience);
+  };
+
+  const { dispatch } = useGlobalState();
+
+  const validateForm = (e) => {
+    e.preventDefault();
+    const checkProps = () => {
+      const props = [
+        "firstName",
+        "lastName",
+        "dateOfBirth",
+        "phoneNumber",
+        "climbingExperience",
+        "street",
+        "city",
+        "state",
+        "postcode",
+        "country",
+        "profilePhoto",
+      ];
+
+      for (const prop of props) {
+        if (!formData[prop]) return false;
+      }
+
+      return true;
+    };
+
+    if (checkProps()) {
+      nextStep(e);
+    } else {
+      displayNotification(
+        dispatch,
+        3000,
+        "warning",
+        "Oops!",
+        "Please ensure that you have completed all the fields and check that the responses are valid."
+      );
+    }
+  };
+
+  useEffect(() => {
+    (function setMaxDateOfBirth() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
+
+      today = yyyy + "-" + mm + "-" + dd;
+      document.getElementById("date-of-birth").setAttribute("max", today);
+    })();
+  }, []);
+
   return (
     <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
       <div className="max-w-md max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
@@ -48,7 +124,10 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="date-of-birth"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Date of Birth
                   </label>
                   <div className="mt-1">
@@ -64,7 +143,7 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700">
                     Phone Number
                   </label>
                   <div className="mt-1">
@@ -92,13 +171,19 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                       id="climbing-experience"
                       name="climbingExperience"
                       autoComplete="climbing-experience"
-                      value={formData.climbingExperience}
-                      onChange={handleFormData}
+                      value={mapCategories(
+                        experienceLevels,
+                        formData.climbingExperience,
+                        "id",
+                        "experience_level"
+                      )}
+                      onChange={handleExperience}
                       className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     >
-                      <option>Novice</option>
-                      <option>Intermediate</option>
-                      <option>Pro</option>
+                      {experienceLevels &&
+                        experienceLevels.map((level) => (
+                          <option key={level.id}>{level.experience_level}</option>
+                        ))}
                     </select>
                   </div>
                 </div>
@@ -108,7 +193,7 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                     htmlFor="street-address"
                     className="block text-sm font-medium text-gray-700"
                   >
-                    Street address
+                    Street Address
                   </label>
                   <div className="mt-1">
                     <input
@@ -156,12 +241,12 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                 </div>
 
                 <div className="sm:col-span-2">
-                  <label htmlFor="zip" className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="postcode" className="block text-sm font-medium text-gray-700">
                     Post Code
                   </label>
                   <div className="mt-1">
                     <input
-                      type="text"
+                      type="number"
                       name="postcode"
                       id="postcode"
                       value={formData.postcode}
@@ -198,11 +283,11 @@ export default function UserProfile({ nextStep, handleFormData, formData }) {
                   <UserPhotoUpload formData={formData} handleFormData={handleFormData} />
                 </div>
               </div>
-
+              <div className="w-full border-t border-gray-300" />
               <div className="flex justify-end">
                 <button
                   type="submit"
-                  onClick={nextStep}
+                  onClick={validateForm}
                   className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-500 hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                 >
                   Next

@@ -1,6 +1,27 @@
-import { Link } from "react-router-dom";
+import { useGlobalState } from "../../utils/globalContext";
+import { Link, useHistory } from "react-router-dom";
+import { signOut } from "../../api/ServicesAuth";
+import logo from "../../images/logo_1up.png";
 
-const Signup = () => {
+export const HomeIcon = ({ loggedIn }) => {
+  const Logo = () => {
+    return (
+      <>
+        <span className="sr-only">1UP Bouldering Gym</span>
+        <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Logo" />
+      </>
+    );
+  };
+  return loggedIn ? (
+    <Logo />
+  ) : (
+    <Link to="/">
+      <Logo />
+    </Link>
+  );
+};
+
+export const Signup = () => {
   return (
     <Link
       to="/signup"
@@ -8,29 +29,26 @@ const Signup = () => {
     border-transparent text-base font-medium rounded-md text-white
     bg-green-500 hover:bg-green-700 "
     >
+      <button className="rounded-md focus:outline-none">Sign Up</button>
+    </Link>
+  );
+};
+
+export const Login = () => {
+  return (
+    <Link to="/login" className="text-base font-medium text-white hover:text-gray-300 ">
       <button
-        className="rounded-md focus:outline-none"
+        className="rounded-md focus:outline-none focus:ring-2
+  focus:ring-offset-2 focus:ring-green-400
+  focus:ring-offset-gray-900"
       >
-        Sign Up
+        Log in
       </button>
     </Link>
   );
-}
+};
 
-const Login = () => {
-  return (
-    <Link
-      to="/login"
-      className="text-base font-medium text-white hover:text-gray-300 "
-    >
-      <button className="rounded-md focus:outline-none focus:ring-2
-  focus:ring-offset-2 focus:ring-green-400
-  focus:ring-offset-gray-900">Log in</button>
-    </Link>
-  );
-}
-
-const CheckIn = () => {
+export const CheckIn = () => {
   return (
     <Link to="/" className="text-base font-medium text-white hover:text-gray-300 ">
       <button
@@ -42,25 +60,57 @@ const CheckIn = () => {
       </button>
     </Link>
   );
-}
+};
 
-const Back = () => {
+export const OnboardingBackLink = () => {
+  const {
+    store: { onboardingStep },
+    dispatch,
+  } = useGlobalState();
+  const firstOnboardingPage = onboardingStep === 1;
+  const handleClick = (e) => {
+    e.preventDefault();
+    dispatch({ type: "prevOnboardingStep" });
+  };
+
   return (
-    <Link to="/" className="text-base font-medium text-white hover:text-gray-300 ">
-      <button
-        className="rounded-md focus:outline-none focus:ring-2
-  focus:ring-offset-2 focus:ring-green-400
-  focus:ring-offset-gray-900"
-      >
-        Back
-      </button>
-    </Link>
+    <>
+      {firstOnboardingPage ? null : (
+        <button
+          onClick={handleClick}
+          className="text-base font-medium text-white hover:text-gray-300 rounded-md focus:outline-none focus:ring-2
+            focus:ring-offset-2 focus:ring-green-400
+          focus:ring-offset-gray-900"
+        >
+          Back
+        </button>
+      )}
+    </>
   );
-}
+};
 
-export {
-  Signup,
-  Login,
-  CheckIn,
-  Back
+export function Logout() {
+  const { dispatch } = useGlobalState();
+  const history = useHistory();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+
+    signOut(dispatch)
+      .then((_) => {
+        history.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="inline-flex px-3 py-1 border border-transparent text-base font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset focus:ring-red-400 whitespace-nowrap"
+    >
+      Log Out
+    </button>
+  );
 }

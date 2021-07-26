@@ -1,31 +1,14 @@
-import { Route, Link, Switch } from "react-router-dom";
-import { Signup, Login, CheckIn } from "./_Links.js";
-import Logout from "../Dashboard/__Logout";
-import logo from "../../images/logo_1up.png";
+import { Route, Switch } from "react-router-dom";
+import { HomeIcon, Signup, Login, CheckIn, OnboardingBackLink } from "./_Links.js";
+import { Logout } from "../NavBar/_Links";
 
-export default function NavBar({ token, profileComplete }) {
-  const Logo = () => {
-    return (
-      <>
-        <span className="sr-only">1UP Bouldering Gym</span>
-        <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Logo" />
-      </>
-    );
-  };
-
-  const dynamicLink = () => {
-    return token ? (
-      <Logo />
-    ) : (
-      <Link to="/">
-        <Logo />
-      </Link>
-    );
-  };
+export default function NavBar({ loggedIn, profileComplete, redirectURL, onboardingStep }) {
+  const onboardingEnd = onboardingStep > 4;
+  const onboardingStart = onboardingStep < 1;
 
   return (
     <>
-      {(!token || !profileComplete) && (
+      {(!loggedIn || !profileComplete) && !redirectURL && (
         <div className="fixed top-0 w-screen z-50 bg-gradient-to-t from-gray-900 to-gray-800">
           <nav
             className="mx-auto flex items-center justify-between px-4 py-4 sm:px-6"
@@ -37,9 +20,10 @@ export default function NavBar({ token, profileComplete }) {
                   className="rounded-md focus:outline-none focus:ring-2
                 focus:ring-offset-2 focus:ring-green-400
                 focus:ring-offset-gray-900"
-                ></button>
+                >
+                  <HomeIcon loggedIn={loggedIn} />
+                </button>
               </div>
-              {dynamicLink()}
             </div>
             <div className="md:flex md:items-center md:space-x-6 space-x-2">
               <Switch>
@@ -52,7 +36,15 @@ export default function NavBar({ token, profileComplete }) {
                   )}
                 />
                 <Route path="/signup" render={() => <Login />} />
-                <Route path="/onboarding" render={() => <Logout />} />
+                <Route
+                  path="/onboarding"
+                  render={() => (
+                    <>
+                      {!(onboardingEnd || onboardingStart) && <OnboardingBackLink />}
+                      {!onboardingEnd && <Logout />}
+                    </>
+                  )}
+                />
                 <Route
                   path="/"
                   render={() => (
