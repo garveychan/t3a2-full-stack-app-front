@@ -48,7 +48,7 @@ export default function CheckIn() {
             </span>
           </h1>
           <div className="mt-10 sm:mt-12">
-            <form onSubmit={handleSubmit} className="sm:max-w-xl sm:mx-auto lg:mx-auto">
+            <form onSubmit={handleSubmit} className="sm:max-w-xl sm:mx-auto lg:mx-auto" autoComplete="off">
               <div className="sm:flex">
                 <div className="min-w-0 flex-1">
                   <label htmlFor="email" className="sr-only">

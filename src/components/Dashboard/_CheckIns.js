@@ -28,6 +28,7 @@ export default function CheckIns() {
   const [checkIns, setCheckIns] = useState([]);
   const [currentCheckIn, setCurrentCheckIn] = useState(initialCheckIn);
   const [members, setMembers] = useState([]);
+  const [failedRequest, setFailedRequest] = useState(false);
 
   const pollCheckIns = useCallback(() => {
     const findMember = (id) => {
@@ -72,22 +73,26 @@ export default function CheckIns() {
       setCheckIns(checkInLog);
     };
 
-    getCheckIns(userProps)
-      .then(({ newCheckIns, newMembers }) => {
-        if (currentCheckIn && currentCheckIn.id !== newCheckIns[0].user_id) {
-          updateCheckIns(newCheckIns, newMembers);
-        }
-      })
-      .catch((_) => {
-        displayNotification(
-          dispatch,
-          3000,
-          "error",
-          "Sorry, something went wrong.",
-          "Please contact your system administrator."
-        );
-      });
-  }, [currentCheckIn, dispatch, userProps, members]);
+    if (!failedRequest) {
+      getCheckIns(userProps)
+        .then(({ newCheckIns, newMembers }) => {
+          if (currentCheckIn && currentCheckIn.id !== newCheckIns[0].user_id) {
+            updateCheckIns(newCheckIns, newMembers);
+          }
+        })
+        .catch((_) => {
+          setFailedRequest(true)
+          displayNotification(
+            dispatch,
+            600000,
+            "error",
+            "Sorry, something went wrong.",
+            "The check-in log could not be updated.",
+            "Please contact your system administrator."
+          );
+        });
+    }
+  }, [currentCheckIn, dispatch, userProps, members, failedRequest]);
 
   useEffect(() => {
     pollCheckIns();
@@ -99,8 +104,8 @@ export default function CheckIns() {
     <div className="space-y-8">
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 rounded-lg">
         <div className="justify-between items-center flex flex-col lg:flex-row">
-          <div className="max-w-sm mx-auto flex justify-center">
-            <img className="mt-2 rounded-full" src={currentCheckIn.image} alt="Current Check-in" />
+          <div className="w-1/2 flex justify-center">
+            <img className="h-60 w-60 object-cover rounded-full" src={currentCheckIn.image} alt="Current Check-in" />
           </div>
           <dl className="mt-4 lg:mt-0 w-1/2 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
             <div className="sm:col-span-1">
