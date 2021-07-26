@@ -45,7 +45,7 @@ export default function Signup() {
             </span>
           </h1>
           <div className="mt-10 sm:mt-12">
-            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit} autoComplete="off">
               <div>
                 <label htmlFor="email-address" className="sr-only">
                   Email address
@@ -55,8 +55,8 @@ export default function Signup() {
                   name="email"
                   type="email"
                   data-testid="email-input"
-                  autoComplete="email"
                   required
+                  autoFocus={true}
                   onChange={handleSignupData}
                   className="appearance-none relative block w-full mb-3 px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-green-500 focus:border-green-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"

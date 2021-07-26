@@ -8,6 +8,7 @@ import Onboarding from "./Onboarding/Onboarding";
 import Checkout from "./Onboarding/Checkout";
 import Failure from "./Onboarding/Failure";
 import Dashboard from "./Dashboard/Dashboard";
+import CheckInSuccess from "./CheckIn/_CheckInSuccess";
 import { AuthRoute } from "../utils/AuthRoute";
 import { useEffect } from "react";
 import { Notification } from "./_Notification";
@@ -51,6 +52,7 @@ export default function Main() {
         <Route path="/dashboard" render={() => <Dashboard {...sessionProps} />} />
         <Route path="/checkout" render={() => <Checkout />} />
         <Route path="/failure" render={() => <Failure />} />
+        <Route path="/checkin" render={() => <CheckInSuccess />} />
         <Route path="/" render={() => <CheckIn />} />
       </Switch>
     </Router>
