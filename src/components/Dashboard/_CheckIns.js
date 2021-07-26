@@ -81,7 +81,7 @@ export default function CheckIns() {
           }
         })
         .catch((_) => {
-          setFailedRequest(true)
+          setFailedRequest(true);
           displayNotification(
             dispatch,
             600000,
@@ -101,13 +101,17 @@ export default function CheckIns() {
   useInterval(5000, pollCheckIns);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 w-full">
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 rounded-lg">
         <div className="justify-between items-center flex flex-col lg:flex-row">
-          <div className="w-1/2 flex justify-center">
-            <img className="h-60 w-60 object-cover rounded-full" src={currentCheckIn.image} alt="Current Check-in" />
-          </div>
-          <dl className="mt-4 lg:mt-0 w-1/2 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
+            <div className="w-3/4 lg:w-1/2 flex justify-center">
+              <img
+                className="h-60 w-60 object-cover rounded-full"
+                src={currentCheckIn.image}
+                alt="Current Check-in"
+              />
+            </div>
+          <dl className="mt-4 lg:mt-0 w-2/3 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Name</dt>
               <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
@@ -159,7 +163,7 @@ export default function CheckIns() {
                       <th
                         key={index}
                         scope="col"
-                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        className="px-4 py-3 text-left text-xs font-medium text-gray-500 text-center uppercase tracking-wider"
                       >
                         {name}
                       </th>
@@ -168,8 +172,8 @@ export default function CheckIns() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {checkIns.map((person, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                    <tr key={index} className="text-center">
+                      <td className="px-4 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
                             <img className="h-10 w-10 rounded-full" src={person.image} alt="" />
@@ -180,16 +184,16 @@ export default function CheckIns() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-4 whitespace-nowrap">
                         <div className="text-sm text-gray-900">{person.streetAddress}</div>
                         <div className="text-sm text-gray-500">{person.townAddress}</div>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                         {person.dateOfBirth}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
+                      <td className="px-4 py-4 whitespace-nowrap">
                         <span
-                          className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                          className={`px-4 inline-flex text-xs leading-5 font-semibold rounded-full ${
                             person.waiverStatus
                               ? "bg-green-100 text-green-800"
                               : "bg-red-100 text-red-800"
@@ -198,7 +202,7 @@ export default function CheckIns() {
                           {person.waiverStatus ? "Signed" : "Not Signed"}
                         </span>
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
                         {person.checkInTime.toString()}
                       </td>
                     </tr>
