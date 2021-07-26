@@ -101,6 +101,7 @@ export default function UserProfile({
                       autoComplete="given-name"
                       value={formData.firstName}
                       onChange={handleFormData}
+                      autoFocus={true}
                       className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                     />
                   </div>

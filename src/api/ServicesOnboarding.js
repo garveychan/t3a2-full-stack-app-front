@@ -44,7 +44,6 @@ export function postOnboardingForm(dispatch, history, formData, userProps) {
   axios
     .post(memberURL, payload, { headers: { Authorization: userProps.token } })
     .then((_) => {
-
       axios
         .post(
           paymentURL,
@@ -54,7 +53,7 @@ export function postOnboardingForm(dispatch, history, formData, userProps) {
         .then((resp) => {
           const token = resp.headers.authorization;
           saveTokenToStorage(token);
-          setRedirectURL(dispatch, resp.data.StripeSessionURL)
+          setRedirectURL(dispatch, resp.data.StripeSessionURL);
           resetOnboardingStep(dispatch);
         })
         .then((_) => {
@@ -71,7 +70,6 @@ export function postOnboardingForm(dispatch, history, formData, userProps) {
             "Please refresh the page and try again."
           );
         });
-
     })
     .catch((error) => {
       console.error(error);

@@ -15,6 +15,7 @@ export default function Login() {
     signIn(dispatch, email, password)
       .then((_) => {
         history.push("/dashboard");
+        history.go();
       })
       .catch((error) => {
         console.error(error);

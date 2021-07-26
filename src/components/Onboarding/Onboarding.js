@@ -38,28 +38,30 @@ export default function Onboarding() {
   const [formQueries, setFormQueries] = useState(initialFormQueries);
 
   const {
-    store: { onboardingStep },
+    store: { onboardingStep, userProps },
     dispatch,
   } = useGlobalState();
 
   useEffect(() => {
     let mounted = true;
 
-    getOnboardingForm(dispatch)
-      .then((data) => {
-        const {
-          currentWaiver: { content: waiverContent, declaration: waiverDeclaration },
-          experienceLevels,
-        } = data;
-        mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
-      })
-      .catch((error) => console.error(error));
+    if (!initialFormQueries.experienceLevels) {
+      getOnboardingForm(dispatch, userProps)
+        .then((data) => {
+          const {
+            currentWaiver: { content: waiverContent, declaration: waiverDeclaration },
+            experienceLevels,
+          } = data;
+          mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
+        })
+        .catch((error) => {console.error(error)});
+    }
 
     return () => {
       mounted = false;
       setFormData(memoizedInitialFormData);
     };
-  }, [dispatch, memoizedInitialFormData]);
+  }, [dispatch, memoizedInitialFormData, initialFormQueries.experienceLevels, userProps]);
 
   const prevStep = (e) => {
     e.preventDefault();
