@@ -24,6 +24,7 @@ export default function App() {
     onboardingStep: 1,
     resetToken: null,
     redirectURL: "",
+    checkInName: "",
   };
 
   const [store, dispatch] = useReducer(globalReducer, initialState);

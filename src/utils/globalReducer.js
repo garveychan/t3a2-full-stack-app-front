@@ -48,6 +48,12 @@ export default function globalReducer(state, action) {
         redirectURL: data,
       };
     }
+    case "setCheckInName": {
+      return {
+        ...state,
+        checkInName: data,
+      };
+    }
     default:
       return state;
   }

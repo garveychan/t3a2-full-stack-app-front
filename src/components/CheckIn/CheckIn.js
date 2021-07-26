@@ -1,4 +1,42 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { checkIn } from "../../api/ServicesCheckins";
+import { setCheckInName } from "../../api/_State";
+import { useGlobalState } from "../../utils/globalContext";
+import { displayNotification } from "../_Notification";
+
 export default function CheckIn() {
+  const { dispatch } = useGlobalState();
+  const history = useHistory();
+
+  const [emailForm, setEmailForm] = useState("");
+
+  const handleInput = (e) => {
+    setEmailForm(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    checkIn(emailForm)
+      .then((resp) => {
+        setCheckInName(dispatch, resp.data.memberName);
+      })
+      .then((_) => {
+        history.push("/checkin");
+      })
+      .catch((_) => {
+        displayNotification(
+          dispatch,
+          3000,
+          "error",
+          "Sorry!",
+          "We were unable to check you in.",
+          "Please try again later."
+        );
+      });
+  };
+
   return (
     <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
       <div className="m-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
@@ -10,7 +48,7 @@ export default function CheckIn() {
             </span>
           </h1>
           <div className="mt-10 sm:mt-12">
-            <form action="#" method="POST" className="sm:max-w-xl sm:mx-auto lg:mx-auto">
+            <form onSubmit={handleSubmit} className="sm:max-w-xl sm:mx-auto lg:mx-auto">
               <div className="sm:flex">
                 <div className="min-w-0 flex-1">
                   <label htmlFor="email" className="sr-only">
@@ -21,6 +59,10 @@ export default function CheckIn() {
                     type="email"
                     data-testid="email-input"
                     placeholder="Enter your email"
+                    value={emailForm}
+                    onChange={handleInput}
+                    required
+                    autoFocus={true}
                     className="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
                   />
                 </div>

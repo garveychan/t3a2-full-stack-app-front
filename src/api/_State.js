@@ -52,3 +52,7 @@ export function setRedirectURL(dispatch, url) {
 export function resetOnboardingStep(dispatch) {
   dispatch({ type: "resetOnboardingStep" });
 }
+
+export function setCheckInName(dispatch, name) {
+  dispatch({ type: "setCheckInName", data: name });
+}
