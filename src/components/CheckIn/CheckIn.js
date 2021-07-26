@@ -27,6 +27,7 @@ export default function CheckIn() {
                 <div className="mt-3 sm:mt-0 sm:ml-3">
                   <button
                     type="submit"
+                    data-cy="submit-button"
                     className="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
                   >
                     Submit
