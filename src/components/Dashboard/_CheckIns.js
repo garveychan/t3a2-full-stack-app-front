@@ -123,42 +123,46 @@ const currentCheckIn = {
   checkInTime: "Admin",
 };
 
+const columns = ["Name", "Address", "Date of Birth", "Waiver Status", "Check-in Time"];
+
 export default function CheckIns() {
   return (
     <div className="space-y-8">
       <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 rounded-lg">
         <div className="justify-between items-center flex flex-col lg:flex-row">
-          <div className="w-full mx-auto flex justify-center">
+          <div className="w-3/4 mx-auto flex justify-center">
             <img
               className="mt-2 rounded-full"
               src={currentCheckIn.image}
-              alt="Current Check-in Photo"
+              alt="Current Check-in"
             />
           </div>
-          <dl className="mt-4 lg:mt-0 w-full grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-justify text-center">
+          <dl className="mt-4 lg:mt-0 w-full grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Name</dt>
               <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
             </div>
             <div className="sm:col-span-1">
-              <dt className="text-sm font-medium text-gray-500">Address</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
-            </div>
-            <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Date of Birth</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
-            </div>
-            <div className="sm:col-span-1">
-              <dt className="text-sm font-medium text-gray-500">Waiver Status</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
+              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.dateOfBirth}</dd>
             </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Email</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
+              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.email}</dd>
+            </div>
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">Waiver Status</dt>
+              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.waiverStatus}</dd>
+            </div>
+            <div className="sm:col-span-1">
+              <dt className="text-sm font-medium text-gray-500">Address</dt>
+              <dd className="mt-1 text-sm text-gray-900">
+                {currentCheckIn.streetAddress}, {currentCheckIn.townAddress}
+              </dd>
             </div>
             <div className="sm:col-span-1">
               <dt className="text-sm font-medium text-gray-500">Check-in Time</dt>
-              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
+              <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.checkInTime}</dd>
             </div>
           </dl>
         </div>
@@ -171,36 +175,14 @@ export default function CheckIns() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Name
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Address
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Date of Birth
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Waiver Status
-                    </th>
-                    <th
-                      scope="col"
-                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                    >
-                      Check-in Time
-                    </th>
+                    {columns.map((name, index) => (
+                      <th key={index}
+                        scope="col"
+                        className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        {name}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
