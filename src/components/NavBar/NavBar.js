@@ -1,23 +1,15 @@
 import { Route, Switch } from "react-router-dom";
 import { HomeIcon, Signup, Login, CheckIn, OnboardingBackLink } from "./_Links.js";
-import Logout from "../Dashboard/__Logout";
+import { Logout } from "../NavBar/_Links";
 import { useGlobalState } from "../../utils/globalContext.js";
 
-export default function NavBar() {
-  const {
-    store: {
-      onboardingStep,
-      userProps: { token, profileComplete },
-      redirectURL,
-    },
-  } = useGlobalState();
-  const loggedIn = !!token;
+export default function NavBar({ loggedIn, profileComplete, redirectURL, onboardingStep }) {
   const onboardingEnd = onboardingStep > 4;
   const onboardingStart = onboardingStep < 1;
 
   return (
     <>
-      {((!loggedIn || !profileComplete) && !redirectURL) && (
+      {(!loggedIn || !profileComplete) && !redirectURL && (
         <div className="fixed top-0 w-screen z-50 bg-gradient-to-t from-gray-900 to-gray-800">
           <nav
             className="mx-auto flex items-center justify-between px-4 py-4 sm:px-6"

@@ -1,6 +1,7 @@
-import { Link } from "react-router-dom";
-import logo from "../../images/logo_1up.png";
 import { useGlobalState } from "../../utils/globalContext";
+import { Link, useHistory } from "react-router-dom";
+import { signOut } from "../../api/ServicesAuth";
+import logo from "../../images/logo_1up.png";
 
 export const HomeIcon = ({ loggedIn }) => {
   const Logo = () => {
@@ -87,3 +88,29 @@ export const OnboardingBackLink = () => {
     </>
   );
 };
+
+export function Logout() {
+  const { dispatch } = useGlobalState();
+  const history = useHistory();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+
+    signOut(dispatch)
+      .then((_) => {
+        history.push("/");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  return (
+    <button
+      onClick={handleLogout}
+      className="inline-flex px-3 py-1 border border-transparent text-base font-medium rounded-md text-white bg-red-500 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset focus:ring-red-400 whitespace-nowrap"
+    >
+      Log Out
+    </button>
+  );
+}

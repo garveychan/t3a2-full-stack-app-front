@@ -1,4 +1,3 @@
-import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from "react-router-dom";
 import NavBar from "./NavBar/NavBar";
 import CheckIn from "./CheckIn/CheckIn";
 import Login from "./Auth/Login";
@@ -9,11 +8,13 @@ import Onboarding from "./Onboarding/Onboarding";
 import Checkout from "./Onboarding/Checkout";
 import Failure from "./Onboarding/Failure";
 import Dashboard from "./Dashboard/Dashboard";
+import { AuthRoute } from "../utils/AuthRoute";
+import { useEffect } from "react";
 import { Notification } from "./_Notification";
 import { useGlobalState } from "../utils/globalContext";
-import { useEffect } from "react";
 import { clearUserProps, setUserProps } from "../api/_State";
 import { retrieveTokenFromStorage } from "../api/_Storage";
+import { BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
 
 export default function Main() {
   const {
@@ -21,7 +22,11 @@ export default function Main() {
       userProps: { profileComplete, role, token },
     },
     dispatch,
+    redirectURL,
+    onboardingStep,
   } = useGlobalState();
+  const adminAccess = role === "admin";
+  const loggedIn = !!token;
 
   const location = useLocation();
   useEffect(() => {
@@ -29,22 +34,13 @@ export default function Main() {
     token ? setUserProps(dispatch, token) : clearUserProps(dispatch);
   }, [location, dispatch]);
 
-  const navBarProps = { token, profileComplete };
-  const dashboardProps = { role };
+  const sessionProps = { loggedIn, profileComplete, adminAccess, redirectURL, onboardingStep };
 
   return (
     <Router>
-      <NavBar {...navBarProps} />
+      <NavBar {...sessionProps} />
       <Notification />
-      {token ? (
-        profileComplete ? (
-          <Redirect to="/dashboard" />
-        ) : (
-          <Redirect to="/onboarding" />
-        )
-      ) : (
-        <Redirect to="/" />
-      )}
+      <AuthRoute {...sessionProps} />
       <Switch>
         <Route path="/login" render={() => <Login />} />
         <Route path="/recovery" render={() => <Recovery />} />
@@ -52,9 +48,9 @@ export default function Main() {
         <Route path="/reset" render={() => <Reset />} />
         <Route path="/signup" render={() => <Signup />} />
         <Route path="/onboarding" render={() => <Onboarding />} />
+        <Route path="/dashboard" render={() => <Dashboard {...sessionProps} />} />
         <Route path="/checkout" render={() => <Checkout />} />
         <Route path="/failure" render={() => <Failure />} />
-        <Route path="/dashboard" render={() => <Dashboard {...dashboardProps} />} />
         <Route path="/" render={() => <CheckIn />} />
       </Switch>
     </Router>
