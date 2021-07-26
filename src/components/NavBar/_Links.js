@@ -8,7 +8,7 @@ export const HomeIcon = ({ loggedIn }) => {
     return (
       <>
         <span className="sr-only">1UP Bouldering Gym</span>
-        <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Logo" />
+        <img className="h-20 w-auto sm:h-25" src={logo} alt="1UP Logo" />
       </>
     );
   };
