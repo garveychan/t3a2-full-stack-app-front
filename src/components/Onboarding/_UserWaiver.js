@@ -58,7 +58,7 @@ export default function UserWaiver({
         <div className="max-h-screen px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
           <div className="sm:py-12 lg:py-24">
             <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-6xl xl:text-6xl">
-              <span className="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-green-200 to-green-400 sm:pb-5">
+              <span className="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-green-200 to-green-400 mt-5 lg:mt-0 sm:pb-5">
                 Digital Waiver
               </span>
             </h1>

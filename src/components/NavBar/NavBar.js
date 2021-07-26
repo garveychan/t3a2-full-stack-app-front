@@ -14,7 +14,7 @@ export default function NavBar({ loggedIn, profileComplete, redirectURL, onboard
       {(!loggedIn || !profileComplete) && !redirectURL && (
         <div className="fixed top-0 w-screen z-50 bg-gradient-to-t from-gray-900 to-gray-800">
           <nav
-            className="mx-auto flex items-center justify-between px-4 py-4 sm:px-6"
+            className="mx-auto flex items-center justify-between"
             aria-label="Global"
           >
             <div className="flex items-center flex-1">
@@ -28,7 +28,7 @@ export default function NavBar({ loggedIn, profileComplete, redirectURL, onboard
                 </button>
               </div>
             </div>
-            <div className="md:flex md:items-center md:space-x-6 space-x-2">
+            <div className="md:flex md:items-center md:space-x-6 space-x-2 mx-3 sm:mx-6">
               <Switch>
                 <Route
                   path="/login"

@@ -49,7 +49,7 @@ export default function UserPricing({ nextStep, handleFormData }) {
           <div className="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <div className="max-w-3xl mx-auto space-y-2 lg:max-w-none">
               <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-6xl xl:text-6xl">
-                <span className="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-green-200 to-green-400 sm:pb-5">
+                <span className="pb-3 block bg-clip-text text-transparent bg-gradient-to-r from-green-200 to-green-400 mt-5 lg:mt-0 sm:pb-5">
                   How would you like to pay?
                 </span>
               </h1>

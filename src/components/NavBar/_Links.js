@@ -8,7 +8,7 @@ export const HomeIcon = ({ loggedIn }) => {
     return (
       <>
         <span className="sr-only">1UP Bouldering Gym</span>
-        <img className="h-20 w-auto sm:h-25" src={logo} alt="1UP Logo" />
+        <img className="h-12 sm:h-16 w-auto mx-3 sm:mx-6 my-3 sm:my-4" src={logo} alt="1UP Logo" />
       </>
     );
   };
@@ -27,7 +27,7 @@ export const Signup = () => {
       to="/signup"
       className="inline-flex items-center px-4 py-2 border
     border-transparent text-base font-medium rounded-md text-white
-    bg-green-500 hover:bg-green-700 "
+    bg-green-500 hover:bg-green-700"
     >
       <button className="rounded-md focus:outline-none">Sign Up</button>
     </Link>
