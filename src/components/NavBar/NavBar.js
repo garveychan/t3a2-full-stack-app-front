@@ -1,7 +1,6 @@
 import { Route, Switch } from "react-router-dom";
 import { HomeIcon, Signup, Login, CheckIn, OnboardingBackLink } from "./_Links.js";
 import { Logout } from "../NavBar/_Links";
-import { useGlobalState } from "../../utils/globalContext.js";
 
 export default function NavBar({ loggedIn, profileComplete, redirectURL, onboardingStep }) {
   const onboardingEnd = onboardingStep > 4;

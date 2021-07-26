@@ -5,6 +5,6 @@ export function AuthRoute({ loggedIn }) {
   if (loggedIn) {
     return <Redirect to="/dashboard" />;
   } else {
-    return <Redirect to="/login" />;
+    return <Redirect to="/" />;
   }
 }
