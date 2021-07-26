@@ -1,4 +1,4 @@
-import { useRouteMatch, Switch, Route, Redirect, useHistory } from "react-router-dom";
+import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
 import { useState } from "react";
 import Header from "./_Header";
 import CheckIns from "./_CheckIns";
