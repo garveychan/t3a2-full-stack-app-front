@@ -2,6 +2,7 @@ import { useGlobalState } from "../../utils/globalContext";
 import { Link, useHistory } from "react-router-dom";
 import { signOut } from "../../api/ServicesAuth";
 import logo from "../../images/logo_1up.png";
+import { resetOnboardingStep } from "../../api/_State";
 
 export const HomeIcon = ({ loggedIn }) => {
   const Logo = () => {
@@ -98,6 +99,7 @@ export function Logout() {
 
     signOut(dispatch)
       .then((_) => {
+        resetOnboardingStep(dispatch)
         history.push("/");
       })
       .catch((error) => {

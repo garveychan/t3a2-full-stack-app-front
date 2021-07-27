@@ -54,7 +54,9 @@ export default function Onboarding() {
           } = data;
           mounted && data && setFormQueries({ experienceLevels, waiverContent, waiverDeclaration });
         })
-        .catch((error) => {console.error(error)});
+        .catch((error) => {
+          console.error(error);
+        });
     }
 
     return () => {
