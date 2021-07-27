@@ -158,7 +158,7 @@ export default function Profile() {
             "Now refreshing your page.",
           );
           top.current.scrollIntoView({behavior:'smooth'})
-          setTimeout(() => history.go(), 3000);
+          setTimeout(() => history.push("/dashboard/refresh"), 3000);
         })
         .catch((_) => {
           displayNotification(

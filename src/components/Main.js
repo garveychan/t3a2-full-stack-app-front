@@ -15,7 +15,7 @@ import { Notification } from "./_Notification";
 import { useGlobalState } from "../utils/globalContext";
 import { clearUserProps, setUserProps } from "../api/_State";
 import { retrieveTokenFromStorage } from "../api/_Storage";
-import { BrowserRouter as Router, Switch, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, useLocation, Redirect } from "react-router-dom";
 
 export default function Main() {
   const {
