@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import { getCheckIns } from "../../api/ServicesCheckins";
+import { getCheckIns } from "../../api/ServicesAdmins";
 import { useInterval } from "../../utils/customHooks";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";
@@ -108,7 +108,7 @@ export default function CheckIns() {
               <img
                 className="h-60 w-60 object-cover rounded-full"
                 src={currentCheckIn.image}
-                alt="Current Check-in"
+                alt=""
               />
             </div>
           <dl className="mt-4 lg:mt-0 w-2/3 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
