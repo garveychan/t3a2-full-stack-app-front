@@ -47,6 +47,16 @@ export default function Profile() {
   const [formData, setFormData] = useState(memoizedInitialFormData);
 
   const { experienceLevels } = formQueries;
+  const handleExperience = (e) => {
+    const mappedExperience = {
+      target: {
+        name: "climbingExperience",
+        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id"),
+      },
+    };
+
+    handleFormData(mappedExperience);
+  };
 
   const prepareMemberProfile = useCallback(() => {
     const updateForm = (formData, member) => {
@@ -58,6 +68,7 @@ export default function Profile() {
         waiver,
       } = member;
 
+      const { experienceLevels } = formQueries;
       setProfileCard({
         image: photo,
         name: `${first_name} ${last_name}`,
@@ -69,21 +80,23 @@ export default function Profile() {
         climbingExperience: mapCategories(
           experienceLevels,
           experience_level_id,
-          "experience_level",
-          "id"
-        ).toString(),
+          "id",
+          "experience_level"
+        ),
       });
+
+      
     };
 
     const setForm = (formQueries) => {
-      const {experienceLevels} = formQueries;
+      const { experienceLevels } = formQueries;
       setFormQueries({ experienceLevels: experienceLevels });
+      
     };
 
     getMemberProfile(userProps)
       .then(({ member, formQueries }) => {
         setForm(formQueries);
-
         updateForm(formData, member);
       })
       .catch((_) => {
@@ -96,7 +109,7 @@ export default function Profile() {
           "Please refresh your page or try again later."
         );
       });
-  }, [dispatch, userProps, experienceLevels, formData]);
+  }, [dispatch, userProps, formData, formQueries]);
 
   useEffect(() => {
     prepareMemberProfile();
@@ -104,16 +117,6 @@ export default function Profile() {
 
   const handleFormData = ({ target: { name, value } }) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
-  };
-
-  const handleExperience = (e) => {
-    const mappedExperience = {
-      target: {
-        name: "climbingExperience",
-        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id").toString(),
-      },
-    };
-    handleFormData(mappedExperience);
   };
 
   return (
@@ -246,7 +249,6 @@ export default function Profile() {
                     autoComplete="given-name"
                     value={formData.firstName}
                     onChange={handleFormData}
-                    autoFocus={true}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
