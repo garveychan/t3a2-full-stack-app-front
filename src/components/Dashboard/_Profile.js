@@ -28,6 +28,9 @@ export default function Profile() {
 
   const memoizedInitialFormData = useMemo(() => {
     return {
+      email: "",
+      password: "",
+      confirmPassword: "",
       firstName: "",
       lastName: "",
       dateOfBirth: "",
@@ -46,20 +49,13 @@ export default function Profile() {
   const [formQueries, setFormQueries] = useState(initialFormQueries);
   const [formData, setFormData] = useState(memoizedInitialFormData);
 
-  const { experienceLevels } = formQueries;
-  const handleExperience = (e) => {
-    const mappedExperience = {
-      target: {
-        name: "climbingExperience",
-        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id"),
-      },
+  const initialisePage = useCallback(() => {
+    const initialiseForm = (formQueries) => {
+      const { experienceLevels } = formQueries;
+      setFormQueries({ experienceLevels: experienceLevels });
     };
 
-    handleFormData(mappedExperience);
-  };
-
-  const prepareMemberProfile = useCallback(() => {
-    const updateForm = (formData, member) => {
+    const populatePage = (member, formQueries) => {
       const {
         user: { email },
         profile: { first_name, last_name, date_of_birth, phone_number, experience_level_id },
@@ -67,8 +63,8 @@ export default function Profile() {
         photo,
         waiver,
       } = member;
-
       const { experienceLevels } = formQueries;
+
       setProfileCard({
         image: photo,
         name: `${first_name} ${last_name}`,
@@ -85,19 +81,28 @@ export default function Profile() {
         ),
       });
 
-      
-    };
-
-    const setForm = (formQueries) => {
-      const { experienceLevels } = formQueries;
-      setFormQueries({ experienceLevels: experienceLevels });
-      
+      setFormData({
+        email: email,
+        password: "",
+        confirmPassword: "",
+        firstName: first_name,
+        lastName: last_name,
+        dateOfBirth: date_of_birth,
+        phoneNumber: phone_number,
+        climbingExperience: experience_level_id,
+        street: street_address,
+        city: city,
+        state: state,
+        postcode: postcode,
+        country: country,
+        profilePhoto: null,
+      });
     };
 
     getMemberProfile(userProps)
       .then(({ member, formQueries }) => {
-        setForm(formQueries);
-        updateForm(formData, member);
+        initialiseForm(formQueries);
+        populatePage(member, formQueries);
       })
       .catch((_) => {
         displayNotification(
@@ -109,14 +114,26 @@ export default function Profile() {
           "Please refresh your page or try again later."
         );
       });
-  }, [dispatch, userProps, formData, formQueries]);
+  }, [dispatch, userProps]);
 
   useEffect(() => {
-    prepareMemberProfile();
-  }, [prepareMemberProfile]);
+    initialisePage();
+  }, [initialisePage]);
 
   const handleFormData = ({ target: { name, value } }) => {
     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+  };
+
+  const { experienceLevels } = formQueries;
+  const handleExperience = (e) => {
+    const mappedExperience = {
+      target: {
+        name: "climbingExperience",
+        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id"),
+      },
+    };
+
+    handleFormData(mappedExperience);
   };
 
   return (
@@ -190,6 +207,7 @@ export default function Profile() {
                     name="email"
                     type="email"
                     required
+                    value={formData.email}
                     onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
@@ -218,7 +236,7 @@ export default function Profile() {
                 <div className="mt-1">
                   <input
                     type="password"
-                    name="confirm-password"
+                    name="confirmPassword"
                     id="confirm-password"
                     onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
