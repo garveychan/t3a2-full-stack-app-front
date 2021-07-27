@@ -46,7 +46,7 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
     { name: "Phone Number", value: phoneNumber },
     {
       name: "Climbing Experience",
-      value: mapCategories(experienceLevels, climbingExperience, "id", "experience_level"),
+      value: mapCategories(experienceLevels, climbingExperience , "id", "experience_level"),
     },
     { name: "Full Address", value: `${street}, ${city}, ${state}, ${postcode}, ${country}` },
     {

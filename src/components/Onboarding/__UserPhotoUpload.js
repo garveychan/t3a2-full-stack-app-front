@@ -36,8 +36,8 @@ export default function UserPhotoUpload({ formData, handleFormData }) {
         <input {...getInputProps()} />
 
         {formData.profilePhoto ? (
-          <div key={formData.profilePhoto.name} className="h-1/2 w-1/2">
-            <img src={formData.profilePhoto.preview} alt="Upload Preview" />
+          <div key={formData.profilePhoto.name} className="h-1/2 w-1/2 flex justify-center">
+            <img src={formData.profilePhoto.preview} className="max-h-screen-1/3" alt="Upload Preview" />
           </div>
         ) : (
           <div className="space-y-1 text-center">

@@ -11,12 +11,15 @@ export default function UserProfile({
   formQueries: { experienceLevels },
 }) {
   const handleExperience = (e) => {
+    const experienceId = mapCategories(experienceLevels, e.target.value, "experience_level", "id")
+
     const mappedExperience = {
       target: {
         name: "climbingExperience",
-        value: mapCategories(experienceLevels, e.target.value, "experience_level", "id").toString(),
+        value: experienceId
       },
     };
+
     handleFormData(mappedExperience);
   };
 
