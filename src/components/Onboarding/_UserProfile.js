@@ -24,6 +24,7 @@ export default function UserProfile({
 
   const validateForm = (e) => {
     e.preventDefault();
+
     const checkProps = () => {
       const props = [
         "firstName",

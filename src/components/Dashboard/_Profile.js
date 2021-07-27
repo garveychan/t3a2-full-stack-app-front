@@ -1,65 +1,115 @@
-const currentCheckIn = {
-  id: "",
-  image: "",
-  name: "",
-  email: "",
-  streetAddress: "",
-  townAddress: "",
-  dateOfBirth: "",
-  waiverStatus: true,
-  checkInTime: "",
-};
+import { useGlobalState } from "../../utils/globalContext";
+import { useState, useMemo, useEffect, useCallback } from "react";
+import { getMemberProfile } from "../../api/ServicesMembers";
+import { displayNotification } from "../_Notification";
 
 export default function Profile() {
+  const {
+    store: { userProps },
+    dispatch,
+  } = useGlobalState();
+
+  const initialProfileCard = {
+    id: "",
+    image: "",
+    name: "",
+    email: "",
+    streetAddress: "",
+    townAddress: "",
+    dateOfBirth: "",
+    waiverStatus: true,
+    climbingExperience: 1,
+  };
+
+  const memoizedInitialFormData = useMemo(() => {
+    return {
+      firstName: "",
+      lastName: "",
+      dateOfBirth: "",
+      phoneNumber: "",
+      climbingExperience: 1,
+      street: "",
+      city: "",
+      state: "",
+      postcode: "",
+      country: "Australia",
+      profilePhoto: null,
+    };
+  }, []);
+
+  const [profileCard, setProfileCard] = useState(initialProfileCard);
+  const [formData, setFormData] = useState(memoizedInitialFormData);
+
+  const prepareMemberProfile = useCallback(() => {
+    getMemberProfile(userProps)
+      .then(({ member }) => {
+        console.log(member);
+      })
+      .catch((_) => {
+        displayNotification(
+          dispatch,
+          3000,
+          "error",
+          "Sorry, something went wrong.",
+          "We couldn't retrieve your profile details.",
+          "Please refresh your page or try again later."
+        );
+      });
+  }, [dispatch, userProps]);
+
+  useEffect(() => {
+    prepareMemberProfile();
+  }, [prepareMemberProfile]);
+
+
+
   return (
     <>
-      <form className="space-y-8 divide-y divide-gray-200">
+      <form className="space-y-8 divide-y divide-gray-200" autoComplete="off">
         <div className="space-y-8 divide-y divide-gray-200">
           <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 rounded-lg">
             <div className="justify-between items-center flex flex-col lg:flex-row">
               <div className="w-3/4 lg:w-1/2 flex justify-center">
                 <img
                   className="h-60 w-60 object-cover rounded-full"
-                  src={currentCheckIn.image}
+                  src={profileCard.image}
                   alt=""
                 />
               </div>
               <dl className="mt-4 lg:mt-0 w-2/3 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:text-left text-center">
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Name</dt>
-                  <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.name}</dd>
+                  <dd className="mt-1 text-sm text-gray-900">{profileCard.name}</dd>
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Date of Birth</dt>
-                  <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.dateOfBirth}</dd>
+                  <dd className="mt-1 text-sm text-gray-900">{profileCard.dateOfBirth}</dd>
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Email</dt>
-                  <dd className="mt-1 text-sm text-gray-900">{currentCheckIn.email}</dd>
+                  <dd className="mt-1 text-sm text-gray-900">{profileCard.email}</dd>
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Waiver Status</dt>
                   <span
                     className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                      currentCheckIn.waiverStatus
+                      profileCard.waiverStatus
                         ? "bg-green-100 text-green-800"
                         : "bg-red-100 text-red-800"
                     }`}
                   >
-                    {currentCheckIn.waiverStatus ? "Signed" : "Not Signed"}
+                    {profileCard.waiverStatus ? "Signed" : "Not Signed"}
                   </span>
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Address</dt>
                   <dd className="mt-1 text-sm text-gray-900">
-                    {currentCheckIn.streetAddress}, {currentCheckIn.townAddress}
+                    {profileCard.streetAddress}, {profileCard.townAddress}
                   </dd>
                 </div>
                 <div className="sm:col-span-1">
                   <dt className="text-sm font-medium text-gray-500">Experience Level</dt>
-                  <dd className="mt-1 text-sm text-gray-900">
-                    {currentCheckIn.checkInTime.toString()}
-                  </dd>
+                  <dd className="mt-1 text-sm text-gray-900">{profileCard.climbingExperience}</dd>
                 </div>
               </dl>
             </div>
@@ -69,7 +119,7 @@ export default function Profile() {
             <div>
               <h3 className="text-lg leading-6 font-medium text-gray-900">Credentials</h3>
               <p className="mt-1 text-sm text-gray-500">
-                Leave your password blank if you do not wish to change it.
+                Leave your password blank if you do not wish to make changes to it.
               </p>
             </div>
 
@@ -83,7 +133,9 @@ export default function Profile() {
                     id="email"
                     name="email"
                     type="email"
-                    autoComplete="email"
+                    required
+                    value={}
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -91,14 +143,14 @@ export default function Profile() {
 
               <div className="sm:col-span-3">
                 <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                  First name
+                  New password
                 </label>
                 <div className="mt-1">
                   <input
-                    type="text"
-                    name="first-name"
-                    id="first-name"
-                    autoComplete="given-name"
+                    type="password"
+                    name="password"
+                    id="password"
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -106,14 +158,14 @@ export default function Profile() {
 
               <div className="sm:col-span-3">
                 <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                  Last name
+                  Confirm password
                 </label>
                 <div className="mt-1">
                   <input
-                    type="text"
-                    name="last-name"
-                    id="last-name"
-                    autoComplete="family-name"
+                    type="password"
+                    name="confirm-password"
+                    id="confirm-password"
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -138,7 +190,8 @@ export default function Profile() {
                     type="text"
                     name="first-name"
                     id="first-name"
-                    autoComplete="given-name"
+                    required
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -153,15 +206,14 @@ export default function Profile() {
                     type="text"
                     name="last-name"
                     id="last-name"
-                    autoComplete="family-name"
+                    required
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
               </div>
 
-
-
-              <div className="sm:col-span-6">
+              <div className="sm:col-span-3">
                 <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
                   Street address
                 </label>
@@ -170,13 +222,14 @@ export default function Profile() {
                     type="text"
                     name="street-address"
                     id="street-address"
-                    autoComplete="street-address"
+                    required
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
               </div>
 
-              <div className="sm:col-span-2">
+              <div className="sm:col-span-3">
                 <label htmlFor="city" className="block text-sm font-medium text-gray-700">
                   City
                 </label>
@@ -185,6 +238,8 @@ export default function Profile() {
                     type="text"
                     name="city"
                     id="city"
+                    required
+                    onChange={handleFormData}
                     className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border-gray-300 rounded-md"
                   />
                 </div>
@@ -219,7 +274,7 @@ export default function Profile() {
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
+              <div className="sm:col-span-2">
                 <label htmlFor="country" className="block text-sm font-medium text-gray-700">
                   Country
                 </label>
@@ -376,7 +431,7 @@ export default function Profile() {
             </button>
             <button
               type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              className="ml-3 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
             >
               Save
             </button>
