@@ -1,3 +1,5 @@
+// Dan Abramov's fancy custom hook used for polling our check-in records.
+
 import { useEffect, useRef } from "react";
 
 export function useInterval(delay, callback) {
@@ -17,5 +19,3 @@ export function useInterval(delay, callback) {
     }
   }, [delay]);
 }
-
-// Courtesy of Dan Abramov

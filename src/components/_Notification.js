@@ -1,3 +1,11 @@
+// Reuseable notification component of the application.
+// Rendered at the top level and hidden until called via
+// the dispatch action which alters the state of the component.
+// Component is then displayed based on the supplied arguments,
+// dictating how long it should persist, notification type,
+// title of the notification, and as many messages as the invoking
+// function would like to pass - aggregated with a rest operator and mapped accordingly.
+
 import { Fragment, useState, useEffect } from "react";
 import { useGlobalState } from "../utils/globalContext";
 import { Transition } from "@headlessui/react";

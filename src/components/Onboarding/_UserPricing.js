@@ -1,3 +1,6 @@
+// Placeholder pricing page awaiting business instruction.
+// Pricing ID informs Stripe session to be generated for the user.
+
 import { CheckIcon } from "@heroicons/react/outline";
 
 const tiers = [

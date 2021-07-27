@@ -1,3 +1,11 @@
+// Edit Profile form for existing members.
+// Initialises the page by requesting current member information
+// from the database and using that to populate the title card and form.
+// useCallback, useMemo, useEffect hooks leveraged to populate information
+// and render initial view without causing an infinite loop of re-renders
+// when the form is updated by the user with their new information.
+// useRef hook used to scroll user back to top of page on submission of form before refresh.
+
 import { useGlobalState } from "../../utils/globalContext";
 import { useHistory } from "react-router-dom";
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";

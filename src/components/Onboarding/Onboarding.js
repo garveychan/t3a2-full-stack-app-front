@@ -1,3 +1,14 @@
+// Onboarding workflow - multi-page/step form.
+// Form details stored as state in this parent component
+// as the user works through each step of the onboarding process.
+// Queries and criteria are retrieved from the database - 
+// e.g. experience level categories, the current waiver, and pricing models.
+// Form is dynamically generated based on the information received.
+// Form information is populated when the component mounts and
+// cleaned up when component unmounts to prevent memory leaks.
+// Onboarding stage is stored and managed in global state so navigation bar
+// has context for dynamic link generation.
+
 import UserProfile from "./_UserProfile";
 import UserWaiver from "./_UserWaiver";
 import UserPricing from "./_UserPricing";

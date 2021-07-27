@@ -1,3 +1,5 @@
+// Helper functions to access local storage and manipulate the JWT.
+
 const TOKEN_KEY = "session_token";
 
 export function retrieveTokenFromStorage() {

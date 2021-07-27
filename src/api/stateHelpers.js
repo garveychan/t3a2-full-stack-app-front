@@ -1,3 +1,8 @@
+// Helper functions to manage global state via the reducer.
+// This helps make the core component code more readable as
+// the function name can be quickly interpreted rather than being
+// bombarded with a complex dispatch invocation. 
+
 import jwt_decode from "jwt-decode";
 import { deleteTokenFromStorage } from "./storageHelpers";
 

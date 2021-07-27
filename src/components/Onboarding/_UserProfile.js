@@ -1,3 +1,9 @@
+// Initial profile completion page of onboarding workflow.
+// Rigorous validations aligned with database model validations
+// e.g. date of birth can't be in the future and fields must be completed.
+// Photo upload is a drag/drop zone which shows a preview of the uploaded image.
+// Categories dynamically generated from database ids and mapped to corresponding names.
+
 import { useEffect } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";

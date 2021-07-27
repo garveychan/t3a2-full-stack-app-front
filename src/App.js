@@ -1,3 +1,6 @@
+// Top level of custom components in application.
+// Initialises global state and provides store/dispatch reducer methods as context.
+
 import React, { useReducer } from "react";
 import { GlobalContext } from "./utils/globalContext";
 import globalReducer from "./utils/globalReducer";

@@ -1,3 +1,6 @@
+// Login form component.
+// Controlled inputs which calls the API request when submitted.
+
 import { LockClosedIcon } from "@heroicons/react/solid";
 import { Link, useHistory } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";

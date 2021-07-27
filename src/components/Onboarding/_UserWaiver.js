@@ -1,3 +1,9 @@
+// Waiver form generated dynamically from the latest relevant record
+// in the database. Waiver information formatted with React Markdown
+// library so that it can be stored as a string in database.
+// Signature and name completion validations so that each instance
+// can be associated with a signature and timestamp for legal reasons.
+
 import { PencilIcon } from "@heroicons/react/solid";
 import SignatureModal from "./__UserSignature";
 import { useState } from "react";

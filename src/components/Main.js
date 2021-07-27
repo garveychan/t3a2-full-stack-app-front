@@ -1,3 +1,11 @@
+// Main page of the application.
+// Renders all top level components and enables routing logic.
+// useEffect hook with a location dependency checks for a JWT in storage
+// with every new page visited. Token is decoded and properties are set
+// to global state to inform the flow of the application. If the token
+// is corrupted or no longer exists, global state is cleared of the user's
+// properties and the application returns to the landing page.
+
 import NavBar from "./NavBar/NavBar";
 import CheckIn from "./CheckIn/CheckIn";
 import Login from "./Auth/Login";

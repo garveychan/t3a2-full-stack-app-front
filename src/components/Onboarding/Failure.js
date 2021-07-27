@@ -1,3 +1,5 @@
+// Failure page for unsuccessful Stripe payments.
+
 import { useEffect } from "react";
 
 export default function Failure() {

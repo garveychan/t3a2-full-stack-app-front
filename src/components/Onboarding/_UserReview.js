@@ -1,3 +1,9 @@
+// Final page of the onboarding process.
+// User is asked to review their details and step back
+// through the onboarding form if they wish to change anything.
+// Signature is rendered from the array of points stored in state.
+// Photo is rendered from the file attachment prepared for the form.
+
 import { useHistory } from "react-router-dom";
 import { postOnboardingForm } from "../../api/ServicesOnboarding";
 import { useGlobalState } from "../../utils/globalContext";

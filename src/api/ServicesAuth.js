@@ -1,3 +1,7 @@
+// Functions related to API requests for Authentication and Authorisation.
+// Includes sign up, sign in, password reset methods.
+// Notifications displayed based on the responses and Promises returned to the components which initialised the requests.
+
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
 import { retrieveTokenFromStorage, saveTokenToStorage, deleteTokenFromStorage } from "./storageHelpers";

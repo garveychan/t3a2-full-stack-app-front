@@ -1,5 +1,15 @@
+// Live check-in dashboard only accessible by a user with admin permissions.
+// Intialises an empty page while retrieving information from the database.
+// Sends an initial request for check-in information to populate the page.
+// Initial request wrapped in useCallback and invoked via useEffect so that
+// its response does not re-render the page in an infinite loop.
+// Polls the database every 5 seconds to see if the page needs to be updated.
+// Future iterations will use webhooks to update the current state of the log.
+// Any failed request will terminate the polling routine.
+// Responses mapped to display fields for meaningful insights.
+
 import { useCallback, useEffect, useState } from "react";
-import { getCheckIns } from "../../api/ServicesAdmins";
+import { getCheckIns } from "../../api/ServicesCheckIns";
 import { useInterval } from "../../utils/customHooks";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";

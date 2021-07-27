@@ -1,3 +1,5 @@
+// Reducer for global state manipulation actions accessible via the dispatch method.
+
 export default function globalReducer(state, action) {
   const { type, data } = action;
 

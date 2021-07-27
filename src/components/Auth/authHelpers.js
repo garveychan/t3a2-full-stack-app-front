@@ -1,3 +1,6 @@
+// Helper methods related to authentication.
+// E.g. ensuring that the submitted passwords match.
+
 import { displayNotification } from "../_Notification";
 
 export const passwordsMatch = (dispatch, password, confirmPassword) => {
