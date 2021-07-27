@@ -1,5 +1,5 @@
 import jwt_decode from "jwt-decode";
-import { deleteTokenFromStorage } from "./_Storage";
+import { deleteTokenFromStorage } from "./storageHelpers";
 
 export function setUserProps(dispatch, token = null) {
   let [id, email, profileComplete, stripeCustomer, role] = [null, null, null, null, null];

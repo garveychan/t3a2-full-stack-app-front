@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Route, Redirect, useLocation, useHistory } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
 import { resetPassword } from "../../api/ServicesAuth";
-import { passwordsMatch } from "./___Helpers";
+import { passwordsMatch } from "./authHelpers";
 
 export default function Reset(redirect = false) {
   const {

@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { postOnboardingForm } from "../../api/ServicesOnboarding";
 import { useGlobalState } from "../../utils/globalContext";
-import { mapCategories } from "./___Helpers";
+import { mapCategories } from "./onboardingHelpers";
 
 export default function UserReview({ formData, formQueries: { experienceLevels } }) {
   const {

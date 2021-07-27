@@ -1,7 +1,7 @@
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
-import { retrieveTokenFromStorage, saveTokenToStorage, deleteTokenFromStorage } from "./_Storage";
-import { clearResetToken, clearUserProps, setUserProps } from "./_State";
+import { retrieveTokenFromStorage, saveTokenToStorage, deleteTokenFromStorage } from "./storageHelpers";
+import { clearResetToken, clearUserProps, setUserProps } from "./stateHelpers";
 
 const API_URL = process.env.REACT_APP_API_URL;
 

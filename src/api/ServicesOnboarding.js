@@ -1,7 +1,7 @@
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
-import { saveTokenToStorage } from "./_Storage";
-import { resetOnboardingStep, setRedirectURL } from "./_State";
+import { saveTokenToStorage } from "./storageHelpers";
+import { resetOnboardingStep, setRedirectURL } from "./stateHelpers";
 
 const API_URL = process.env.REACT_APP_API_URL;
 

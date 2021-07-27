@@ -1,8 +1,8 @@
+import { resetOnboardingStep } from "../../api/stateHelpers";
 import { useGlobalState } from "../../utils/globalContext";
 import { Link, useHistory } from "react-router-dom";
 import { signOut } from "../../api/ServicesAuth";
 import logo from "../../images/logo_1up.png";
-import { resetOnboardingStep } from "../../api/_State";
 
 export const HomeIcon = ({ loggedIn }) => {
   const Logo = () => {

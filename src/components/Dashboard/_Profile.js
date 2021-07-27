@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { getMemberProfile } from "../../api/ServicesMembers";
 import { displayNotification } from "../_Notification";
-import { mapCategories } from "../Onboarding/___Helpers";
-import { passwordsMatch } from "../Auth/___Helpers";
+import { mapCategories } from "../Onboarding/onboardingHelpers";
+import { passwordsMatch } from "../Auth/authHelpers";
 import { updateMemberProfile } from "../../api/ServicesMembers";
 import UserPhotoUpload from "../Onboarding/__UserPhotoUpload";
 

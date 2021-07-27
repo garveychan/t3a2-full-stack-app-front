@@ -1,5 +1,5 @@
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
-import { passwordsMatch } from "./___Helpers";
+import { passwordsMatch } from "./authHelpers";
 import { useState } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 import { signUp } from "../../api/ServicesAuth";
