@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react';
 import { StaticRouter as Router } from 'react-router-dom'; 
 import { unmountComponentAtNode } from "react-dom";
 import userEvent from '@testing-library/user-event';
+import { GlobalContext } from "../../utils/globalContext";
 
 let container = null;
 beforeEach(() => {
@@ -21,34 +22,59 @@ afterEach(() => {
 describe('CheckIn', () => {
     // Text display - gym name
     it('should render "1UP Bouldering" text', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const text = screen.getByText(/1UP Bouldering/);
         expect(text).toBeInTheDocument();
     });
 
     // Text display - Page label
     it('should render "Member Check-In" text', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const text = screen.getByText(/Member Check-In/);
         expect(text).toBeInTheDocument();
     });
 
     // Email 
     it('should show an email field with default placeholder text of "Enter your email"', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const inputNode = screen.getByPlaceholderText('Enter your email')
         expect(inputNode).toBeInTheDocument();
     });
 
     it('should render an email input field', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const inputEl = screen.getByTestId("email-input");
         expect(inputEl).toBeInTheDocument();
         expect(inputEl).toHaveAttribute("type", "email");
     });
 
     it('should not return an error if passed a valid email to test email input field', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const inputEl = screen.getByTestId("email-input");
         userEvent.type(inputEl, "test@mail.com");
         expect(screen.getByTestId("email-input")).toHaveValue("test@mail.com");
@@ -56,7 +82,12 @@ describe('CheckIn', () => {
     });
 
     it('should return an error message if passed an invalid email to test input value', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const inputEl = screen.getByTestId("email-input");
         userEvent.type(inputEl, "test");
         expect(screen.getByTestId("email-input")).toHaveValue("test");
@@ -67,7 +98,12 @@ describe('CheckIn', () => {
 
     // Sign Up button 
     it('should render a "submit" button within a link', () => {
-        render(<Router><CheckIn/></Router>);
+        const dispatch = jest.fn();
+        render(
+        <GlobalContext.Provider value={{ dispatch }}>
+            <Router><CheckIn/></Router>
+        </GlobalContext.Provider>
+        );
         const linkElement = screen.getByText(/Submit/);
         expect(linkElement).toBeInTheDocument();
     });
