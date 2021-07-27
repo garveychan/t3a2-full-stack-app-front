@@ -16,9 +16,7 @@ export default function Login() {
       .then((_) => {
         history.push("/dashboard");
       })
-      .catch((error) => {
-        console.error(error);
-      });
+      .catch((_) => {});
   };
 
   return (

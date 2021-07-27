@@ -1,11 +1,16 @@
 import { useGlobalState } from "../../utils/globalContext";
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useHistory } from "react-router-dom";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
 import { getMemberProfile } from "../../api/ServicesMembers";
 import { displayNotification } from "../_Notification";
 import { mapCategories } from "../Onboarding/___Helpers";
+import { passwordsMatch } from "../Auth/___Helpers";
+import { updateMemberProfile } from "../../api/ServicesMembers";
 import UserPhotoUpload from "../Onboarding/__UserPhotoUpload";
 
 export default function Profile() {
+  const history = useHistory();
+  const top = useRef();
   const {
     store: { userProps },
     dispatch,
@@ -111,7 +116,7 @@ export default function Profile() {
           "error",
           "Sorry, something went wrong.",
           "We couldn't retrieve your profile details.",
-          "Please refresh your page or try again later."
+          "Please refresh the page or try again later."
         );
       });
   }, [dispatch, userProps]);
@@ -136,9 +141,46 @@ export default function Profile() {
     handleFormData(mappedExperience);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const { password, confirmPassword } = formData;
+
+    if (passwordsMatch(dispatch, password, confirmPassword)) {
+      updateMemberProfile(formData, userProps)
+        .then((_) => {
+          displayNotification(
+            dispatch,
+            3000,
+            "success",
+            "Great news!",
+            "Your profile details have been updated.",
+            "Now refreshing your page.",
+          );
+          top.current.scrollIntoView({behavior:'smooth'})
+          setTimeout(() => history.go(), 3000);
+        })
+        .catch((_) => {
+          displayNotification(
+            dispatch,
+            3000,
+            "error",
+            "Sorry, something went wrong.",
+            "Your profile could not be updated.",
+            "Please refresh the page or try again later."
+          );
+        });
+    }
+  };
+
   return (
     <>
-      <form className="space-y-8 divide-y divide-gray-200" autoComplete="off">
+      <div ref={top} />
+      <form
+        className="space-y-8 divide-y divide-gray-200"
+        onSubmit={handleSubmit}
+        autoComplete="off"
+      >
         <div className="space-y-8 divide-y divide-gray-200">
           <div className="bg-white px-4 py-5 border-b border-gray-200 sm:px-6 rounded-lg">
             <div className="justify-between items-center flex flex-col lg:flex-row">
@@ -215,7 +257,7 @@ export default function Profile() {
               </div>
 
               <div className="sm:col-span-3">
-                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                   New password
                 </label>
                 <div className="mt-1">
@@ -230,7 +272,10 @@ export default function Profile() {
               </div>
 
               <div className="sm:col-span-3">
-                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                <label
+                  htmlFor="confirm-password"
+                  className="block text-sm font-medium text-gray-700"
+                >
                   Confirm password
                 </label>
                 <div className="mt-1">
@@ -534,12 +579,6 @@ export default function Profile() {
         </div>
         <div className="pt-5">
           <div className="flex justify-end">
-            <button
-              type="button"
-              className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-            >
-              Cancel
-            </button>
             <button
               type="submit"
               className="ml-3 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
