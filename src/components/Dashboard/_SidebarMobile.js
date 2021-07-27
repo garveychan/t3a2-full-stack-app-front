@@ -1,3 +1,5 @@
+// Collapsed dashboard sidebar for Mobile.
+
 import { XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";

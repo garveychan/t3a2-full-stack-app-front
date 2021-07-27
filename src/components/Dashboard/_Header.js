@@ -1,3 +1,5 @@
+// Responsive header component of dashboard.
+
 import { Logout } from "../NavBar/_Links";
 import { MenuAlt2Icon } from "@heroicons/react/outline";
 

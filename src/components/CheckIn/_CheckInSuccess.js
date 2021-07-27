@@ -1,3 +1,6 @@
+// Successful check-in page.
+// Retrieves the name of the recent check-in and generates a custom welcome message.
+
 import { useHistory } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
 

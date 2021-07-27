@@ -1,3 +1,8 @@
+// Dynamic navigation bar for any page that isn't dashboard-based.
+// Provides links to authentication forms as well as navigation
+// links for the multi-page onboarding workflow.
+// Links are rendered and enabled/disabled based on context.
+
 import { Route, Switch } from "react-router-dom";
 import { HomeIcon, Signup, Login, CheckIn, OnboardingBackLink } from "./_Links.js";
 import { Logout } from "../NavBar/_Links";

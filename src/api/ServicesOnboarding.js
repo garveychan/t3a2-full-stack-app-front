@@ -1,3 +1,9 @@
+// API requests for onboarding new members.
+// Retrieve the latest form information from the database - 
+// climbing experience categories, waiver, pricing.
+// Construct the payload for populating a user record with profile details.
+// This is sent as a form data so it can include a file (photo).
+
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
 import { saveTokenToStorage } from "./storageHelpers";

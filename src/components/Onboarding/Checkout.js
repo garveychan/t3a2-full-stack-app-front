@@ -1,3 +1,5 @@
+// Successful onboarding page with redirect to Stripe session.
+
 import { useEffect } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 

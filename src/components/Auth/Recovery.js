@@ -1,3 +1,6 @@
+// Password recovery request form.
+// User submits their email and Devise sends a password reset link to that email.
+
 import { getRecoveryEmail } from "../../api/ServicesAuth";
 import { useGlobalState } from "../../utils/globalContext";
 

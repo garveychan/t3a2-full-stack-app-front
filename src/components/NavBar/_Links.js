@@ -1,3 +1,6 @@
+// Individual link components for the navigation bar.
+// Dynamic behaviour enabled by props passed through as arguments.
+
 import { resetOnboardingStep } from "../../api/stateHelpers";
 import { useGlobalState } from "../../utils/globalContext";
 import { Link, useHistory } from "react-router-dom";

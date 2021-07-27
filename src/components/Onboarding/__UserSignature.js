@@ -1,3 +1,8 @@
+// Signature Canvas modal opened from Waiver form.
+// Stores signature as both a URI and an array of points.
+// Array is used to redisplay the signature if the user
+// wants to edit their signature and URI is stored in database for efficiency.
+
 import SignatureCanvas from "react-signature-canvas";
 import { Fragment, useState, useRef, useEffect } from "react";
 import { Dialog, Transition } from "@headlessui/react";

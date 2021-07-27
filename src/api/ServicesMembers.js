@@ -1,3 +1,7 @@
+// API request functions related to member activities.
+// Retrieve information on the current member to populate the edit profile form.
+// PUT request to send updated profile details to be persisted in database.
+
 import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;

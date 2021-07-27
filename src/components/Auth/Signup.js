@@ -1,3 +1,7 @@
+// Signup form component.
+// Controlled input form with appropriate validations for passwords.
+// Sends a request to the API when submitted and redirects to the onboarding workflow if successful.
+
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import { passwordsMatch } from "./authHelpers";
 import { useState } from "react";

@@ -1,3 +1,9 @@
+// Main dashboard component from which subpages are rendered and managed.
+// Dashboard is polymorphic, adapting to the user's role specified by the JWT.
+// Links and initial landing page informed by the user role.
+// API requests will contain the JWT header so sensitive information is still protected.
+// Dashboard redirects to onboarding workflow if user is not an admin and has no profile.
+
 import { useRouteMatch, Switch, Route, Redirect } from "react-router-dom";
 import { useState } from "react";
 import Header from "./_Header";

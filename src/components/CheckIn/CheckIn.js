@@ -1,6 +1,9 @@
+// Check-in page for users to submit emails to log a record on entry.
+// Current landing page of the application.
+
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { checkIn } from "../../api/ServicesAdmins";
+import { checkIn } from "../../api/ServicesCheckIns";
 import { setCheckInName } from "../../api/stateHelpers";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";

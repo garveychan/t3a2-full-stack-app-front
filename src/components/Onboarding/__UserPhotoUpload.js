@@ -1,3 +1,7 @@
+// Photo upload drag and drop zone.
+// Uses React Dropzone to generate an ObjectURL for previews
+// and stores a single image in preparation for file upload.
+
 import React, { useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 
