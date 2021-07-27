@@ -9,7 +9,7 @@ export default function CheckInSuccess() {
 
   setTimeout(() => {
     history.push("/");
-  }, 5000);
+  }, 3000);
 
   return (
     <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
