@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";
 import UserPhotoUpload from "./__UserPhotoUpload";
-import { mapCategories } from "./___Helpers";
+import { mapCategories } from "./onboardingHelpers";
 
 export default function UserProfile({
   nextStep,

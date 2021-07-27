@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { checkIn } from "../../api/ServicesAdmins";
-import { setCheckInName } from "../../api/_State";
+import { setCheckInName } from "../../api/stateHelpers";
 import { useGlobalState } from "../../utils/globalContext";
 import { displayNotification } from "../_Notification";
 

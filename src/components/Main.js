@@ -13,8 +13,8 @@ import { AuthRoute } from "../utils/AuthRoute";
 import { useEffect } from "react";
 import { Notification } from "./_Notification";
 import { useGlobalState } from "../utils/globalContext";
-import { clearUserProps, setUserProps } from "../api/_State";
-import { retrieveTokenFromStorage } from "../api/_Storage";
+import { clearUserProps, setUserProps } from "../api/stateHelpers";
+import { retrieveTokenFromStorage } from "../api/storageHelpers";
 import { BrowserRouter as Router, Switch, Route, useLocation, Redirect } from "react-router-dom";
 
 export default function Main() {
