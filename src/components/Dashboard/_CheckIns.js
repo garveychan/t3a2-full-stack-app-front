@@ -163,7 +163,7 @@ export default function CheckIns() {
                       <th
                         key={index}
                         scope="col"
-                        className="px-4 py-3 text-left text-xs font-medium text-gray-500 text-center uppercase tracking-wider"
+                        className="px-4 py-3 text-xs font-medium text-gray-500 text-left uppercase tracking-wider"
                       >
                         {name}
                       </th>
@@ -172,7 +172,7 @@ export default function CheckIns() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {checkIns.map((person, index) => (
-                    <tr key={index} className="text-center">
+                    <tr key={index} className="text-left">
                       <td className="px-4 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
