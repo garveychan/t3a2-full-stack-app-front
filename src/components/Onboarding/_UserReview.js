@@ -30,14 +30,16 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
         history.push("/checkout");
       })
       .catch((error) => {
-        console.error(error);
+        const errorMessages = error.response.data.errors || "";
         displayNotification(
           dispatch,
           3000,
           "error",
-          "Something went wrong.",
-          "The server was unable to process your details.",
-          "Please refresh the page and try again."
+          "Sorry, the server couldn't process your details.",
+          errorMessages
+            .replace("Validation failed: ", "")
+            .split(", ")
+            .map((message) => message + ".")
         );
       })
       .finally((_) => setDisable(false));

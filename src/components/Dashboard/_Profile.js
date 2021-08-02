@@ -172,14 +172,17 @@ export default function Profile() {
           top.current.scrollIntoView({ behavior: "smooth" });
           setTimeout(() => history.push("/dashboard/refresh"), 3000);
         })
-        .catch((_) => {
+        .catch((error) => {
+          const errorMessages = error.response.data.errors || "";
           displayNotification(
             dispatch,
             3000,
             "error",
-            "Sorry, something went wrong.",
-            "Your profile could not be updated.",
-            "Please refresh the page or try again later."
+            "Sorry, your profile could not be updated.",
+            errorMessages
+              .replace("Validation failed: ", "")
+              .split(", ")
+              .map((message) => message + ".")
           );
         })
         .finally(() => setDisable(false));
