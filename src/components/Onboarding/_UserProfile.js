@@ -17,12 +17,12 @@ export default function UserProfile({
   formQueries: { experienceLevels },
 }) {
   const handleExperience = (e) => {
-    const experienceId = mapCategories(experienceLevels, e.target.value, "experience_level", "id")
+    const experienceId = mapCategories(experienceLevels, e.target.value, "experience_level", "id");
 
     const mappedExperience = {
       target: {
         name: "climbingExperience",
-        value: experienceId
+        value: experienceId,
       },
     };
 
@@ -64,7 +64,7 @@ export default function UserProfile({
         3000,
         "warning",
         "Oops!",
-        "Please ensure that you have completed all the fields and check that the responses are valid."
+        "Please ensure that you have completed all the fields and checked that the responses are valid."
       );
     }
   };

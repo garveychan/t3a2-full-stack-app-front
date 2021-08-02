@@ -1,5 +1,5 @@
 // API requests for onboarding new members.
-// Retrieve the latest form information from the database - 
+// Retrieve the latest form information from the database -
 // climbing experience categories, waiver, pricing.
 // Construct the payload for populating a user record with profile details.
 // This is sent as a form data so it can include a file (photo).
@@ -32,7 +32,7 @@ export function getOnboardingForm(dispatch) {
     });
 }
 
-export function postOnboardingForm(dispatch, history, formData, userProps) {
+export function postOnboardingForm(dispatch, formData, userProps) {
   const memberURL = `${API_URL}/members`;
   const paymentURL = `${API_URL}/payments/checkout`;
   const profileData = { ...formData };
@@ -47,10 +47,10 @@ export function postOnboardingForm(dispatch, history, formData, userProps) {
   payload.append("profileData", JSON.stringify(profileData));
   payload.append("profilePhoto", profilePhoto);
 
-  axios
+  return axios
     .post(memberURL, payload, { headers: { Authorization: userProps.token } })
     .then((_) => {
-      axios
+      return axios
         .post(
           paymentURL,
           { id: userProps.id, pricingId: profileData.pricingId },
@@ -61,31 +61,7 @@ export function postOnboardingForm(dispatch, history, formData, userProps) {
           saveTokenToStorage(token);
           setRedirectURL(dispatch, resp.data.StripeSessionURL);
           resetOnboardingStep(dispatch);
-        })
-        .then((_) => {
-          history.push("/checkout");
-        })
-        .catch((error) => {
-          console.error(error);
-          displayNotification(
-            dispatch,
-            3000,
-            "error",
-            "Something went wrong.",
-            "We were unable to redirect you.",
-            "Please refresh the page and try again."
-          );
         });
     })
-    .catch((error) => {
-      console.error(error);
-      displayNotification(
-        dispatch,
-        3000,
-        "error",
-        "Something went wrong.",
-        "The server was unable to process your details",
-        "Please refresh the page and try again."
-      );
-    });
+    .catch((error) => Promise.reject(error));
 }

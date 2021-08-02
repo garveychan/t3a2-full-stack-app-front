@@ -6,6 +6,7 @@ import { GlobalContext } from "./utils/globalContext";
 import globalReducer from "./utils/globalReducer";
 import Main from "./components/Main";
 import { BrowserRouter as Router } from "react-router-dom";
+import { useResponsiveViewHeight } from "./utils/customHooks";
 
 export default function App() {
   const initialState = {
@@ -31,6 +32,8 @@ export default function App() {
   };
 
   const [store, dispatch] = useReducer(globalReducer, initialState);
+
+  useResponsiveViewHeight();
 
   return (
     <GlobalContext.Provider value={{ store, dispatch }}>

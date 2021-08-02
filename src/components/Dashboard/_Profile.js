@@ -15,6 +15,7 @@ import { mapCategories } from "../Onboarding/onboardingHelpers";
 import { passwordsMatch } from "../Auth/authHelpers";
 import { updateMemberProfile } from "../../api/ServicesMembers";
 import UserPhotoUpload from "../Onboarding/__UserPhotoUpload";
+import Button from "../_Button";
 
 export default function Profile() {
   const history = useHistory();
@@ -61,6 +62,7 @@ export default function Profile() {
   const [profileCard, setProfileCard] = useState(initialProfileCard);
   const [formQueries, setFormQueries] = useState(initialFormQueries);
   const [formData, setFormData] = useState(memoizedInitialFormData);
+  const [disable, setDisable] = useState(false);
 
   const initialisePage = useCallback(() => {
     const initialiseForm = (formQueries) => {
@@ -155,6 +157,8 @@ export default function Profile() {
     const { password, confirmPassword } = formData;
 
     if (passwordsMatch(dispatch, password, confirmPassword)) {
+      setDisable(true);
+
       updateMemberProfile(formData, userProps)
         .then((_) => {
           displayNotification(
@@ -163,9 +167,9 @@ export default function Profile() {
             "success",
             "Great news!",
             "Your profile details have been updated.",
-            "Now refreshing your page.",
+            "Now refreshing your page."
           );
-          top.current.scrollIntoView({behavior:'smooth'})
+          top.current.scrollIntoView({ behavior: "smooth" });
           setTimeout(() => history.push("/dashboard/refresh"), 3000);
         })
         .catch((_) => {
@@ -177,7 +181,8 @@ export default function Profile() {
             "Your profile could not be updated.",
             "Please refresh the page or try again later."
           );
-        });
+        })
+        .finally(() => setDisable(false));
     }
   };
 
@@ -587,12 +592,15 @@ export default function Profile() {
         </div>
         <div className="pt-5">
           <div className="flex justify-end">
-            <button
-              type="submit"
-              className="ml-3 inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            <Button
+              props={{
+                disable: disable,
+                classNames:
+                  "w-20 py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500",
+              }}
             >
               Save
-            </button>
+            </Button>
           </div>
         </div>
       </form>
