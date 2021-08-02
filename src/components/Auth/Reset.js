@@ -7,6 +7,7 @@ import { Route, Redirect, useLocation, useHistory } from "react-router-dom";
 import { useGlobalState } from "../../utils/globalContext";
 import { resetPassword } from "../../api/ServicesAuth";
 import { passwordsMatch } from "./authHelpers";
+import Button from "../_Button";
 
 export default function Reset(redirect = false) {
   const {
@@ -25,6 +26,7 @@ export default function Reset(redirect = false) {
   };
 
   const [resetData, setResetData] = useState(initialResetData);
+  const [disable, setDisable] = useState(false);
 
   const handleResetData = ({ target: { name, value } }) => {
     setResetData((prevData) => ({ ...prevData, [name]: value }));
@@ -36,11 +38,14 @@ export default function Reset(redirect = false) {
     const { password, confirmPassword } = resetData;
 
     if (passwordsMatch(dispatch, password, confirmPassword)) {
+      setDisable(true);
+
       resetPassword(dispatch, resetToken, password)
         .then((_) => {
           history.push("/");
         })
-        .catch((error) => console.error(error));
+        .catch((error) => console.error(error))
+        .finally(() => setDisable(false));
     }
   };
 
@@ -91,9 +96,12 @@ export default function Reset(redirect = false) {
             </div>
 
             <div>
-              <button
-                type="submit"
-                className="group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
+              <Button
+                props={{
+                  disable: disable,
+                  classNames:
+                    "group relative w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900",
+                }}
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon
@@ -102,7 +110,7 @@ export default function Reset(redirect = false) {
                   />
                 </span>
                 Submit
-              </button>
+              </Button>
             </div>
           </form>
         </div>

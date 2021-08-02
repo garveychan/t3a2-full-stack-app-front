@@ -29,11 +29,12 @@ export default function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setDisable(true);
 
     const { email, password, confirmPassword } = signupData;
 
     if (passwordsMatch(dispatch, password, confirmPassword)) {
+      setDisable(true);
+      
       signUp(dispatch, email, password)
         .then((_) => {
           history.push("/onboarding");
