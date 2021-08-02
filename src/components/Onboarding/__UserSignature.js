@@ -42,7 +42,9 @@ export default function SignatureModal({
     signatureCanvas.current.clear();
   };
 
-  const handleSave = () => {
+  const handleSave = (e) => {
+    e.preventDefault();
+
     handleFormData({
       target: { name: "waiverName", value: signerName },
     });
@@ -52,7 +54,7 @@ export default function SignatureModal({
     handleFormData({
       target: { name: "waiverSignatureURI", value: signatureURI },
     });
-    setOpen(false)
+    setOpen(false);
   };
 
   useEffect(() => {
@@ -98,7 +100,7 @@ export default function SignatureModal({
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
             <div className="inline-block align-center bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
-              <div>
+              <form onSubmit={handleSave}>
                 <div className="flex flex-col space-y-4 items-center justify-center text-center">
                   <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                     Please sign here and enter your name below.
@@ -126,10 +128,10 @@ export default function SignatureModal({
                     />
                   </div>
                 </div>
-              </div>
+              </form>
               <div className="mt-4 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                 <button
-                  type="button"
+                  type="submit"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm"
                   onClick={handleSave}
                 >

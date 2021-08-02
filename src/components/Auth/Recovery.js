@@ -1,18 +1,46 @@
 // Password recovery request form.
 // User submits their email and Devise sends a password reset link to that email.
 
+import { displayNotification } from "../_Notification";
 import { getRecoveryEmail } from "../../api/ServicesAuth";
 import { useGlobalState } from "../../utils/globalContext";
+import { useState } from "react";
+import Button from "../_Button";
 
 export default function Recovery() {
   const { dispatch } = useGlobalState();
+  const [disable, setDisable] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setDisable(true);
 
     const email = e.target.elements.email.value;
-    getRecoveryEmail(dispatch, email);
-    e.target.elements.email.value = "";
+    getRecoveryEmail(email)
+      .then(() =>
+        displayNotification(
+          dispatch,
+          3000,
+          "success",
+          "Success!",
+          `Your password reset link has been sent to ${email}.`,
+          "Please check your inbox or your spam folder."
+        )
+      )
+      .catch(() =>
+        displayNotification(
+          dispatch,
+          3000,
+          "error",
+          "Sorry!",
+          "Something went wrong.",
+          "Please refresh the page or try again later."
+        )
+      )
+      .finally(() => {
+        setDisable(false);
+        e.target.elements.email.value = "";
+      });
   };
 
   return (
@@ -42,12 +70,15 @@ export default function Recovery() {
                   />
                 </div>
                 <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <button
-                    type="submit"
-                    className="block w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
+                  <Button
+                    props={{
+                      disable: disable,
+                      classNames:
+                        "w-full sm:w-24 py-3 px-4 rounded-md shadow bg-gradient-to-r from-green-400 to-green-600 text-white font-medium hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900",
+                    }}
                   >
                     Submit
-                  </button>
+                  </Button>
                 </div>
               </div>
             </form>

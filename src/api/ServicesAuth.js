@@ -4,7 +4,11 @@
 
 import axios from "axios";
 import { displayNotification } from "../components/_Notification";
-import { retrieveTokenFromStorage, saveTokenToStorage, deleteTokenFromStorage } from "./storageHelpers";
+import {
+  retrieveTokenFromStorage,
+  saveTokenToStorage,
+  deleteTokenFromStorage,
+} from "./storageHelpers";
 import { clearResetToken, clearUserProps, setUserProps } from "./stateHelpers";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -104,19 +108,10 @@ export function signOut(dispatch) {
     });
 }
 
-export function getRecoveryEmail(dispatch, email) {
+export function getRecoveryEmail(email) {
   const url = `${API_URL}/users/password`;
 
-  axios.post(url, { user: { email } }).catch((_) => {});
-
-  displayNotification(
-    dispatch,
-    3000,
-    "success",
-    "Success!",
-    `Your password reset link has been sent to ${email}.`,
-    "Please check your inbox or your spam folder."
-  );
+  return axios.post(url, { user: { email } }).catch((error) => Promise.reject(error));
 }
 
 export function resetPassword(dispatch, resetToken, password) {

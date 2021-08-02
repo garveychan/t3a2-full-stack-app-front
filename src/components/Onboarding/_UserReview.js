@@ -4,21 +4,43 @@
 // Signature is rendered from the array of points stored in state.
 // Photo is rendered from the file attachment prepared for the form.
 
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { postOnboardingForm } from "../../api/ServicesOnboarding";
 import { useGlobalState } from "../../utils/globalContext";
 import { mapCategories } from "./onboardingHelpers";
+import { displayNotification } from "../_Notification";
+import Button from "../_Button";
 
 export default function UserReview({ formData, formQueries: { experienceLevels } }) {
   const {
     store: { userProps },
     dispatch,
   } = useGlobalState();
+  const [disable, setDisable] = useState(false);
 
   const history = useHistory();
 
-  const handleSubmit = () => {
-    postOnboardingForm(dispatch, history, formData, userProps);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setDisable(true);
+
+    postOnboardingForm(dispatch, formData, userProps)
+      .then((_) => {
+        history.push("/checkout");
+      })
+      .catch((error) => {
+        console.error(error);
+        displayNotification(
+          dispatch,
+          3000,
+          "error",
+          "Something went wrong.",
+          "The server was unable to process your details.",
+          "Please refresh the page and try again."
+        );
+      })
+      .finally((_) => setDisable(false));
   };
 
   const {
@@ -52,7 +74,7 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
     { name: "Phone Number", value: phoneNumber },
     {
       name: "Climbing Experience",
-      value: mapCategories(experienceLevels, climbingExperience , "id", "experience_level"),
+      value: mapCategories(experienceLevels, climbingExperience, "id", "experience_level"),
     },
     { name: "Full Address", value: `${street}, ${city}, ${state}, ${postcode}, ${country}` },
     {
@@ -100,13 +122,16 @@ export default function UserReview({ formData, formQueries: { experienceLevels }
               </dl>
             </div>
             <div className="my-4 sm:my-8">
-              <button
-                type="submit"
-                onClick={handleSubmit}
-                className="w-1/2 inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm"
+              <Button
+                props={{
+                  disable: disable,
+                  classNames:
+                    "w-1/2 justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-500 text-base font-medium text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:col-start-2 sm:text-sm",
+                  onClick: handleSubmit,
+                }}
               >
                 Submit
-              </button>
+              </Button>
             </div>
           </div>
         </div>
