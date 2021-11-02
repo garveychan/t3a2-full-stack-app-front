@@ -24,13 +24,13 @@ The purpose of this application is to provide an all-in-one solution for managin
 
 For further details on this app, please visit the comprehensive documentation available at:
 
-<https://github.com/garveycodes/t3a2-full-stack-app-docs/blob/main/README.md>
+<https://github.com/garveychan/t3a2-full-stack-app-docs/blob/main/README.md>
 
 ### Tech Stack
 
 This repository is for the front-end of the application only. The repository for the back-end of the application is available at:
 
-<https://github.com/garveycodes/t3a2-full-stack-app-back>
+<https://github.com/garveychan/t3a2-full-stack-app-back>
 
 #### Front-End
 
