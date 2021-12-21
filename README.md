@@ -14,7 +14,7 @@
 
 #### Deployed Website
 
-**[1UP Bouldering Gym Portal](https://1upbouldering.app)**
+**[Portal](https://boulderingcrm.netlify.app)**
 
 ### Purpose
 
