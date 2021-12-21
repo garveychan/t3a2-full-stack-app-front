@@ -24,7 +24,7 @@ The purpose of this application is to provide an all-in-one solution for managin
 
 For further details on this app, please visit the comprehensive documentation available at:
 
-<https://github.com/garveychan/1up-bouldering>
+<https://github.com/garveychan/bouldering-crm>
 
 ### Tech Stack
 
