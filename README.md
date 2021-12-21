@@ -14,7 +14,7 @@
 
 #### Deployed Website
 
-**[Portal](https://boulderingcrm.netlify.app)**
+**[Portal](https://bouldering-crm.netlify.app)**
 
 ### Purpose
 
