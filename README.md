@@ -18,7 +18,7 @@
 
 ### Purpose
 
-The purpose of this application is to provide an all-in-one solution for managing the membership-related operations of a local bouldering gym, **1 Up Bouldering**, via an intuitive web portal interface.
+The purpose of this application is to provide an all-in-one solution for managing the membership-related operations of a local bouldering gym, **1UP Bouldering**, via an intuitive web portal interface.
 
 ### Documentation
 
