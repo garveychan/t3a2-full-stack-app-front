@@ -1,7 +1,5 @@
 # Gym Membership Management System
 
-## Client - 1UP Bouldering Gym
-
 <hr>
 
 #### Term 3 Assignment 2 - Full Stack Application
@@ -18,7 +16,7 @@
 
 ### Purpose
 
-The purpose of this application is to provide an all-in-one solution for managing the membership-related operations of a local bouldering gym, **1UP Bouldering**, via an intuitive web portal interface.
+The purpose of this application is to provide an all-in-one solution for managing the membership-related operations of a local bouldering gym via an intuitive web portal interface.
 
 ### Documentation
 
