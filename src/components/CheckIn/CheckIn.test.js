@@ -21,14 +21,14 @@ afterEach(() => {
 
 describe('CheckIn', () => {
     // Text display - gym name
-    it('should render "1UP Bouldering" text', () => {
+    it('should render "Bouldering Gym" text', () => {
         const dispatch = jest.fn();
         render(
         <GlobalContext.Provider value={{ dispatch }}>
             <Router><CheckIn/></Router>
         </GlobalContext.Provider>
         );
-        const text = screen.getByText(/1UP Bouldering/);
+        const text = screen.getByText(/Bouldering Gym/);
         expect(text).toBeInTheDocument();
     });
 

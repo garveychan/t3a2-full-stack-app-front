@@ -40,7 +40,7 @@ describe('NavBar', () => {
             <Router><NavBar/></Router>
         </GlobalContext.Provider>
         );
-        const linkElement = screen.getByText(/1UP Bouldering Gym/);
+        const linkElement = screen.getByText(/Bouldering Gym/);
         expect(linkElement).toBeInTheDocument();
     });
 

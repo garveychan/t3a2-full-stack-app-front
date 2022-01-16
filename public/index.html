@@ -2,11 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="robots" content="noindex">
-    <link rel="icon" href="%PUBLIC_URL%/1up_favicon.png" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="%PUBLIC_URL%/bouldering_logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/1up_favicon.png" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/bouldering_logo.svg" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -21,7 +21,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>1UP Bouldering</title>
+    <title>Bouldering Gym</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -36,14 +36,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    <script>
-      window.onUsersnapCXLoad = function(api) {
-        api.init();
-      }
-      var script = document.createElement('script');
-      script.defer = 1;
-      script.src = 'https://widget.usersnap.com/global/load/3b3301db-a6ff-4165-9e60-551fd984e498?onload=onUsersnapCXLoad';
-      document.getElementsByTagName('head')[0].appendChild(script);
-    </script>
   </body>
 </html>

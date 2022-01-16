@@ -19,6 +19,6 @@ afterEach(() => {
 describe('App', () => {
 it('should show gym name', () => {
     render(<App/>);
-    const text = screen.getByText(/1UP Bouldering Gym/i);
+    const text = screen.getByText(/Bouldering Gym/i);
     expect(text).toBeInTheDocument();
 })});

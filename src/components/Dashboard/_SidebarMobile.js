@@ -4,7 +4,6 @@ import { XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import logo from "../../images/logo_1up.png";
 
 export default function SidebarMobile({
   sidebarOpen,
@@ -25,7 +24,7 @@ export default function SidebarMobile({
       <Dialog
         as="div"
         static
-        className="fixed inset-0 flex z-40 md:hidden"
+        className="fixed inset-0 z-40 flex md:hidden"
         open={sidebarOpen}
         onClose={setSidebarOpen}
       >
@@ -49,7 +48,7 @@ export default function SidebarMobile({
           leaveFrom="translate-x-0"
           leaveTo="-translate-x-full"
         >
-          <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-gray-800">
+          <div className="relative flex flex-col flex-1 w-full max-w-xs pt-5 pb-4 bg-gray-800">
             <Transition.Child
               as={Fragment}
               enter="ease-in-out duration-300"
@@ -59,21 +58,21 @@ export default function SidebarMobile({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="absolute top-0 right-0 -mr-12 pt-2">
+              <div className="absolute top-0 right-0 pt-2 -mr-12">
                 <button
-                  className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  className="flex items-center justify-center w-10 h-10 ml-1 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                   onClick={() => setSidebarOpen(false)}
                 >
                   <span className="sr-only">Close sidebar</span>
-                  <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+                  <XIcon className="w-6 h-6 text-white" aria-hidden="true" />
                 </button>
               </div>
             </Transition.Child>
-            <div className="flex-shrink-0 flex items-center px-4">
-              <span className="sr-only">1UP Bouldering Gym</span>
-              <img className="h-8 w-auto sm:h-10" src={logo} alt="1UP Bouldering Gym" />
+            <div className="flex items-center flex-shrink-0 px-4">
+              <span className="sr-only">Bouldering Gym</span>
+              <img className="w-auto h-8 sm:h-10" src="/bouldering_logo.svg" alt="Bouldering Gym" />
             </div>
-            <div className="mt-5 flex-1 h-0 overflow-y-auto">
+            <div className="flex-1 h-0 mt-5 overflow-y-auto">
               <nav className="px-2 space-y-1">
                 {navLinks.map((item) => (
                   <Link

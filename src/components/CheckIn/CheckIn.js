@@ -45,12 +45,12 @@ export default function CheckIn() {
   };
 
   return (
-    <div className="h-screen bg-gray-900 flex flex-col justify-center items-center text-center lg:px-8 lg:overflow-hidden">
-      <div className="m-auto max-w-md px-4 sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
+    <div className="flex flex-col items-center justify-center h-screen text-center bg-gray-900 lg:px-8 lg:overflow-hidden">
+      <div className="max-w-md px-4 m-auto sm:max-w-2xl sm:px-6 sm:text-center lg:px-0 lg:text-center lg:items-center">
         <div className="lg:py-24">
-          <h1 className="text-4xl tracking-tight font-extrabold text-white sm:text-6xl xl:text-6xl">
-            <span className="block">1UP Bouldering</span>
-            <span className="block bg-clip-text text-transparent bg-gradient-to-r from-green-200 to-green-400">
+          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl xl:text-6xl">
+            <span className="block">Bouldering Gym</span>
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-green-200 to-green-400">
               Member Check-In
             </span>
           </h1>
@@ -61,7 +61,7 @@ export default function CheckIn() {
               autoComplete="off"
             >
               <div className="sm:flex">
-                <div className="min-w-0 flex-1">
+                <div className="flex-1 min-w-0">
                   <label htmlFor="email" className="sr-only">
                     Email address
                   </label>
@@ -74,10 +74,10 @@ export default function CheckIn() {
                     onChange={handleInput}
                     required
                     autoFocus={true}
-                    className="block w-full px-4 py-3 rounded-md border-0 text-base text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
+                    className="block w-full px-4 py-3 text-base text-gray-900 placeholder-gray-500 border-0 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-400 focus:ring-offset-gray-900"
                   />
                 </div>
-                <div className="sm:w-24 mt-3 sm:mt-0 sm:ml-3">
+                <div className="mt-3 sm:w-24 sm:mt-0 sm:ml-3">
                   <Button
                     props={{
                       disable: disable,
