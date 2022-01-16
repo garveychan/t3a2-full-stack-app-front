@@ -28,7 +28,7 @@ describe('NavBar', () => {
             <Router><NavBar/></Router>
         </GlobalContext.Provider>
         );
-        const icon = screen.getByAltText(/1UP Logo/i);
+        const icon = screen.getByAltText(/Bouldering Logo/i);
         expect(icon).toBeInTheDocument();
     });
 
