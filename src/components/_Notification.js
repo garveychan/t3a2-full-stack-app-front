@@ -9,7 +9,11 @@
 import { Fragment, useState, useEffect } from "react";
 import { useGlobalState } from "../utils/globalContext";
 import { Transition } from "@headlessui/react";
-import { CheckCircleIcon, ExclamationCircleIcon, ExclamationIcon } from "@heroicons/react/outline";
+import {
+  CheckCircleIcon,
+  ExclamationCircleIcon,
+  ExclamationIcon,
+} from "@heroicons/react/outline";
 import { XIcon } from "@heroicons/react/solid";
 
 export function displayNotification(dispatch, timer, type, title, ...messages) {
@@ -17,10 +21,10 @@ export function displayNotification(dispatch, timer, type, title, ...messages) {
     type: "setNotificationProps",
     data: {
       status: true,
-      timer: timer,
-      title: title,
+      timer,
+      title,
       messages: messages.flat(),
-      type: type,
+      type,
     },
   });
 
@@ -50,19 +54,35 @@ export function Notification() {
   useEffect(() => {
     setShow(status);
 
-    setTimeout(() => {
-      setShow(false);
-    }, timer);
+    let notificationTimer;
+    notificationTimer = setTimeout(() => void setShow(false), timer);
+
+    return () => void clearTimeout(notificationTimer);
   }, [status, timer]);
 
   const iconType = () => {
     switch (type) {
       case "error":
-        return <ExclamationCircleIcon className="h-6 w-6 text-red-400" aria-hidden="true" />;
+        return (
+          <ExclamationCircleIcon
+            className="w-6 h-6 text-red-400"
+            aria-hidden="true"
+          />
+        );
       case "warning":
-        return <ExclamationIcon className="h-6 w-6 text-yellow-400" aria-hidden="true" />;
+        return (
+          <ExclamationIcon
+            className="w-6 h-6 text-yellow-400"
+            aria-hidden="true"
+          />
+        );
       case "success":
-        return <CheckCircleIcon className="h-6 w-6 text-green-400" aria-hidden="true" />;
+        return (
+          <CheckCircleIcon
+            className="w-6 h-6 text-green-400"
+            aria-hidden="true"
+          />
+        );
       default:
         return;
     }
@@ -73,9 +93,9 @@ export function Notification() {
       {/* Global notification live region, render this permanently at the end of the document */}
       <div
         aria-live="assertive"
-        className="z-50 fixed inset-y-14 inset-x-0 flex items-end px-4 py-6 pointer-events-none sm:p-6 sm:items-start"
+        className="fixed inset-x-0 z-50 flex items-end px-4 py-6 pointer-events-none inset-y-14 sm:p-6 sm:items-start"
       >
-        <div className="w-full flex flex-col items-center text-left space-y-4 sm:items-end">
+        <div className="flex flex-col items-center w-full space-y-4 text-left sm:items-end">
           {/* Notification panel, dynamically insert this into the live region when it needs to be displayed */}
           <Transition
             show={show}
@@ -87,7 +107,7 @@ export function Notification() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="max-w-md w-full bg-white shadow-lg rounded-lg pointer-events-auto ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="w-full max-w-md overflow-hidden bg-white rounded-lg shadow-lg pointer-events-auto ring-1 ring-black ring-opacity-5">
               <div className="p-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">{iconType()}</div>
@@ -99,15 +119,15 @@ export function Notification() {
                       </p>
                     ))}
                   </div>
-                  <div className="ml-4 flex-shrink-0 flex">
+                  <div className="flex flex-shrink-0 ml-4">
                     <button
-                      className="bg-white rounded-md inline-flex text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                      className="inline-flex text-gray-400 bg-white rounded-md hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       onClick={() => {
                         setShow(false);
                       }}
                     >
                       <span className="sr-only">Close</span>
-                      <XIcon className="h-5 w-5" aria-hidden="true" />
+                      <XIcon className="w-5 h-5" aria-hidden="true" />
                     </button>
                   </div>
                 </div>
