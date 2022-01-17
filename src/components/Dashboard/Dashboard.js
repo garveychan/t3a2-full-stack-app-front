@@ -85,26 +85,27 @@ export default function Dashboard({ loggedIn, profileComplete, adminAccess }) {
 
   if (profileComplete || adminAccess) {
     return (
-      <div className="h-screen flex overflow-hidden bg-gray-100">
+      <div className="flex h-screen overflow-hidden bg-gray-100">
         <SidebarMobile {...dashboardProps} />
         <Sidebar {...dashboardProps} />
-        <div className="flex flex-col w-0 flex-1 overflow-hidden">
+        <div className="flex flex-col flex-1 w-0 overflow-hidden">
           <Header {...dashboardProps} />
-          <main className="flex-1 relative overflow-y-auto focus:outline-none">
-            <div className="py-6">
-              <div className="mx-auto px-4 sm:px-6 md:px-8">
-                <Route path="/dashboard/refresh" render={() => <Redirect path="/dashboard" />} />
-                <Switch>
-                  <Route path={`${path}/checkins`} render={() => <CheckIns />} />
-                  <Route path={`${path}/members`} render={() => <Members />} />
-                  <Route path={`${path}/profile`} render={() => <Profile />} />
-                  <Route path={`${path}/billing`} render={() => <Billing />} />
-                  <Route
-                    path={path}
-                    render={() => <Redirect to={`${path}${initialPage.href}`} />}
-                  />
-                </Switch>
-              </div>
+          <main className="relative flex-1 overflow-y-auto focus:outline-none">
+            <div className="h-full px-4 py-6 mx-auto sm:px-6 md:px-8">
+              <Route
+                path="/dashboard/refresh"
+                render={() => <Redirect path="/dashboard" />}
+              />
+              <Switch>
+                <Route path={`${path}/checkins`} render={() => <CheckIns />} />
+                <Route path={`${path}/members`} render={() => <Members />} />
+                <Route path={`${path}/profile`} render={() => <Profile />} />
+                <Route path={`${path}/billing`} render={() => <Billing />} />
+                <Route
+                  path={path}
+                  render={() => <Redirect to={`${path}${initialPage.href}`} />}
+                />
+              </Switch>
             </div>
           </main>
         </div>
